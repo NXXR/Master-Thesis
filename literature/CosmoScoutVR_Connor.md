@@ -1,4 +1,5 @@
 # CosmoScoutVR: A Case Study of Navigational Techniques for Cybersickness Reduction
+*[Source](CosmoScoutVR_Connor.pdf)*
 
 - No significant differences between tested navigation techniques
 - Cybersickness caused by conflict between visual cortex and vestibular system
