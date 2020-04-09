@@ -5,6 +5,7 @@
 - [Motion Sickness](#motion-sickness)
 - [Simulator Sickness](#simulator-sickness)
 - [Simulator Sickness Questionnaire (SSQ)](#simulator-sickness-questionnaire-ssq)
+- [Vergence-Accommodation Conflict](#vergence-accommodation-conflict)
 - [VR Sickness](#vr-sickness)
 
 ---
@@ -36,6 +37,14 @@ Questionnaire intended for military personnel using flight simulators to asses s
 Scores between 10-15 indicate significant symptoms;
 Scores between 15-20 are a concern;
 Scores over 20 indicate a problem simulator.
+Cut-off scores established from military personnel using flight simulators.
+Scores may differ for general population and tend to be higher in virtual environments compared to military grade
+ flight simulators.
+
+### Vergence-Accommodation Conflict
+Vergence refers to the way the eyes move laterally to adjust to items moving toward and away from the eyes combined
+ with the process of focusing (accomodation).
+These visual processes do not occur naturally in a stereoscopic display as accomodation occurs at a fixed screen depth.
 
 ### VR Sickness
 Term typically used in studies using [HMDs](#head-mounted-display-hmd).
