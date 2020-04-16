@@ -17,7 +17,10 @@ is called right after `Update()` regardless of its return value, used to realize
 #### `PhysicalEnable()`
 internal method to stop device from sending data/overflow when driver enabled flag is set to false.
 #### `DoSensorUpdate()`
-uses [Sensor Measure Protocol](#sensor-measure-protocol) to update Sensor Values
+uses [Sensor Measure Protocol](#sensor-measure-protocol) to update Sensor Values.
+Is called when the driver is enabled and either an update request is pending by the interaction manager or the
+ threaded method detects that an update is possible.
+A timestamp is used to indicate the time of the update.
 
 ### Sensor Measure Protocol
 1. decode the data to store in the `VistaDeviceSensor` and determine its storage index
@@ -61,4 +64,3 @@ Params:
 - [`VistaDeviceSensor`](#vistadevicesensor) - sensor to setup history for
 - `int` - Maximum time any reader on the history is accessing the history.
 - `int` - Maximum number of slots to read within the access time frame.
-
