@@ -1,0 +1,106 @@
+@startuml
+/' Nodes '/
+/' Drivers & History Projects '/
+object vrpn_analog_driver
+vrpn_analog_driver : DriverSensor
+vrpn_analog_driver : driver = XBOXCONTROLLER
+vrpn_analog_driver : sensor = 0
+vrpn_analog_driver : type = ANALOG
+
+object vrpn_analog_data
+vrpn_analog_data : HistoryProject
+vrpn_analog_data : project >VALUE, CHANNELS<
+
+object vrpn_button_driver
+vrpn_button_driver : DriverSensor
+vrpn_button_driver : driver = XBOXCONTROLLER
+vrpn_button_driver : sensor = 0
+vrpn_button_driver : type = BUTTON
+
+object vrpn_button_data
+vrpn_button_data : HistoryProject
+vrpn_button_data : project >BTMASK, NUMBER, STATE<
+
+object btn_number_to_int
+btn_number_to_int : TypeConvert[unsigned int,int]
+
+object get_button
+get_button : Demultiplex[unsigned int]
+get_button : num_outports >14<
+
+/' observer node '/
+object observer
+observer : ObserverNavigationNode
+observer : max_linear_speed = 10, 10, 10
+observer : max_angular_speed = 1
+
+/' timer node for observer '/
+object timer
+timer : Timer
+
+/' compose movement vector for observer '/
+object movement
+movement : Compose3DVector
+
+/' compose rotation for observer '/
+object rotation
+rotation : AxisRotate
+
+/' Triggers for moving forward/zooming '/
+object triggers_to_float
+triggers_to_float : TypeConvert[double,float]
+
+/' Strafing using the Right Stick '/
+object RStickX_to_float
+RStickX_to_float : TypeConvert[double,float]
+
+object negate_RStickY
+negate_RStickY : Negate[double]
+
+object RStickY_to_float
+RStickY_to_float : TypeConvert[double,float]
+
+/' Rolling using the bumpers '/
+object roll_movement
+roll_movement : Subtract[float]
+
+object lb_to_float
+lb_to_float : TypeConvert[unsigned int,float]
+object rb_to_float
+rb_to_float : TypeConvert[unsigned int,float]
+
+object rotation_axis
+rotation_axis : ConstantValue[VistaVector3D]
+rotation_axis : value = 0,0,-1,0
+
+/' Edges '/
+
+timer "time" --> "time" observer
+movement "out" --> "translation" observer
+rotation "out" --> "rotation" observer
+
+vrpn_button_driver "history" --> "history" vrpn_button_data
+vrpn_button_data "NUMBER" --> "in" btn_number_to_int
+btn_number_to_int "out" --> "select" get_button
+vrpn_button_data "STATE" --> "value" get_button
+
+vrpn_analog_driver "history" --> "history" vrpn_analog_data
+
+roll_movement "out" --> "angle" rotation
+rotation_axis "value" --> "axis" rotation
+
+vrpn_analog_data "VALUE_4" --> "in" triggers_to_float
+triggers_to_float "out" --> "z" movement
+
+vrpn_analog_data "VALUE_2" --> "in" RStickX_to_float
+RStickX_to_float "out" --> "x" movement
+
+vrpn_analog_data "VALUE_3" --> "in" negate_RStickY
+negate_RStickY "out" --> "in" RStickY_to_float
+RStickY_to_float "out" --> "y" movement
+
+get_button "4" --> "in" lb_to_float
+get_button "5" --> "in" rb_to_float
+lb_to_float "out" --> "second" roll_movement
+rb_to_float "out" --> "first" roll_movement
+@enduml
