@@ -209,13 +209,13 @@ add_height_pos "out" --> "current" latest_height
 /'  limit values to stay within viewport '/
 add_width_pos "out" --> "first" lower_limit_width
 const_0 "value" --> "second" lower_limit_width
-lower_limit_width "out" --> "first" upper_limit_width
-viewport "vp_w" --> "second" upper_limit_width
+lower_limit_width "out" --> "second" upper_limit_width
+viewport "vp_w" --> "first" upper_limit_width
 
 add_height_pos "out" --> "first" lower_limit_height
 const_0 "value" --> "second" lower_limit_height
-lower_limit_height "out" --> "first" upper_limit_height
-viewport "vp_h" --> "second" upper_limit_height
+lower_limit_height "out" --> "second" upper_limit_height
+viewport "vp_h" --> "first" upper_limit_height
 
 /'  values to 3dmouse '/
 upper_limit_width "out" --> "x_pos" 3dmouse
