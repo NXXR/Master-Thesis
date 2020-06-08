@@ -1,0 +1,241 @@
+@startuml
+skinparam packageStyle rectangle
+/' Nodes '/
+/'  analog driver and history '/
+package driver_history_demux{
+object vrpn_analog_driver
+vrpn_analog_driver : DriverSensor
+vrpn_analog_driver : driver = XBOXCONTROLLER
+vrpn_analog_driver : sensor = 0
+vrpn_analog_driver : type = ANALOG
+
+object vrpn_analog_data
+vrpn_analog_data : HistoryProject
+vrpn_analog_data : project (VALUE, CHANNELS)
+
+/'  button driver and history '/
+object vrpn_button_driver
+vrpn_button_driver : DriverSensor
+vrpn_button_driver : driver = XBOXCONTROLLER
+vrpn_button_driver : sensor = 0
+vrpn_button_driver : type = BUTTON
+
+object vrpn_button_data
+vrpn_button_data : HistoryProject
+vrpn_button_data : project >BTMASK, NUMBER, STATE<
+
+/'      demux buttons '/
+object btn_number_to_int
+btn_number_to_int : TypeConvert[unsigned int,int]
+
+object get_button
+get_button : Demultiplex[unsigned int]
+get_button : num_outports >14<
+}
+
+/'  cursor movement from buttons '/
+package button_to_movement{
+/'      convert to int '/
+object up_to_int
+up_to_int : TypeConvert[unsigned int,int]
+
+object right_to_int
+right_to_int : TypeConvert[unsigned int,int]
+
+object down_to_int
+down_to_int : TypeConvert[unsigned int,int]
+
+object left_to_int
+left_to_int : TypeConvert[unsigned int,int]
+
+/'      calculate movement '/
+object x_movement
+x_movement : Substract[int]
+
+object y_movement
+y_movement : Substract[int]
+}
+
+/'  get viewport dimensions '/
+package viewport_center{
+object viewport
+viewport : ViewportSource
+viewport : value = MAIN_VIEWPORT
+
+/'      divide by 2 for center point '/
+object const_2
+const_2 : ConstantValue[int]
+const_2 : value = 2
+
+object divide_viewport_width
+divide_viewport_width : Divide[int]
+
+object divide_viewport_height
+divide_viewport_height : Divide[int]
+}
+
+package update_position{
+/'  latest position values '/
+object latest_width
+latest_width : LatestUpdate[int]
+
+object latest_height
+latest_height : LatestUpdate[int]
+
+/'  add movement to latest position '/
+object add_width_pos
+add_width_pos : Add[int]
+
+object add_height_pos
+add_height_pos : Add[int]
+}
+
+/'  limit values to stay inside viewport '/
+package limit_position{
+object const_0
+const_0 : ConstantValue[int]
+const_0 : value = 0
+
+object lower_limit_width
+lower_limit_width : Max[int]
+
+object lower_limit_height
+lower_limit_height : Max[int]
+
+object upper_limit_width
+upper_limit_width : Min[int]
+
+object upper_limit_height
+upper_limit_height : Min[int]
+}
+
+/'  values to 3dmouse '/
+package 3dmouse_transform{
+object 3dmouse
+3dmouse : 3DMouseTransform
+3dmouse : displaysystem = MAIN
+3dmouse : viewport = MAIN_VIEWPORT
+3dmouse : in_world_coordinates = FALSE
+3dmouse : origin_offset_along_ray = 0
+
+object 3dmouse_matrix
+3dmouse_matrix : MatrixCompose
+
+object intention_transform
+intention_transform : SetTransform
+intention_transform : object = SELECTION_NODE
+}
+
+/'  buttons to event sources '/
+package button_to_event {
+/'      buttons to bool '/
+object a_to_bool
+a_to_bool : TypeConvert[unsigned int,bool]
+
+object b_to_bool
+b_to_bool : TypeConvert[unsigned int,bool]
+
+object x_to_bool
+x_to_bool : TypeConvert[unsigned int,bool]
+
+/'      detect button changes '/
+object a_change_detect
+a_change_detect : ChangeDetect[bool]
+
+object b_change_detect
+b_change_detect : ChangeDetect[bool]
+
+object x_change_detect
+x_change_detect : ChangeDetect[bool]
+
+/'      event sources '/
+object button_01
+button_01 : EventSource
+
+object button_02
+button_02 : EventSource
+
+object button_03
+button_03 : EventSource
+}
+
+/' Edges '/
+/'  button driver, history and demux '/
+vrpn_button_driver "history" --> "history" vrpn_button_data
+vrpn_button_data "NUMBER" --> "in" btn_number_to_int
+btn_number_to_int "out" --> "select" get_button
+vrpn_button_data "STATE" --> "value" get_button
+
+/'  analog driver and history '/
+vrpn_analog_driver "history" --> "history" vrpn_analog_data
+
+/'  cursor movement from buttons '/
+/'      convert to int '/
+get_button "11" --> "in" right_to_int
+get_button "13" --> "in" left_to_int
+get_button "12" --> "in" down_to_int
+get_button "10" --> "in" up_to_int
+
+/'      right - left '/
+right_to_int "out" --> "first" x_movement
+left_to_int "out" --> "second" x_movement
+
+/'      down - up '/
+down_to_int "out" --> "first" y_movement
+up_to_int "out" --> "second" y_movement
+
+/'  get viewport center values '/
+viewport "vp_w" --> "first" divide_viewport_width
+const_2 "value" --> "second" divide_viewport_width
+
+viewport "vp_h" --> "first" divide_viewport_height
+const_2 "value" --> "second" divide_viewport_height
+
+/' initial viewport center then last value '/
+divide_viewport_width "out" --> "initial" latest_width
+divide_viewport_height "out" --> "initial" latest_height
+
+/'  add movement to latest position '/
+latest_width "out" --> "first" add_width_pos
+x_movement "out" --> "second" add_width_pos
+
+latest_height "out" --> "first" add_height_pos
+y_movement "out" --> "second" add_height_pos
+
+/'  feedback results into latest value node '/
+add_width_pos "out" --> "current" latest_width
+add_height_pos "out" --> "current" latest_height
+
+/'  limit values to stay within viewport '/
+add_width_pos "out" --> "first" lower_limit_width
+const_0 "value" --> "second" lower_limit_width
+lower_limit_width "out" --> "first" upper_limit_width
+viewport "vp_w" --> "second" upper_limit_width
+
+add_height_pos "out" --> "first" lower_limit_height
+const_0 "value" --> "second" lower_limit_height
+lower_limit_height "out" --> "first" upper_limit_height
+viewport "vp_h" --> "second" upper_limit_height
+
+/'  values to 3dmouse '/
+upper_limit_width "out" --> "x_pos" 3dmouse
+upper_limit_height "out" --> "y_pos" 3dmouse
+
+3dmouse "orientation" --> "orientation" 3dmouse_matrix
+3dmouse "position" --> "translation" 3dmouse_matrix
+
+3dmouse_matrix "out" --> "in" intention_transform
+
+/'  buttons to event sources '/
+get_button "0" --> "in" a_to_bool
+get_button "1" --> "in" b_to_bool
+get_button "2" --> "in" x_to_bool
+
+a_to_bool "out" --> "in" a_change_detect
+b_to_bool "out" --> "in" b_change_detect
+x_to_bool "out" --> "in" x_change_detect
+
+a_change_detect "out" --> "value" button_01
+b_change_detect "out" --> "value" button_02
+x_change_detect "out" --> "value" button_03
+@enduml
