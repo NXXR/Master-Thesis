@@ -1,6 +1,8 @@
 @startuml
+skinparam packageStyle rectangle
 /' Nodes '/
-/' Drivers & History Projects '/
+/'  Drivers & History Projects '/
+package driver_history_demux{
 object vrpn_analog_driver
 vrpn_analog_driver : DriverSensor
 vrpn_analog_driver : driver = XBOXCONTROLLER
@@ -27,30 +29,25 @@ btn_number_to_int : TypeConvert[unsigned int,int]
 object get_button
 get_button : Demultiplex[unsigned int]
 get_button : num_outports >14<
+}
 
-/' observer node '/
+/'  observer node '/
 object observer
 observer : ObserverNavigationNode
 observer : max_linear_speed = 10, 10, 10
 observer : max_angular_speed = 1
 
-/' timer node for observer '/
+/'  timer node for observer '/
 object timer
 timer : Timer
 
-/' compose movement vector for observer '/
-object movement
-movement : Compose3DVector
-
-/' compose rotation for observer '/
-object rotation
-rotation : AxisRotate
-
-/' Triggers for moving forward/zooming '/
+/'  Compose movement vector for observer '/
+package movement_composition{
+/'      Triggers for moving forward/zooming '/
 object triggers_to_float
 triggers_to_float : TypeConvert[double,float]
 
-/' Strafing using the Right Stick '/
+/'      Strafing using the Right Stick '/
 object RStickX_to_float
 RStickX_to_float : TypeConvert[double,float]
 
@@ -60,7 +57,14 @@ negate_RStickY : Negate[double]
 object RStickY_to_float
 RStickY_to_float : TypeConvert[double,float]
 
-/' Rolling using the bumpers '/
+/'      compile into vector '/
+object movement
+movement : Compose3DVector
+}
+
+/'  Compose rotation for observer '/
+package rotation_composition{
+/'      Rolling using the bumpers '/
 object roll_movement
 roll_movement : Subtract[float]
 
@@ -72,6 +76,11 @@ rb_to_float : TypeConvert[unsigned int,float]
 object rotation_axis
 rotation_axis : ConstantValue[VistaVector3D]
 rotation_axis : value = 0,0,-1,0
+
+/'      compile into rotation '/
+object rotation
+rotation : AxisRotate
+}
 
 /' Edges '/
 
