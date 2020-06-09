@@ -83,11 +83,11 @@ object latest_ypos
 latest_ypos : LatestUpdate[int]
 
 /'  add movement to latest position '/
-object add_width_xmove
-add_width_xmove : Add[int]
+object add_xpos_xmove
+add_xpos_xmove : Add[int]
 
-object add_height_ymove
-add_height_ymove : Add[int]
+object add_ypos_ymove
+add_ypos_ymove : Add[int]
 }
 
 /'  limit values to stay inside viewport '/
@@ -196,23 +196,23 @@ divide_viewport_width "out" --> "initial" latest_xpos
 divide_viewport_height "out" --> "initial" latest_ypos
 
 /'  add movement to latest position '/
-latest_xpos "out" --> "first" add_width_xmove
-x_movement "out" --> "second" add_width_xmove
+latest_xpos "out" --> "first" add_xpos_xmove
+x_movement "out" --> "second" add_xpos_xmove
 
-latest_ypos "out" --> "first" add_height_ymove
-y_movement "out" --> "second" add_height_ymove
+latest_ypos "out" --> "first" add_ypos_ymove
+y_movement "out" --> "second" add_ypos_ymove
 
 /'  feedback results into latest value node '/
-add_width_xmove "out" --> "current" latest_xpos
-add_height_ymove "out" --> "current" latest_ypos
+add_xpos_xmove "out" --> "current" latest_xpos
+add_ypos_ymove "out" --> "current" latest_ypos
 
 /'  limit values to stay within viewport '/
-add_width_xmove "out" --> "first" lower_limit_xpos
+add_xpos_xmove "out" --> "first" lower_limit_xpos
 const_0 "value" --> "second" lower_limit_xpos
 lower_limit_xpos "out" --> "second" upper_limit_xpos
 viewport "vp_w" --> "first" upper_limit_xpos
 
-add_height_ymove "out" --> "first" lower_limit_ypos
+add_ypos_ymove "out" --> "first" lower_limit_ypos
 const_0 "value" --> "second" lower_limit_ypos
 lower_limit_ypos "out" --> "second" upper_limit_ypos
 viewport "vp_h" --> "first" upper_limit_ypos
