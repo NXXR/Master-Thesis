@@ -202,9 +202,9 @@ x_movement "out" --> "second" add_xpos_xmove
 latest_ypos "out" --> "first" add_ypos_ymove
 y_movement "out" --> "second" add_ypos_ymove
 
-/'  feedback results into latest value node '/
-add_xpos_xmove "out" --> "current" latest_xpos
-add_ypos_ymove "out" --> "current" latest_ypos
+/'  feedback results after limiting into latest value node '/
+limit_position "xpos" --> "current" latest_xpos
+limit_position "ypos" --> "current" latest_ypos
 
 /'  limit values to stay within viewport '/
 add_xpos_xmove "out" --> "first" lower_limit_xpos
@@ -238,4 +238,8 @@ x_to_bool "out" --> "in" x_change_detect
 a_change_detect "out" --> "value" button_01
 b_change_detect "out" --> "value" button_02
 x_change_detect "out" --> "value" button_03
+
+
+
+
 @enduml
