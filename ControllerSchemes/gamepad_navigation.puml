@@ -82,12 +82,43 @@ object rotation
 rotation : AxisRotate
 }
 
+/'  Compose pitch control from left stick y axis '/
+package pitch_control{
+object pitch_axis
+pitch_axis : ConstantValue[VistaVector3D]
+pitch_axis : value = -1,0,0,0
+
+object pitch_to_float
+pitch_to_float : TypeConvert[double,float]
+
+object pitch_rotation
+pitch_rotation : AxisRotate
+}
+
+/'  Compose yaw control from left stick x axis '/
+package yaw_control{
+object yaw_axis
+yaw_axis : ConstantValue[VistaVector3D]
+yaw_axis : value = 0,-1,0,0
+
+object yaw_to_float
+yaw_to_float : TypeConvert[double,float]
+
+object yaw_rotation
+yaw_rotation : AxisRotate
+}
+
+/'  Compile rotations together'/
+package compile_rotations{
+object pitch_yaw
+pitch_yaw : Multiply[VistaQuaternion]
+
+object pitch_yaw_roll
+pitch_yaw_roll : Multiply[VistaQuaternion]
+}
+
 /' Edges '/
-
-timer "time" --> "time" observer
-movement "out" --> "translation" observer
-rotation "out" --> "rotation" observer
-
+/'  Driver, History, and Button Demux '/
 vrpn_button_driver "history" --> "history" vrpn_button_data
 vrpn_button_data "NUMBER" --> "in" btn_number_to_int
 btn_number_to_int "out" --> "select" get_button
@@ -95,21 +126,46 @@ vrpn_button_data "STATE" --> "value" get_button
 
 vrpn_analog_driver "history" --> "history" vrpn_analog_data
 
-roll_movement "out" --> "angle" rotation
-rotation_axis "value" --> "axis" rotation
+/'  Feed composed movements into observer '/
+timer "time" --> "time" observer
+movement "out" --> "translation" observer
 
+
+/'  Compose forward movement (zooming) '/
 vrpn_analog_data "VALUE_4" --> "in" triggers_to_float
 triggers_to_float "out" --> "z" movement
 
+/'  Compose horizontal movement (strafing) '/
 vrpn_analog_data "VALUE_2" --> "in" RStickX_to_float
 RStickX_to_float "out" --> "x" movement
 
+/'  Compose vertical movement (strafing) '/
 vrpn_analog_data "VALUE_3" --> "in" negate_RStickY
 negate_RStickY "out" --> "in" RStickY_to_float
 RStickY_to_float "out" --> "y" movement
 
+/'  Compose rotation (roll) for observer '/
 get_button "4" --> "in" lb_to_float
 get_button "5" --> "in" rb_to_float
 lb_to_float "out" --> "second" roll_movement
 rb_to_float "out" --> "first" roll_movement
+roll_movement "out" --> "angle" rotation
+rotation_axis "value" --> "axis" rotation
+
+/'  Compose pitch control from left stick y axis '/
+vrpn_analog_data "VALUE_1" --> "in" pitch_to_float
+pitch_to_float "out" --> "angle" pitch_rotation
+pitch_axis "value" --> "axis" pitch_rotation
+
+/'  Compose yaw control from left stick x axis '/
+vrpn_analog_data "VALUE_0" --> "in" yaw_to_float
+yaw_to_float "out" --> "angle" yaw_rotation
+yaw_axis "value" --> "axis" yaw_rotation
+
+/'  Compile rotations together '/
+pitch_rotation "out" --> "first" pitch_yaw
+yaw_rotation "out" --> "second" pitch_yaw
+pitch_yaw "out" --> "first" pitch_yaw_roll
+rotation "out" --> "second" pitch_yaw_roll
+pitch_yaw_roll "out" --> "rotation" observer
 @enduml
