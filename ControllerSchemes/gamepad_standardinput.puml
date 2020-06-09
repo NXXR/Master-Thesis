@@ -83,11 +83,11 @@ object latest_height
 latest_height : LatestUpdate[int]
 
 /'  add movement to latest position '/
-object add_width_pos
-add_width_pos : Add[int]
+object add_width_xmove
+add_width_xmove : Add[int]
 
-object add_height_pos
-add_height_pos : Add[int]
+object add_height_ymove
+add_height_ymove : Add[int]
 }
 
 /'  limit values to stay inside viewport '/
@@ -96,17 +96,17 @@ object const_0
 const_0 : ConstantValue[int]
 const_0 : value = 0
 
-object lower_limit_width
-lower_limit_width : Max[int]
+object lower_limit_xpos
+lower_limit_xpos : Max[int]
 
-object lower_limit_height
-lower_limit_height : Max[int]
+object lower_limit_ypos
+lower_limit_ypos : Max[int]
 
-object upper_limit_width
-upper_limit_width : Min[int]
+object upper_limit_xpos
+upper_limit_xpos : Min[int]
 
-object upper_limit_height
-upper_limit_height : Min[int]
+object upper_limit_ypos
+upper_limit_ypos : Min[int]
 }
 
 /'  values to 3dmouse '/
@@ -196,30 +196,30 @@ divide_viewport_width "out" --> "initial" latest_width
 divide_viewport_height "out" --> "initial" latest_height
 
 /'  add movement to latest position '/
-latest_width "out" --> "first" add_width_pos
-x_movement "out" --> "second" add_width_pos
+latest_width "out" --> "first" add_width_xmove
+x_movement "out" --> "second" add_width_xmove
 
-latest_height "out" --> "first" add_height_pos
-y_movement "out" --> "second" add_height_pos
+latest_height "out" --> "first" add_height_ymove
+y_movement "out" --> "second" add_height_ymove
 
 /'  feedback results into latest value node '/
-add_width_pos "out" --> "current" latest_width
-add_height_pos "out" --> "current" latest_height
+add_width_xmove "out" --> "current" latest_width
+add_height_ymove "out" --> "current" latest_height
 
 /'  limit values to stay within viewport '/
-add_width_pos "out" --> "first" lower_limit_width
-const_0 "value" --> "second" lower_limit_width
-lower_limit_width "out" --> "second" upper_limit_width
-viewport "vp_w" --> "first" upper_limit_width
+add_width_xmove "out" --> "first" lower_limit_xpos
+const_0 "value" --> "second" lower_limit_xpos
+lower_limit_xpos "out" --> "second" upper_limit_xpos
+viewport "vp_w" --> "first" upper_limit_xpos
 
-add_height_pos "out" --> "first" lower_limit_height
-const_0 "value" --> "second" lower_limit_height
-lower_limit_height "out" --> "second" upper_limit_height
-viewport "vp_h" --> "first" upper_limit_height
+add_height_ymove "out" --> "first" lower_limit_ypos
+const_0 "value" --> "second" lower_limit_ypos
+lower_limit_ypos "out" --> "second" upper_limit_ypos
+viewport "vp_h" --> "first" upper_limit_ypos
 
 /'  values to 3dmouse '/
-upper_limit_width "out" --> "x_pos" 3dmouse
-upper_limit_height "out" --> "y_pos" 3dmouse
+upper_limit_xpos "out" --> "x_pos" 3dmouse
+upper_limit_ypos "out" --> "y_pos" 3dmouse
 
 3dmouse "orientation" --> "orientation" 3dmouse_matrix
 3dmouse "position" --> "translation" 3dmouse_matrix
