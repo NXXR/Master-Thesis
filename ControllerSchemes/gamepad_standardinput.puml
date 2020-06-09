@@ -222,8 +222,8 @@ latest_ypos "out" --> "first" add_ypos_ymove
 multiply_y_movement "out" --> "second" add_ypos_ymove
 
 /'  feedback results after limiting into latest value node '/
-limit_position "xpos" --> "current" latest_xpos
-limit_position "ypos" --> "current" latest_ypos
+upper_limit_xpos "out" --> "current" latest_xpos
+upper_limit_ypos "out" --> "current" latest_ypos
 
 /'  limit values to stay within viewport '/
 add_xpos_xmove "out" --> "first" lower_limit_xpos
@@ -237,8 +237,8 @@ lower_limit_ypos "out" --> "second" upper_limit_ypos
 viewport "vp_h" --> "first" upper_limit_ypos
 
 /'  values to 3dmouse '/
-upper_limit_xpos "out" --> "x_pos" 3dmouse
-upper_limit_ypos "out" --> "y_pos" 3dmouse
+latest_xpos "out" --> "x_pos" 3dmouse
+latest_ypos "out" --> "y_pos" 3dmouse
 
 3dmouse "orientation" --> "orientation" 3dmouse_matrix
 3dmouse "position" --> "translation" 3dmouse_matrix
