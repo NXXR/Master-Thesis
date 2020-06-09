@@ -54,6 +54,17 @@ x_movement : Substract[int]
 
 object y_movement
 y_movement : Substract[int]
+
+/'  movement multiplier (currently flat) '/
+object const_multiplier
+const_multiplier : ConstantValue[int]
+const_multiplier : value = 2
+
+object multiply_x_movement
+multiply_x_movement : Multiply[int]
+
+object multiply_y_movement
+multiply_y_movement : Multiply[int]
 }
 
 /'  get viewport dimensions '/
@@ -184,6 +195,14 @@ left_to_int "out" --> "second" x_movement
 down_to_int "out" --> "first" y_movement
 up_to_int "out" --> "second" y_movement
 
+/'  multiply movement '/
+/'      horizontal '/
+x_movement "out" --> "first" multiply_x_movement
+const_multiplier "value" --> "second" multiply_x_movement
+/'      vertical '/
+y_movement "out" --> "first" multiply_y_movement
+const_multiplier "value" --> "second" multiply_y_movement
+
 /'  get viewport center values '/
 viewport "vp_w" --> "first" divide_viewport_width
 const_2 "value" --> "second" divide_viewport_width
@@ -197,10 +216,10 @@ divide_viewport_height "out" --> "initial" latest_ypos
 
 /'  add movement to latest position '/
 latest_xpos "out" --> "first" add_xpos_xmove
-x_movement "out" --> "second" add_xpos_xmove
+multiply_x_movement "out" --> "second" add_xpos_xmove
 
 latest_ypos "out" --> "first" add_ypos_ymove
-y_movement "out" --> "second" add_ypos_ymove
+multiply_y_movement "out" --> "second" add_ypos_ymove
 
 /'  feedback results after limiting into latest value node '/
 limit_position "xpos" --> "current" latest_xpos
