@@ -211,8 +211,8 @@ viewport "vp_h" --> "first" divide_viewport_height
 const_2 "value" --> "second" divide_viewport_height
 
 /' initial viewport center then last value '/
-divide_viewport_width "out" --> "initial" latest_xpos
-divide_viewport_height "out" --> "initial" latest_ypos
+divide_viewport_width "out" --> "1" latest_xpos
+divide_viewport_height "out" --> "1" latest_ypos
 
 /'  add movement to latest position '/
 latest_xpos "out" --> "first" add_xpos_xmove
