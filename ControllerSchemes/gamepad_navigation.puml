@@ -3,7 +3,7 @@ skinparam packageStyle rectangle
 /' Nodes '/
 /'  Drivers & History Projects '/
 package driver_history_demux{
-object vrpn_analog_driver
+object vrpn_analog_driver #lightblue
 vrpn_analog_driver : DriverSensor
 vrpn_analog_driver : driver = XBOXCONTROLLER
 vrpn_analog_driver : sensor = 0
@@ -13,7 +13,7 @@ object vrpn_analog_data
 vrpn_analog_data : HistoryProject
 vrpn_analog_data : project >VALUE, CHANNELS<
 
-object vrpn_button_driver
+object vrpn_button_driver #lightblue
 vrpn_button_driver : DriverSensor
 vrpn_button_driver : driver = XBOXCONTROLLER
 vrpn_button_driver : sensor = 0
@@ -32,13 +32,13 @@ get_button : num_outports >14<
 }
 
 /'  observer node '/
-object observer
+object observer #red
 observer : ObserverNavigationNode
 observer : max_linear_speed = 10, 10, 10
 observer : max_angular_speed = 1
 
 /'  timer node for observer '/
-object timer
+object timer #lightblue
 timer : Timer
 
 /'  Compose movement vector for observer '/
@@ -73,7 +73,7 @@ lb_to_float : TypeConvert[unsigned int,float]
 object rb_to_float
 rb_to_float : TypeConvert[unsigned int,float]
 
-object rotation_axis
+object rotation_axis #lightblue
 rotation_axis : ConstantValue[VistaVector3D]
 rotation_axis : value = 0,0,-1,0
 
@@ -84,7 +84,7 @@ rotation : AxisRotate
 
 /'  Compose pitch control from left stick y axis '/
 package pitch_control{
-object pitch_axis
+object pitch_axis #lightblue
 pitch_axis : ConstantValue[VistaVector3D]
 pitch_axis : value = -1,0,0,0
 
@@ -97,7 +97,7 @@ pitch_rotation : AxisRotate
 
 /'  Compose yaw control from left stick x axis '/
 package yaw_control{
-object yaw_axis
+object yaw_axis #lightblue
 yaw_axis : ConstantValue[VistaVector3D]
 yaw_axis : value = 0,-1,0,0
 

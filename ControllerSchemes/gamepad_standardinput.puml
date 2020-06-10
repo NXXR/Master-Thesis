@@ -3,7 +3,7 @@ skinparam packageStyle rectangle
 /' Nodes '/
 /'  analog driver and history '/
 package driver_history_demux{
-object vrpn_analog_driver
+object vrpn_analog_driver #lightblue
 vrpn_analog_driver : DriverSensor
 vrpn_analog_driver : driver = XBOXCONTROLLER
 vrpn_analog_driver : sensor = 0
@@ -14,7 +14,7 @@ vrpn_analog_data : HistoryProject
 vrpn_analog_data : project (VALUE, CHANNELS)
 
 /'  button driver and history '/
-object vrpn_button_driver
+object vrpn_button_driver #lightblue
 vrpn_button_driver : DriverSensor
 vrpn_button_driver : driver = XBOXCONTROLLER
 vrpn_button_driver : sensor = 0
@@ -56,7 +56,7 @@ object y_movement
 y_movement : Substract[int]
 
 /'  movement multiplier (currently flat) '/
-object const_multiplier
+object const_multiplier #lightblue
 const_multiplier : ConstantValue[int]
 const_multiplier : value = 2
 
@@ -69,12 +69,12 @@ multiply_y_movement : Multiply[int]
 
 /'  get viewport dimensions '/
 package viewport_center{
-object viewport
+object viewport #lightblue
 viewport : ViewportSource
 viewport : value = MAIN_VIEWPORT
 
 /'      divide by 2 for center point '/
-object const_2
+object const_2 #lightblue
 const_2 : ConstantValue[int]
 const_2 : value = 2
 
@@ -103,7 +103,7 @@ add_ypos_ymove : Add[int]
 
 /'  limit values to stay inside viewport '/
 package limit_position{
-object const_0
+object const_0 #lightblue
 const_0 : ConstantValue[int]
 const_0 : value = 0
 
@@ -132,7 +132,7 @@ object 3dmouse
 object 3dmouse_matrix
 3dmouse_matrix : MatrixCompose
 
-object intention_transform
+object intention_transform #red
 intention_transform : SetTransform
 intention_transform : object = SELECTION_NODE
 }
@@ -160,13 +160,13 @@ object x_change_detect
 x_change_detect : ChangeDetect[bool]
 
 /'      event sources '/
-object button_01
+object button_01 #red
 button_01 : EventSource
 
-object button_02
+object button_02 #red
 button_02 : EventSource
 
-object button_03
+object button_03 #red
 button_03 : EventSource
 }
 
@@ -257,8 +257,5 @@ x_to_bool "out" --> "in" x_change_detect
 a_change_detect "out" --> "value" button_01
 b_change_detect "out" --> "value" button_02
 x_change_detect "out" --> "value" button_03
-
-
-
 
 @enduml
