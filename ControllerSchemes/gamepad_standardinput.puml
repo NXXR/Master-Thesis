@@ -120,21 +120,22 @@ object upper_limit_ypos
 upper_limit_ypos : Min[int]
 }
 
-/'  values to 3dmouse '/
-package 3dmouse_transform{
-object 3dmouse
-3dmouse : 3DMouseTransform
-3dmouse : displaysystem = MAIN
-3dmouse : viewport = MAIN_VIEWPORT
-3dmouse : in_world_coordinates = FALSE
-3dmouse : origin_offset_along_ray = 0
+/' store position for 3dmouse_negotiator '/
+package 3dmouse_output{
+object xpos_to_float
+xpos_to_float : TypeConvert[int,float]
+object ypos_to_float
+ypos_to_float : TypeConvert[int,float]
+object 0_to_float
+0_to_float : TypeConvert[int,float]
 
-object 3dmouse_matrix
-3dmouse_matrix : MatrixCompose
 
-object intention_transform #red
-intention_transform : SetTransform
-intention_transform : object = SELECTION_NODE
+object compose_pos_vector
+compose_pos_vector : Compose3DVector
+
+object set_gamepad_pos #red
+set_gamepad_pos : SetVariable[VistaVector3D]
+set_gamepad_pos : variable = gamepad_pos
 }
 
 /'  buttons to event sources '/
@@ -237,13 +238,16 @@ lower_limit_ypos "out" --> "second" upper_limit_ypos
 viewport "vp_h" --> "first" upper_limit_ypos
 
 /'  values to 3dmouse '/
-latest_xpos "out" --> "x_pos" 3dmouse
-latest_ypos "out" --> "y_pos" 3dmouse
+latest_xpos "out" --> "in" xpos_to_float
+xpos_to_float "out" --> "x" compose_pos_vector
 
-3dmouse "orientation" --> "orientation" 3dmouse_matrix
-3dmouse "position" --> "translation" 3dmouse_matrix
+latest_ypos "out" --> "in" ypos_to_float
+ypos_to_float "out" --> "y" compose_pos_vector
 
-3dmouse_matrix "out" --> "in" intention_transform
+const_0 "value" ------> "in" 0_to_float
+0_to_float "out" --> "z" compose_pos_vector
+
+compose_pos_vector "out" --> "value" set_gamepad_pos
 
 /'  buttons to event sources '/
 get_button "0" --> "in" a_to_bool
@@ -257,5 +261,4 @@ x_to_bool "out" --> "in" x_change_detect
 a_change_detect "out" --> "value" button_01
 b_change_detect "out" --> "value" button_02
 x_change_detect "out" --> "value" button_03
-
 @enduml

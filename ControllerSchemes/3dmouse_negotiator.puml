@@ -1,0 +1,59 @@
+@startuml
+skinparam packageStyle rectangle
+/' Nodes '/
+/' get mouse and gamepad positions '/
+object get_mouse_pos
+get_mouse_pos : GetVariable[VistaVector3D]
+get_mouse_pos : variable = mouse_pos
+
+object get_gamepad_pos
+get_gamepad_pos : GetVariable[VistaVector3D]
+get_gamepad_pos : variable = gamepad_pos
+
+/' compare timestamps of positions and select latest '/
+object latest_pos
+latest_pos : LatestUpdate[VistaVector3D]
+
+/' decompose vector into components '/
+object decompose_pos
+decompose_pos : Decompose3DVector
+
+object xpos_to_int
+xpos_to_int : TypeConvert[float,int]
+object ypos_to_int
+ypos_to_int : TypeConvert[float,int]
+
+/' values to 3dmouse '/
+object 3dmouse
+3dmouse : 3DMouseTransform
+3dmouse : displaysystem = MAIN
+3dmouse : viewport = MAIN_VIEWPORT
+3dmouse : in_world_coordinates = FALSE
+3dmouse : origin_offset_along_ray = 0
+
+object 3dmouse_matrix
+3dmouse_matrix : MatrixCompose
+
+object intention_transform #red
+intention_transform : SetTransform
+intention_transform : object = SELECTION_NODE
+
+/' Edges '/
+/' compare timestamps '/
+get_mouse_pos "value" --> "mouse" latest_pos
+get_gamepad_pos "value" --> "gamepad" latest_pos
+
+/' decompose latest position vector '/
+latest_pos "out" --> "in" decompose_pos
+decompose_pos "x" --> "in" xpos_to_int
+decompose_pos "y" --> "in" ypos_to_int
+
+/' feed position to intention_transform '/
+xpos_to_int "out" --> "x_pos" 3dmouse
+ypos_to_int "out" --> "y_pos" 3dmouse
+
+3dmouse "orientation" --> "orientation" 3dmouse_matrix
+3dmouse "position" --> "translation" 3dmouse_matrix
+
+3dmouse_matrix "out" --> "in" intention_transform
+@enduml
