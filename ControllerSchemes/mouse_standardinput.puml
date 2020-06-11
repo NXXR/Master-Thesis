@@ -42,22 +42,13 @@ button_03 : EventSource
 
 /' store position for 3dmouse_negotiator '/
 package 3dmouse_output{
-object compose_pos_vector
-compose_pos_vector : Compose3DVector
+object set_mouse_xpos #red
+set_mouse_xpos : SetVariable[int]
+set_mouse_xpos : variable = mouse_xpos
 
-object set_mouse_pos #red
-set_mouse_pos : SetVariable[VistaVector3D]
-set_mouse_pos : variable = mouse_pos
-
-object const_0 #lightblue
-const_0 : ConstantValue[float]
-const_0 : value = 0
-
-object xpos_to_float
-xpos_to_float : TypeConvert[int,float]
-
-object ypos_to_float
-ypos_to_float : TypeConvert[int,float]
+object set_mouse_ypos #red
+set_mouse_ypos : SetVariable[int]
+set_mouse_ypos : variable = mouse_ypos
 }
 /' Edges '/
 mouse "history" --> "history" project_mouse
@@ -75,14 +66,7 @@ right_button_change_detect "out" --> "value" button_02
 project_mouse "MIDDLE_BUTTON" --> "in" middle_button_change_detect
 middle_button_change_detect "out" --> "value" button_03
 
-
 /' compose positions to vector '/
-project_mouse "X_POS" --> "in" xpos_to_float
-xpos_to_float "out" --> "x" compose_pos_vector
-project_mouse "Y_POS" --> "in" ypos_to_float
-ypos_to_float "out" --> "y" compose_pos_vector
-const_0 "value" --> "z" compose_pos_vector
-
-/' save vector to variable '/
-compose_pos_vector "out" --> "value" set_mouse_pos
+project_mouse "X_POS" --> "value" set_mouse_xpos
+project_mouse "Y_POS" --> "value" set_mouse_ypos
 @enduml

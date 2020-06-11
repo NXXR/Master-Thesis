@@ -122,20 +122,13 @@ upper_limit_ypos : Min[int]
 
 /' store position for 3dmouse_negotiator '/
 package 3dmouse_output{
-object xpos_to_float
-xpos_to_float : TypeConvert[int,float]
-object ypos_to_float
-ypos_to_float : TypeConvert[int,float]
-object 0_to_float
-0_to_float : TypeConvert[int,float]
+object set_gamepad_xpos #red
+set_gamepad_xpos : SetVariable[int]
+set_gamepad_xpos : variable = gamepad_xpos
 
-
-object compose_pos_vector
-compose_pos_vector : Compose3DVector
-
-object set_gamepad_pos #red
-set_gamepad_pos : SetVariable[VistaVector3D]
-set_gamepad_pos : variable = gamepad_pos
+object set_gamepad_ypos #red
+set_gamepad_ypos : SetVariable[int]
+set_gamepad_ypos : variable = gamepad_ypos
 }
 
 /'  buttons to event sources '/
@@ -238,16 +231,8 @@ lower_limit_ypos "out" --> "second" upper_limit_ypos
 viewport "vp_h" --> "first" upper_limit_ypos
 
 /'  values to 3dmouse '/
-latest_xpos "out" --> "in" xpos_to_float
-xpos_to_float "out" --> "x" compose_pos_vector
-
-latest_ypos "out" --> "in" ypos_to_float
-ypos_to_float "out" --> "y" compose_pos_vector
-
-const_0 "value" ------> "in" 0_to_float
-0_to_float "out" --> "z" compose_pos_vector
-
-compose_pos_vector "out" --> "value" set_gamepad_pos
+latest_xpos "out" --> "value" set_gamepad_xpos
+latest_ypos "out" --> "value" set_gamepad_ypos
 
 /'  buttons to event sources '/
 get_button "0" --> "in" a_to_bool

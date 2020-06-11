@@ -2,28 +2,77 @@
 skinparam packageStyle rectangle
 /' Nodes '/
 /' get mouse and gamepad positions '/
-object get_mouse_pos
-get_mouse_pos : GetVariable[VistaVector3D]
-get_mouse_pos : variable = mouse_pos
+package get_variables {
+object get_mouse_xpos #lightblue
+get_mouse_xpos : GetVariable[int]
+get_mouse_xpos : variable = mouse_xpos
 
-object get_gamepad_pos
-get_gamepad_pos : GetVariable[VistaVector3D]
-get_gamepad_pos : variable = gamepad_pos
+object get_mouse_ypos #lightblue
+get_mouse_ypos : GetVariable[int]
+get_mouse_ypos : variable = mouse_ypos
+
+object get_gamepad_xpos #lightblue
+get_gamepad_xpos : GetVariable[int]
+get_gamepad_xpos : variable = gamepad_xpos
+
+object get_gamepad_ypos #lightblue
+get_gamepad_ypos : GetVariable[int]
+get_gamepad_ypos : variable = gamepad_ypos
+}
 
 /' compare timestamps of positions and select latest '/
+package compare_values {
+/'      compose to vector '/
+package composition {
+object const_0 #lightblue
+const_0 : ConstantValue[float]
+const_0 : value = 0
+
+object mouse_xpos_to_float
+mouse_xpos_to_float : TypeConvert[int,float]
+
+object mouse_ypos_to_float
+mouse_ypos_to_float : TypeConvert[int,float]
+
+object gamepad_xpos_to_float
+gamepad_xpos_to_float : TypeConvert[int,float]
+
+object gamepad_ypos_to_float
+gamepad_ypos_to_float : TypeConvert[int,float]
+
+object compose_mouse
+compose_mouse : Compose3DVector
+
+object compose_gamepad
+compose_gamepad : Compose3DVector
+}
+
+/'      check for change (generate timestamp for comparison) '/
+object cd_mouse
+cd_mouse : ChangeDetect[VistaVector3D]
+
+object cd_gamepad
+cd_gamepad : ChangeDetect[VistaVector3D]
+
+/'      compare timestamps '/
 object latest_pos
 latest_pos : LatestUpdate[VistaVector3D]
 
 /' decompose vector into components '/
+package decomposition {
 object decompose_pos
 decompose_pos : Decompose3DVector
 
 object xpos_to_int
 xpos_to_int : TypeConvert[float,int]
+
 object ypos_to_int
 ypos_to_int : TypeConvert[float,int]
+}
+}
 
 /' values to 3dmouse '/
+package set_observer {
 object 3dmouse
 3dmouse : 3DMouseTransform
 3dmouse : displaysystem = MAIN
@@ -37,18 +86,44 @@ object 3dmouse_matrix
 object intention_transform #red
 intention_transform : SetTransform
 intention_transform : object = SELECTION_NODE
+}
 
 /' Edges '/
-/' compare timestamps '/
-get_mouse_pos "value" --> "mouse" latest_pos
-get_gamepad_pos "value" --> "gamepad" latest_pos
+/' compare timestamps of positions and select latest '/
+/'      compose to vector '/
+package composition{
+/'          convert to float '/
+get_mouse_xpos "value" --> "in" mouse_xpos_to_float
+get_mouse_ypos "value" --> "in" mouse_ypos_to_float
+get_gamepad_xpos "value" --> "in" gamepad_xpos_to_float
+get_gamepad_ypos "value" --> "in" gamepad_ypos_to_float
 
-/' decompose latest position vector '/
+/'          compose vector '/
+mouse_xpos_to_float "out" --> "x" compose_mouse
+mouse_ypos_to_float "out" --> "y" compose_mouse
+const_0 "value" --> "z" compose_mouse
+
+gamepad_xpos_to_float "out" --> "x" compose_gamepad
+gamepad_ypos_to_float "out" --> "y" compose_gamepad
+const_0 "value" --> "z" compose_gamepad
+}
+
+/'      compare timestamps '/
+compose_mouse "out" --> "in" cd_mouse
+cd_mouse "out" --> "mouse" latest_pos
+compose_gamepad "out" --> "in" cd_gamepad
+cd_gamepad "out" --> "gamepad" latest_pos
+
+/'      decompose vector '/
+package decomposition {
 latest_pos "out" --> "in" decompose_pos
+
 decompose_pos "x" --> "in" xpos_to_int
 decompose_pos "y" --> "in" ypos_to_int
+}
 
-/' feed position to intention_transform '/
+/' values to 3dmouse '/
+package set_observer {
 xpos_to_int "out" --> "x_pos" 3dmouse
 ypos_to_int "out" --> "y_pos" 3dmouse
 
@@ -56,4 +131,5 @@ ypos_to_int "out" --> "y_pos" 3dmouse
 3dmouse "position" --> "translation" 3dmouse_matrix
 
 3dmouse_matrix "out" --> "in" intention_transform
+}
 @enduml
