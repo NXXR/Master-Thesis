@@ -8,3 +8,13 @@
     - no documentation how port order is determined
     - initial (order of edge declaration) worked before multiplier
     - 1 (~~alphabetical order~~) works after multiplier implementation (wouldn't have worked before multiplier)
+
+- Things to do to run:
+```
+cd .\build\windows-externals-release\vrpn\server_scr\Release\
+
+echo "vrpn_Microsoft_controller_Raw_Xbox_360 microsoft0" > vrpn.cfg
+
+.\vrpn_server.exe
+```
+```vrpn_Microsoft_controller_Raw_Xbox_360 [_Wireless]```
