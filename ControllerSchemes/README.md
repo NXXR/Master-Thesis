@@ -11,9 +11,9 @@
 
 - Things to do to run:
 ```
-cd .\build\windows-externals-release\vrpn\server_scr\Release\
+cd .\install\windows-externals-release\bin\
 
-echo "vrpn_Microsoft_controller_Raw_Xbox_360 microsoft0" > vrpn.cfg
+echo vrpn_Microsoft_Controller_Raw_Xbox_360 microsoft0 > vrpn.cfg
 
 .\vrpn_server.exe
 ```
