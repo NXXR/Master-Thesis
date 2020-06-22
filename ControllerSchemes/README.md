@@ -13,8 +13,11 @@
 ```
 cd .\install\windows-externals-release\bin\
 
-echo vrpn_Microsoft_Controller_Raw_Xbox_360 microsoft0 > vrpn.cfg
+echo vrpn_Microsoft_Controller_Raw_Xbox_360 microsoft0 \n vrpn_XInputGamepad XInput0 0 > vrpn.cfg
 
 .\vrpn_server.exe
 ```
-```vrpn_Microsoft_controller_Raw_Xbox_360 [_Wireless]```
+
+```
+vrpn_Microsoft_controller_Raw_Xbox_360 [_Wireless]
+```
