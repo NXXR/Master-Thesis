@@ -1,0 +1,121 @@
+@startuml
+skinparam packageStyle rectangle
+/' Nodes '/
+/'  analog driver and history '/
+package driver_history{
+object vrpn_analog_driver #lightblue
+vrpn_analog_driver : DriverSensor
+vrpn_analog_driver : driver = XBOXCONTROLLER
+vrpn_analog_driver : sensor = 0
+vrpn_analog_driver : type = ANALOG
+
+object vrpn_analog_data
+vrpn_analog_data : HistoryProject
+vrpn_analog_data : project (VALUE, CHANNELS)
+}
+
+package tuples{
+object nothing
+nothing : ConstantValue[VistaVector3D]
+nothing : value = 0,0,0,0
+
+object N
+N : ConstantValue[VistaVector3D]
+N : value = 0,-1,0,0
+
+object NE
+NE : ConstantValue[VistaVector3D]
+NE : value = 1,-1,0,0
+
+object E
+E : ConstantValue[VistaVector3D]
+E : value = 1,0,0,0
+
+object SE
+SE : ConstantValue[VistaVector3D]
+SE : value = 1,1,0,0
+
+object S
+S : ConstantValue[VistaVector3D]
+S : value = 0,1,0,0
+
+object SW
+SW : ConstantValue[VistaVector3D]
+SW : value = -1,1,0,0
+
+object W
+W : ConstantValue[VistaVector3D]
+W : value = -1,0,0,0
+
+object NW
+NW : ConstantValue[VistaVector3D]
+NW : value = -1,-1,0,0
+}
+
+package select_and_multipy{
+object select_direction
+select_direction : Multiplex[VistaVector3D]
+select_direction : .
+select_direction : .
+select_direction : .
+select_direction : .
+select_direction : .
+select_direction : .
+select_direction : .
+
+object dpad_absolute
+dpad_absolute : Absolute[double]
+
+object dpad_to_int
+dpad_to_int : TypeConvert[double,int]
+
+/'  apply multiplier '/
+object apply_multiplier
+apply_multiplier : Multiply[int,VistaVector3D]
+
+object multiplier
+multiplier : ConstantValue[int]
+multiplier : value = 2
+}
+
+object decompose_pos
+decompose_pos : Decompose3DVector
+
+/' Edges '/
+vrpn_analog_driver "history" --> "history" vrpn_analog_data
+
+/'  dpad for select '/
+vrpn_analog_data "VALUE_4" --> "in" dpad_absolute
+dpad_absolute "out" --> "in" dpad_to_int
+dpad_to_int "out" --> "select" select_direction
+
+/'  direction tuples into MUX'/
+nothing "value" --> "1" select_direction
+N "value" --> "0" select_direction
+NE "value" -l-> "45" select_direction
+E "value" -l-> "90" select_direction
+SE "value" -l-> "135" select_direction
+S "value" -l-> "180" select_direction
+SW "value" -l-> "225" select_direction
+W "value" --> "270" select_direction
+NW "value" --> "315" select_direction
+
+/'  apply multiplier '/
+multiplier "value" --> "first" apply_multiplier
+select_direction "out" --> "second" apply_multiplier
+
+/'  decompose '/
+apply_multiplier "out" --> "in" decompose_pos
+decompose_pos "x" --> xpos
+decompose_pos "y" --> ypos
+
+/' Formatting Directives '/
+nothing -d[hidden]- N
+N -d[hidden]- NE
+NE -d[hidden]- E
+E -d[hidden]- SE
+SE -d[hidden]- S
+S -d[hidden]- SW
+SW -d[hidden]- W
+W -d[hidden]- NW
+@enduml
