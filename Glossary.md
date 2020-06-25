@@ -9,6 +9,7 @@
 - [Simulator Sickness](#simulator-sickness)
 - [Simulator Sickness Questionnaire (SSQ)](#simulator-sickness-questionnaire-ssq)
 - [Somatosensory System](#somatosensory-system)
+- [Vection](#vection)
 - [Vergence-Accommodation Conflict](#vergence-accommodation-conflict)
 - [Vestibular System](#vestibular-system)
 - [VR Sickness](#vr-sickness)
@@ -69,6 +70,9 @@ Part of the sensory nervous system, sensing proprioception/kinesthesia (self-mov
  well as haptic perception (pressure, vibratory, and touch senses).
 Provides information about spatial position, movement relative to the support surface, and postition of body parts
  relative to each other.
+
+### Vection
+Illusion of self-motion, occurs when there is perceived bodily motion despite no movement is taking place.
 
 ### Vergence-Accommodation Conflict
 Vergence refers to the way the eyes move laterally to adjust to items moving toward and away from the eyes combined
