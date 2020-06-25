@@ -92,9 +92,9 @@ dpad_to_int "out" --> "select" select_direction
 /'  direction tuples into MUX'/
 nothing "value" --> "1" select_direction
 N "value" --> "0" select_direction
-NE "value" -l-> "45" select_direction
-E "value" -l-> "90" select_direction
-SE "value" -l-> "135" select_direction
+NE "value" --> "45" select_direction
+E "value" --> "90" select_direction
+SE "value" --> "135" select_direction
 S "value" -l-> "180" select_direction
 SW "value" -l-> "225" select_direction
 W "value" --> "270" select_direction
