@@ -2,10 +2,14 @@
 
 ## Origins & Targets
 - different locations
-    - relative to surface
-    - relative to orbit
-    - relative to system
+    - relative to surface (relative to Spice Planet Center & Frame)
+    - relative to orbit (relative to Spice Planet Center)
+    - relative to system (relative to Spice Barycenter)
     - bookmarked position
+        - different levels of specification:
+            - general position
+            - specific position
+            - specific position & orientation
 - different time
 
 ## Navigation Scenarios
