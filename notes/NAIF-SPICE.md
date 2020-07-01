@@ -147,3 +147,7 @@ SIPCE considers them the same as all data is referenced to ICRF, but for compati
 [Wikipedia: International Celestial Reference Frame](https://en.wikipedia.org/wiki/International_Celestial_Reference_Frame)
 ######4
 [Wikipedia: Horizontal Coordinate System](https://en.wikipedia.org/wiki/Horizontal_coordinate_system)
+######5
+[NAIF SPICE Homepage](https://naif.jpl.nasa.gov/naif/index.html)
+######6
+[SPICE Toolkit Homepage](https://naif.jpl.nasa.gov/naif/toolkit.html)
