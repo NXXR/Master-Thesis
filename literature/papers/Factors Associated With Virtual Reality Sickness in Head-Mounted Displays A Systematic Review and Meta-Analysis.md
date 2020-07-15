@@ -1,5 +1,5 @@
 # Factors Associated With Virtual Reality Sickness in Head-Mounted Displays: A Systematic Review and Meta-Analysis
-*[Source](Factors Associated With Virtual Reality Sickness in Head-Mounted Displays A Systematic Review and Meta-Analysis.bak.pdf)*
+*[Source](Factors%20Associated%20With%20Virtual%20Reality%20Sickness%20in%20Head-Mounted%20Displays%20A%20Systematic%20Review%20and%20Meta-Analysis.pdf)*
 
 ## Participants data and questionnaire results
 - Meta Analysis participants: 3016
