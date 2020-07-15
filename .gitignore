@@ -1,7 +1,7 @@
 # ignore idea project files
-.idea
+.idea/*
 
 # ignore pdf files (full papers) but keep md notes/summaries
 literature/*.pdf
 literature/papers/*.pdf
-literature/papers/todo/
+literature/papers/todo/*
