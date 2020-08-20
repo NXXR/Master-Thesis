@@ -1,5 +1,5 @@
 # Factors Associated With Virtual Reality Sickness in Head-Mounted Displays: A Systematic Review and Meta-Analysis
-*[Source](Factors%20Associated%20With%20Virtual%20Reality%20Sickness%20in%20Head-Mounted%20Displays%20A%20Systematic%20Review%20and%20Meta-Analysis.pdf)*
+*[Source](Factors%20Associated%20With%20Virtual%20Reality%20Sickness%20in%20Head-Mounted%20Displays%20A%20Systematic%20Review%20and%20Meta-Analysis.bak.pdf)*
 
 ## Participants data and questionnaire results
 - Meta Analysis participants: 3016
@@ -12,7 +12,7 @@
   - 360° videos: captured video or images allowing a 360° view of a virtual environment
   - gaming: highly detailed content with active interaction (off-the-shelf games and researcher developed content)
   - minimalist: basic shapes or minimal textures with simple interactions
-  - scenic: detailed environments with no or simple interaction
+  - scenic: detailed environments with simple or no interaction
 
 | Content    | Detail | Interaction | Sensory Feedback | Total Mean SSQ Score |
 |------------|--------|-------------|------------------|----------------------|
@@ -35,8 +35,8 @@
 
 - Time categorization into:
   - < 10 min
-  - \>= 10 min
-  - \>= 20 min
+  - ≥ 10 min
+  - ≥ 20 min
 
 ## Findings and conclusions
 - VR Sickness not only influenced by resolution & refresh rate but also content type
@@ -44,7 +44,7 @@
  and realism, influencing the occurrence of VR sickness
   - clear images and accurate tracking of movement may lead to fewer sensory conflicts and a reduction in VR sickness
    symptoms
-- increase in field of view may also increase risk of VR sickness
+- increase in field-of-view may also increase risk of VR sickness
 - content consisting of low amounts of motion may be less likely to induce VR sickness
 - length of time exposed to virtual environment may influence likelihood and severity of VR sickness
   - another review found some people may build up a resistance or adapt over time, especially over multiple sessions
@@ -63,15 +63,15 @@
 - new, high-quality stereoscopic HMDs are capable of simulating the visual and spacial properties, but still fall
  short in replicating how humans see and perceive depth under natural viewing conditions
 - locomotion type significantly influences SSQ scores
-  - controller-based movement has highest total SSQ mean (*M* = 32.55)
-  - nausea and oculomoteor subscale scores higher when stationary as opposed to controller-based moving or walking
+  - controller-based movement has the highest total SSQ mean (*M* = 32.55)
+  - nausea and oculomotor subscale scores higher when stationary as opposed to controller-based moving or walking
   - difference between total scores and subscales may result from certain methods of locomotion having a greater
    impact on specific symptoms depending on type (e.g. being stationary causes a higher conflict in virtual
    environments where there is movement and thus lead to an increase of nausea symptoms)
     - other research also indicates a reduction in symptoms when user initiated movement is matched to the environment
 - nausea and disorientation subscale scores were lower in studies with exposure times of <10 min compared to >=10 min
   - exposure times of >=20 min had lower scores than exposure times >=10, which may suggest some sort of accommodation
-  - but exposure times of >=10 min also had the highest percentage of gaming content (62%), while the longest
+  - exposure times of >=10 min also had the highest percentage of gaming content (62%), while the longest
    exposure times were using minimalist or scenic content
 
 ## Problems with current studies
@@ -79,7 +79,7 @@
 - "Virtual Reality Symptom Questionnaire" and "Virtual Reality Sickness Questionnaire" not yet widely adopted and
  lacking sufficient data/studies to warrant meta-analysis
 - 35% of papers in this analysis used older HMDs, which differ fundamentally from more modern HMDs (recent 5 years),
- therefor the occurrence of symptoms with the use of currently available HMDs is hard to predict
+ therefore the occurrence of symptoms with the use of currently available HMDs is hard to predict
 
 ## Reasons for research
 - identifying factors that increase the occurrence of simulator sickness necessary with increased usage of VR  for
