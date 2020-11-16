@@ -5,3 +5,6 @@
 literature/*.pdf
 literature/papers/*.pdf
 literature/papers/todo/*
+
+# ignore tex output folder
+/out/
