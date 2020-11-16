@@ -7,4 +7,5 @@ literature/papers/*.pdf
 literature/papers/todo/*
 
 # ignore tex output folder
-/out/
+/Thesis/abschlussarbeit.log
+/Thesis/out/
