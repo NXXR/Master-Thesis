@@ -2,11 +2,11 @@
 | Openly Accessible? | Dataset Name    | Comments |
 |--------------------|-----------------|----------|
 | :O: | **Ceres, Dawn** | |
-| :O: | DWNCHCFC2_2 | Moved Permanently to: https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCHCFC2_2.zip |
-| :O: | DWNCLCFC2_2 | Moved Permanently to: https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCLCFC2_2.zip |
-| :O: | DWNCLSPG_2_190214 | Moved Permanently to: https://sbnarchive.psi.edu/pds3/dawn/fc/certified/DWNCLSPG_2_190214.zip |
-| :O: | DWNCSPC_4_01 | Moved Permanently to: https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCSPC_4_01.zip |
-| :O: | DWNCHSPG_2 | Moved Permanently to: https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCHSPG_2.zip |
+| :O: | DWNCHCFC2_2 | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCHCFC2_2.zip |
+| :O: | DWNCLCFC2_2 | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCLCFC2_2.zip |
+| :O: | DWNCLSPG_2_190214 | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/certified/DWNCLSPG_2_190214.zip |
+| :O: | DWNCSPC_4_01 | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCSPC_4_01.zip |
+| :O: | DWNCHSPG_2 | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCHSPG_2.zip |
 | :X: | **Earth, Arcticdem, Faroese** | create.sh in repository, but no download.sh |
 | :X: | **Earth, Arcticdem, Footprints** | wget returns "No such directory 'elev/dem/setsm/ArcticDEM/indexes'." when logged in as anonymous |
 | :X: | **Earth, Arcticdem, Iceland** | wget returns "No such directory 'elev/dem/setsm/ArcticDEM/geocell/v2.0'." when logged in as anonymous |
@@ -14,7 +14,7 @@
 | :?: | **Earth, Basemap** | |
 | :?: | **Earth, BKG** | |
 | :O: | **Earth, Bluemarble** | |
-| :X: | **Earth, Cleantopo** | Moved Permanently to: https://naciscdn.org/data/cleantopo/Full.zip --> 404: Not Found |
+| :X: | **Earth, Cleantopo** | 301 Moved Permanently --> https://naciscdn.org/data/cleantopo/Full.zip --> 404: Not Found |
 | :?: | **Earth, EOX** | |
 | :?: | **Earth, ESRI** | |
 | :O: | **Earth, Naturalearth** | |
@@ -39,4 +39,10 @@
 | :O: | **Mars, Viking** | |
 | :X: | **Mercury, Messenger** | no files in directory |
 | :X: | **Moon, Clementine** | no files in directory |
-| :O: | **Moon, Kaguya** | |
+| :X: | **Moon, Kaguya** | second download returns 404 Not Found |
+| :O: | **Moon, LRO** | |
+| :O: | **Phobos, HRSC** | |
+| :O: | **Phobos, Viking** | |
+| :O: | **Venus, Magellan** | |
+| :X: | **Vesta, Dawn** | Problems while Downloading |
+| :X: | DWNVFC2_2.zip | 301 Moved Permanently --> https://sbnarchive.psi.edu/pds3/dawn/fc/DWNVFC2_2.zip |
