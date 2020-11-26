@@ -1,0 +1,29 @@
+\chapter{FoV Vignette}
+
+One of the most common methods to reduce cybersickness risks and symptoms is decreasing the Field of View \cite{Duh2001}
+\cite{Lin2002}.
+To alleviate cybersickness during movement with high detail, and movement in the peripheral areas of vision, a
+vignette is implemented to limit the Field of View, focusing the users attention and preventing the influence of
+activity in the peripheral vision from adding to cybersickness symptoms.
+The Vignette is mainly planned for movement close to an object's surface, where peripheral detail is significantly
+higher compared to movement in interplanetary space.
+The vignette is implemented as a post-processing shader, drawing a 2D effect over the rendered scene based on an
+inner and outer radius, which are both adjustable in the settings.
+The inner radius determines the maximum distance from the center of the viewport, where a clear field of view is
+guaranteed.
+While the outer radius determines the minimum distance from the center, after which the screen is fully opaque and
+set to a custom color.
+The area between the inner and outer radius consists of a gradient, blending between fully transparent, showing the
+rendered scene, and the custom color the gradient meets at the outer radius.
+Since the vignette is supposed to block peripheral details distracting the user during movement, the vignette is only
+drawn during movement, and disabled when standing still or during sporadic movement.
+This allows reducing the risk of cybersickness symptoms during critical phases, while still maintaining the feeling
+of presence as much as possible, as reducing the field of view negatively influences the feeling of presence \cite{Lin2002}.
+An adjustable threshold for the velocity is used, since slow movements tend to only produce low risks of cybersickness
+symptoms.
+Additionally, an adjustable deadzone is implemented, allowing for a grace period where the vignette is not displayed
+when passing the threshold to avoid flickering on short, quick movements, or velocities close to the threshold, that
+pass the threshold when fluctuating slightly.
+After passing the velocity threshold for at least the deadzone time or longer, the vignette is eased in or out by a
+fade animation with an adjustable duration, to make the transition to the limited field of view more comfortable and
+less noticeable.
