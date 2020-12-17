@@ -27,7 +27,7 @@
             - center of frame is the center of a natural body (sun, planet, satellite, comet, asteroid)
             - center location specified by SPK or PCK file [[2]](#2)
             - tied to a named body and rotating with the body
-            ![](img/RotatingFixedBodyFrame.png)
+            ![](img/NAIF-SPICE/RotatingFixedBodyFrame.png)
             [[1]](#1)
             - most specifications for most common named bodies are hard-coded into SPICE ("IAU_bodyname", i.e. IAU_MARS)
             - rotation state (orientation at specific time) determined using SPICE text PCK containing data published
@@ -40,14 +40,14 @@
         - Instrument
             - usually instruments have one or more frames associated (also applicable to spaceraft antenna, solar
              array etc.)
-        ![](img/SpacecraftFramesExample.png)
+        ![](img/NAIF-SPICE/SpacecraftFramesExample.png)
         [[1]](#1)
         - Dynamic
             - special family of SPICE unique frames
             - time-dependent orientation (does not include frames where orientation is provided using a CK/PCK)
             - different families: Two-vector, Euler, and Of-date
             - *example:* Geocentric Solar Ecliptic (GSE)
-            ![](img/GSE_DynamicFrame.png)
+            ![](img/NAIF-SPICE/GSE_DynamicFrame.png)
             [[1]](#1)
 
 ## Coordinate Systems
@@ -59,7 +59,7 @@
     - for dwarf planets, asteroids and comets +Z axis points to positive pole
         - positive pole (north pole in SPICE) is along spin axis, so that the object spins right-hand wise
 
-![](img/Coords_Planetocentric.png)
+![](img/NAIF-SPICE/Coords_Planetocentric.png)
 [[1]](#1)
 
 - Planeto**detic** Coordinates
@@ -69,7 +69,7 @@
         - for a point on a reference ellipsoid, angle is measured from X-Y-plane to surface normal at the point
         - for a point not on the reference ellipsoid, the nearest point on it is used.
 
-![](img/Coords_Planetodetic.png)
+![](img/NAIF-SPICE/Coords_Planetodetic.png)
 [[1]](#1)
 
 - Planeto**graphic** Coordinates
@@ -79,7 +79,7 @@
     - latitude same as planeto**detic** latitude
     - **no consistent standard for dwarf planets, asteroids, and comets**
 
-![](img/Coords_Planetographic.png)
+![](img/NAIF-SPICE/Coords_Planetographic.png)
 [[1]](#1)
 
 - Spherical Coordinates
@@ -89,7 +89,7 @@
     - colatitude defined as angle between +Z-axis and position vector (aka. zenith angle, inclination angle, polar
       angle)
 
-![](img/Coords_Spherical.png)
+![](img/NAIF-SPICE/Coords_Spherical.png)
 [[1]](#1)
 
 - Azimuth-Elevation Coordinates
@@ -107,7 +107,7 @@
 
 ### Specifying Positions
 - positions marked by ephemeris objects (positions in J2000 frame)
-![](img/SPICEstylePositions.png)
+![](img/NAIF-SPICE/SPICEstylePositions.png)
 [[1]](#1)
 
 ## Glossary
@@ -122,7 +122,7 @@ Celestial coordinate system that uses the observer's local horizon as the fundam
 #### J2000
 Frame based on earth's equator and equinox (determined from observations of planetary motions and other data). [[1]](#1)
 
-![](img/J2000_EarthOrientation.png)
+![](img/NAIF-SPICE/J2000_EarthOrientation.png)
 [[1]](#1)
 
 J2000 is almost coincident with [ICRF](#icrf) (rotation of less than 0.1 arc second difference).
@@ -134,7 +134,7 @@ SIPCE considers them the same as all data is referenced to ICRF, but for compati
  barycenter of the solar system, whose axes are defined by the measured positions of extragalactic sources (mainly
  quasars). [[3]](#3)
 
-![](img/J2000_ICRFreference.png)
+![](img/NAIF-SPICE/J2000_ICRFreference.png)
 [[1]](#1)
 
 ---
