@@ -1,5 +1,10 @@
 # Nutzerstudie
 
+## What to measure?
+- measure improvement of sickness symptoms when using accessibilty solutions
+- measure severity of sickness while using CosmoScout
+- measure which part of the simulation is worst?
+
 ## What to test?
 - grid/no grid during interplanetary navigation
 - vignette/no vignette during navigation close to surface
@@ -11,3 +16,8 @@
 - SSQ? (needs multiple sessions?)
 - continuous evaluation every few minutes?
   - plot cybersickness over time?
+  - analogue slider measuring sickness symptoms
+- open feedback
+
+## How to test?
+- random navigation tasks (use cases)
