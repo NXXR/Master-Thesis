@@ -1,0 +1,97 @@
+\chapter{Chapter 2}\label{ch:chapter02}
+
+\section{Formulas}\label{sec:formulas}
+
+\begin{wraptable}{o}{0pt}
+    \begin{tabular}{|r l|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Symbols}} \\
+        \hline
+        $I$       & relative brightness \\
+        $\Omega_{sun}$  & solid angle of \\
+        & the sun \\
+        $\Omega_{occ}$  & solid angle of \\
+        & intersection \\
+        \hline
+    \end{tabular}
+\end{wraptable}
+
+This is a text that describes a formula.
+This formula is for calculating the brightness of light for a single point that is illuminated by the sun and partially occluded by a moon.
+This is done by taking the solid angle of the Sun $\Omega_{sun}$ subtracting the solid angle of the occluding moon $\Omega_{occ}$ and normalize the result.
+To the right we have a table that describes all the symbols that appear on this page, so people can much more easily see what symbol has which meaning without having to reread the text everytime they want to use the formula.
+
+\begin{equation}
+    \label{eq:relative-intensity}
+    I = \frac{\Omega_{sun} - \Omega_{occ}}{\Omega_{sun}}.
+\end{equation}
+
+\section{Units in Equations}\label{sec:units-in-equations}
+
+\begin{equation}
+    \frac{\SI{6371}{\kilo\meter} * \SI{149600000}{\kilo\meter}}{\SI{695510}{\kilo\meter} - \SI{6371}{\kilo\meter}} = \SI{1383000}{\kilo\meter}.\label{eq:equation-with-units}
+\end{equation}
+
+\section{Code Blocks}\label{sec:code-blocks}
+
+This templated uses minted for formatting code.
+It is required to install the python package Pygments.
+You can do this with the following command: pip install Pygments
+
+\subsection{Simple Code Block}\label{subsec:simple-code-block}
+
+Here we can see a code block.
+The second argument specifies the language for text highlighting.
+
+\begin{minted}{c}
+    // Get the intensity of the eclipse caused by the occluding body for our fragment.
+    float eclipseLight = calcEclipse(occludingBody, fragPos);
+
+    // Get the color of the fragment from the bodies texture.
+    outputColor = texture(/*...*/);
+
+    // Reduce the brightness of the fragment according to the intensity of the eclipse.
+    outputColor = outputColor * eclipseLight;
+\end{minted}
+
+\subsection{Imported Code Block from File}\label{subsec:imported-code-block-from-file}
+
+The following line imports code from a text file.
+The first argument is the language for highlighting purposes.
+
+\inputminted{c}{chapter02/code/spherical_cap_intersect.glsl}
+
+\subsection{Inline Code}\label{subsec:inline-code}
+
+This is inlined code: \mintinline{c}{float calcEclipse(vec4 occludingBody, vec3 fragmentPosition)}, where the first argument is the language.
+
+\section{Tables}\label{sec:tables}
+
+This is a table:
+
+\begin{center}
+    \begin{tabular}{ l r c r}
+        \toprule
+        \textbf{Body} & \textbf{Semi-major Axis} & \textbf{Observer Placement} & \textbf{Max. Abs. Error} \\
+        \midrule
+        Mercury & 0.39 AU & surface & 0.0008 \\
+        & & 500,000km & 0.0000 \\
+        \midrule
+        Venus & 0.72 AU & surface & 0.0004 \\
+        & & 500,000km & 0.0000 \\
+        \midrule
+        Earth & 1.00 AU & surface & 0.0003 \\
+        & & Moon & 0.0000 \\
+        \midrule
+        Mars & 1.52 AU & surface & 0.0002 \\
+        & & Phobos & 0.0000 \\
+        & & Deimos & 0.0000 \\
+        \midrule
+        Jupiter & 5.20 AU & surface & 0.0000 \\
+        & & Io & 0.0000 \\
+        & & Callisto & 0.0000 \\
+        \bottomrule
+    \end{tabular}
+    \captionof{table}{This is the table caption.}
+    \label{tab:table-example}
+\end{center}
