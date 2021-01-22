@@ -23,7 +23,7 @@
                 - google maps like zoom out and pan for most distances
                 - parabola ascend/descent for moving to/from orbit on large distances
                 - straight movement to orbit if user view above horizon
-6. Collision detection & mitigation not considered at this point
+6. [OPT] Collision detection & mitigation not considered at this point
     - implementing automatic movement as curves so future collision handling can modify the path by inserting 
       control points
     - parametric curves allow to easily detect collision along the path before moving the observer
@@ -35,3 +35,6 @@
     - user survey to quantify improvement
 8. Feedback/Questions
     * ***write down any questions to implement/insert into thesis/presentation***
+
+- video/gif problematic, maybe screenshots
+    - diagram of automatic movement + frames
