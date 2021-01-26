@@ -30,6 +30,7 @@
     - interplanetary movement linear -> detect collision, insert control point to bend curve around object
     - surface movement parabola/curve -> detect collision, increase height of curve or insert control point to 
       increase steepness
+6. User Study
 7. Further plans for the thesis
     - implement automatic navigation
     - user survey to quantify improvement
