@@ -1,11 +1,14 @@
 1. Introduction
-    1. CosmoScout VR
+    1. CosmoScout VR (motivation/broad overview)
+       - broad overview of data visualisation -> VR data analysis -> CosmoScoutVR
     2. Scope of the project
-2. Related Work
+2. Related Work / Background
     1. Common causes of Cybersickness
-    2. Studies?
-    3. Different Methods of Mitigation
-3. Current Problems
+       1. subchapters for causes
+    2. Different Methods of Mitigation
+       1. subchapters for mitigation
+3. Current Problems in CosmoScout / Ausgangssituation
+    0. CosmoScout Concepts/Architecture / SPICE etc.
     1. No Stable reference frame in interplanetary movement
     2. Convoluted/complex automatic movement
 4. Proposed Solutions
