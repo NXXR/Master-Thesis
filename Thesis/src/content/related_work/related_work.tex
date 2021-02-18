@@ -1,9 +1,8 @@
 \chapter{Background and Related Work}\label{ch:background-and-related-work}
 
 While Virtual Reality technology has gained more and more traction over the recent years, 30\% to 80\% of users
-encounter some form of sickness symptoms during exposure to virtual reality environments~\cite{Rebenitsch2016}.
-Additionally, these sickness symptoms not only occur during the exposure to virtual environments, but can have lasting
-effects and affect users after the exposure as well~\cite{LaViola2000}.
+encounter some form of sickness symptoms during their exposure to virtual environments~\cite{Rebenitsch2016}.
+Additionally, these sickness symptoms can have lasting effects after the exposure as well~\cite{LaViola2000}.
 The high number of affected users has led to cybersickness being one of, if not the biggest roadblock to a more
 widespread adoption of Virtual Reality Devices.
 
@@ -21,7 +20,8 @@ According to LaViola~\cite{LaViola2000} the symptoms of exposure to virtual envi
     \item Vomiting.
 \end{itemize}
 Vertigo, in the case of VR-sickness particularly benign paroxysmal positional vertigo (BPPV), is a condition where the
-individual experiences a false sense of motion, or spinning and objects or surroundings appear to swirl or move~\cite{Post2010}.
+individual experiences a false sense of motion, or spinning, and objects or surroundings appear to swirl or
+move~\cite{Post2010}.
 \\
 Several studies also found that severity of symptoms increases with longer exposure times to virtual environments~\cite{Ruddle2004,Min2004,Duzmanska2018}.
 However, some studies show that users can adapt, and overall sickness reduces with repeated exposure~\cite{Hill2000}.
@@ -29,15 +29,16 @@ However, some studies show that users can adapt, and overall sickness reduces wi
 Throughout the study of these symptoms, several terms have been used to compound these sickness symptoms that appear
 to be similar to the symptoms of motion sickness.
 Initially, the term Simulator Sickness was used to describe motion sickness encountered during exposure to flight
-simulators, and originated from the assessment of military flight simulators~\cite{Saredakis2020, Kennedy1993}.
+simulators~\cite{Saredakis2020}.
+The term originated from the assessment of military flight simulators~\cite{Kennedy1993}.
 While Simulator Sickness is still used in recent publications, the terms Cybersickness or VR Sickness are generally used
-to differentiate from simulator sickness and closer examine the side effects resulting from the use of virtual
-environments~\cite{Saredakis2020,McCauley1992}.
+to differentiate, and closer examine the side effects of virtual environments from simulator
+sickness~\cite{Saredakis2020,McCauley1992}.
 The term VR Sickness specifically is used in discussions and studies about sickness symptoms involving head-mounted
 displays (HMD)~\cite{Kim2018,Cobb1999}.
 This terminology is often used interchangeably across literature.
 The terms Cybersickness and VR Sickness will be used in this study, as Stanney, Kennedy, and
-Drexler~\cite{Stanney1997} argue that, while sickness from virtual environments shares many of the symptoms often also
+Drexler~\cite{Stanney1997} argue that, while sickness from virtual environments shares many of the symptoms also
 experienced during simulator sickness or motion sickness, the sickness profiles are different.
 \begin{center}
     \begin{tabular}{ l l l l l}
@@ -113,18 +114,18 @@ Together, the system functions to compensate for movement, stabilize vision, mai
 balance~\cite{Walker2014}.
 In virtual environments, the sensory mismatch is usually between the visual system receiving optical flow patterns
 characteristic of self motion, while the vestibular system does not perceive these changes in motion.
-This sensory conflict lies at the root of simulator sickness and was identified early on, as Barrett and
-Thornton~\cite{Barrett1968} when they noticed that subjects showed symptoms of simulator sickness caused by conflict
-between the visual presentation of motion and the lack of corresponding vestibular sensation in their fixed-base
-simulators.
+This sensory conflict lies at the root of simulator sickness and was identified early on, when Barrett and
+Thornton~\cite{Barrett1968} noticed that subjects showed simulator sickness symptoms caused by conflict between the
+visual presentation of motion and the lack of corresponding vestibular sensation in their fixed-base simulators.
 Barrett and Thornton also noticed, that subjects only showed sickness symptoms when the simulator was in a
 perspective similar to driving a car, but showed no symptoms when viewing the car from outside, similar to driving a
-remote controlled car~\cite{Tiiro2018}.
+remote controlled car, as well as passengers showing more severe symptoms than drivers, indicating
+that involvement in motion is a factor in the occurrence of simulator sickness~\cite{Tiiro2018,Barrett1968}.
 
-The sensory conflict theory is the most popular theory to explain cybersickness, because it has a lot of studies to
-back it up, and is intuitive to understand~\cite{Rebenitsch2016,Tiiro2018}.
+The sensory conflict theory is the most popular theory to explain cybersickness, because it has a steadily growing
+amount of studies supporting it, and the theory is intuitive to understand~\cite{Rebenitsch2016,Tiiro2018}.
 However, the theory has been criticised by several studies, because sensory conflict theory only states that sickness
-is preceded by a sensory conflict, but the theory is unable to predict when cybersickness will occur, or how severe
+is preceded by a sensory conflict, but is unable to predict when cybersickness will occur, or how severe
 sickness symptoms will be~\cite{LaViola2000,Rebenitsch2016,Kolasinski1995}.
 
 
@@ -145,9 +146,9 @@ sickness~\cite{Clifton2020}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% add more paper citations here?
 Chardonnet, Mirzaei, and Merienne~\cite{Chardonnet2015}, as well as other studies propose to use the changes in 
 range, variance, and frequency of the subject's centre of gravity as a measurement of postural sway.
-Based on the accessibility of devices to measure individual's centre of gravity, those measurements have found 
-increasing popularity in studies to objectively measure postural stability of subjects and indicate the potential 
-onset of cybersickness symptoms~\cite{Lim2020}.
+Based on the accessibility of devices to measure individual's centre of gravity, those measurements have found
+increasing popularity in studies to objectively measure subject's postural stability and indicate the potential onset
+of cybersickness symptoms~\cite{Lim2020}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/related_work/img/PosturalStability[Smart2013]}
@@ -180,10 +181,10 @@ up-direction is the cause for sickness symptoms~\cite{Rebenitsch2016}.
     \caption{Example of sensory mismatch according to rest frame theory~\cite{Rebenitsch2016}.}
     \label{fig:sensory-mismatch-example}
 \end{figure}
-An example of this sensory mismatch is shown in Figure~\ref{fig:sensory-mismatch-example}.
-Rest frame theory also shows similarities to the postural instability theory, as the discrepancy between the
-perceived up-direction and gravity leads to an unstable posture and sickness symptoms following a prolonged period of
-postural instability~\cite{Rebenitsch2016}.
+The rest frame theory also shows similarities to the postural instability theory, as the discrepancy between perceived
+up-direction and gravity leads to postural instability and following sickness symptoms~\cite{Rebenitsch2016}.
+An example of this sensory mismatch, and resulting postural instability is shown in
+Figure~\ref{fig:sensory-mismatch-example}.
 The theory also supports the postural instability theory in situations where postural control is lessened, such as in
 seated positions where the individual's posture is stabilized.
 Several studies like Chang et al.~\cite{Chang2013}, and Duh, Parker, and Furness~\cite{Duh2001b} found, that
@@ -193,16 +194,23 @@ stability and reduces cybersickness symptoms.
 
 \subsubsection{Vergence-accommodation conflict theory}\label{subsubsec:vergence-accommodation-conflict-theory}
 
-Another theory to explain cybersickness symptoms, especially oculomotor symptoms, is the vergence-accommodation
+Another theory to explain cybersickness symptoms, especially oculomotor symptoms, is the \mbox{vergence-accommodation}
 conflict theory.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/2]{content/related_work/img/VergenceAccommodation[Kroeker2010]}
+    \caption{Difference between vergence and accomodation distance in the real world (left) and stereoscopic displays
+        (right)~\cite{Kroeker2010}.}
+    \label{fig:vergence-accommodation-differences}
+\end{figure}
 Vergence is the simultaneous lateral movement of the eyes when an individual's visual system is adjusting to objects
-moving towards or away from the individual~\cite{Cassin/Kroeker?}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Accommodation is the process of adjusting both eyes focal lengths to the perceived distance, focusing on the
-perceived object~\cite{Rebenitsch2016}.
+at different distances~\cite{Kim2014}.
+Accommodation is the process of adjusting both eye's focal lengths, focusing on the perceived
+object~\cite{Rebenitsch2016}.
 In virtual environments, especially in head-mounted displays, images are presented at a fixed screen depth.
-This leads to a conflict with real life expectations, as vergence and accommodation do not occur naturally in
-stereoscopic displays~\cite{Saredakis2020}.
+This leads to conflict with real life expectations, as vergence and accommodation do not occur naturally at
+different distances like in stereoscopic displays~\cite{Saredakis2020}, as shown in
+Figure~\ref{fig:vergence-accommodation-differences}.
 Kim, Kane, and Banks~\cite{Kim2014} noted that content with high levels of stimulation usually contain more changes
-in stimulus distance, and therefore not only level of visual stimulation, but also variance of stimulus distance
-increase visual discomfort and eye strain.
+in stimulus distance, and therefore variance of stimulus distance, and level of visual stimulation both increase visual
+discomfort and eye strain.

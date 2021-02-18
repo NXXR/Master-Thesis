@@ -54,13 +54,13 @@
                   when seated) [[Rebenitsch2016](#16)]
             2. ##### Vergence Accommodation conflict theory #####
                 - Vergence refers to simultaneous lateral eye movement to adjust to objects moving towards or away from 
-                  the individual [[Cassin2006][Kroeker2010]?]
+                  the individual [?[Cassin2006]? [Kim2014](#21)]
                 - Accommodation is the process of adjusting the focal length to the perceived distance, focusing on the 
                   object
                 - in virtual environments, especially in HMD VR systems, images are presented at the same distance
-                - conflict with real life as eyes always focus on the same distance[[Rebenitsch2016]]
-                - v-a does not occur naturally in stereoscopic display [[Saredakis2020]]
-                - high level of visual stimulation and changes in stimulus distance produce more sickness [[Kim2014]]
+                - conflict with real life as eyes always focus on the same distance[[Rebenitsch2016](#16)]
+                - v-a does not occur naturally in stereoscopic display [[Saredakis2020](#1)]
+                - high level of visual stimulation and changes in stimulus distance produce more sickness [[Kim2014](#21)]
 
     3. ### Methods of measurement ###
     4. ### Different Methods of Mitigation ###
@@ -158,3 +158,7 @@ https://doi.org/10.1007/s00221-016-4846-7
 Arcioni B., Palmisano S., Apthorp D., Kim J.: *Postural stability predicts the likelihood of cybersickness in active 
 HMD-based virtual reality*. 2018  
 https://doi.org/10.1016/j.displa.2018.07.001
+
+###### 21.
+Kim, Kane, Banks: *The rate of change of vergence–accommodation conflict affects visual discomfort*. 2014  
+https://www.sciencedirect.com/science/article/pii/S0042698914002545?via%3Dihub
