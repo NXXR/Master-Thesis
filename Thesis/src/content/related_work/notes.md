@@ -4,6 +4,8 @@
 - Cybersickness occurs during or after exposure to virtual environments [[6](#6)]
 - symptoms like eye strain, headache, pallor, sweating, disorientation, vertigo, nausea, in extreme cases vomiting [
   [6](#6)]
+- severity increases with longer exposure [[8](#8),[9](#9),[10](#10)]
+- overall sickness reduces with repeated exposure [[11](#11)]
 
 - Simulator Sickness; originated from assessment of military flight simulators [[1](#1),[2](#2)]
 - Cybersickness; originally used to describe side effects form use of virtual environments [[1](#1)[3](#3)]
@@ -16,9 +18,6 @@
 - terminology used interchangeably across literature
 - focus on HMD VR, most studies cybersickness ==> "VR Sickness", sometimes Cybersickness (may involve additional 
   peripheries)
-
-- severity increases with longer exposure [[8](#8),[9](#9),[10](#10)]
-- overall sickness reduces with repeated exposure [[11](#11)]
 
     2. ### Common causes of VR sickness ###
         1. #### Sensory conflict theory ####
@@ -44,6 +43,25 @@
               general cybersickness in HMD-based VR [[18](#18),[19](#19),[20](#20)]
   
         3. #### Other theories ####
+            1. ##### Rest frame theory #####
+                - similar to postural instability
+                - mismatch in sensed gravitation and perceived up-direction [[Rebenitsch2016](#16)]
+                - studies found superimposing frames with horizontal lines [[Chang2013]] or a grid [[Duh2001]] help 
+                  reduce sickness symptoms
+                    - presumably improving postural stability by providing a fixed reference point/minimizing 
+                      sensory conflict
+                - more general explanation in instances where postural control may not be as much of a factor (e.g. 
+                  when seated) [[Rebenitsch2016](#16)]
+            2. ##### Vergence Accommodation conflict theory #####
+                - Vergence refers to simultaneous lateral eye movement to adjust to objects moving towards or away from 
+                  the individual [[Cassin2006][Kroeker2010]?]
+                - Accommodation is the process of adjusting the focal length to the perceived distance, focusing on the 
+                  object
+                - in virtual environments, especially in HMD VR systems, images are presented at the same distance
+                - conflict with real life as eyes always focus on the same distance[[Rebenitsch2016]]
+                - v-a does not occur naturally in stereoscopic display [[Saredakis2020]]
+                - high level of visual stimulation and changes in stimulus distance produce more sickness [[Kim2014]]
+
     3. ### Methods of measurement ###
     4. ### Different Methods of Mitigation ###
         1. #### subchapters for mitigation ####
