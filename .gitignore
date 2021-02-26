@@ -3,6 +3,8 @@
 
 # ignore pdf files (full papers) but keep md notes/summaries
 literature/*.pdf
-literature/papers/*.pdf
-literature/papers/todo/*
-literature/papers/read without notes/*
+literature/*/*.pdf
+#literature/papers/*.pdf
+#literature/papers/todo/*
+#literature/papers/read without notes/*
+
