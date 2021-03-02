@@ -63,8 +63,58 @@
                 - high level of visual stimulation and changes in stimulus distance produce more sickness [[Kim2014](#21)]
 
     3. ### Methods of measurement ###
+        - hard to measure objectively, because of symptom's variety, non-observable, and subjective [[McCauley1992](#3)]
+        - symptoms can also occur after exposure, making measuring symptoms harder [[McCauley1992](#3)]
+        - Questionnaires most popular -> easy and cheap, but yield subjective info
+            - SSQ by [[Kennedy1993](#2)]
+            - VRSQ by [[Kim2018](#4)]
+            - FMS
+        - objective measurements
+        1. #### Questionnaires ####
+            1. ##### Simulator Sickness Questionnaire #####
+                - one of the most commonly used Measurements in cybersickness [[Saredakis2020](#1)]
+                - developed from Pensacola Motion Sickness Questionnaire (MSQ) to provide easier computer or manual 
+                  scoring, and to better tailor Questionnaire for SS instead of MS [[Kennedy1993](#2)]
+                - major objectives [[Kennedy1993](#2)]:
+                    - provide a more valid index of overall simulator sickness severity as distinguished from motion 
+                      sickness
+                    - provide subscale scores that are more diagnostic of the locus od simulator sickness in a 
+                      particular simulator
+                    - provide a scoring approach to make monitoring and cumulative tracking relatively straightforward
+                - separation of symptoms into 3 distinct clusters as mentioned above, Oculomotor, Disorientation, and 
+                  Nausea [[Kennedy1993](#2)]
+                - each (partially) independent cluster used as basis for a subscale [[Kennedy1993](#2)]
+                    - each subscale reflecting the impact of simulator exposure on a different "target system"
+                      [[Kennedy1993](#2)]
+                    - simplifies the process of determining where and in what ways a simulator may be causing problems
+                      [[Kennedy1993](#2)]
+                - scores symptoms on 4-point scale and use derived weights to sum to final score, interpretable by 
+                  comparison to calibration group of simulators [[Kennedy1993](#2)]
+                - [[Kennedy1993](#2)] offers further separation, but not as well defined: too few simulator-relevant 
+                  symptoms to provide adequate reliability for a subscale score based on the additional factors
+                    - split Oculomotor into disturbance of visual processing (blurred vision, difficulty focusing) and 
+                      symptoms caused by disturbance (headache, eyestrain, fatigue)
+                    - separation of "tired and hungry" factor (fatigue, difficulty concentrating) as artifact created by 
+                      time spent in simulator
+                    - split Nausea into premonitory signs (increased salivation, burping) and advanced stages (nausea, 
+                      sweating)
+                - modal position is no indicated symptomatology, and scale sensitivity at upper extremes of 
+                  symptomatology range (0-value contains 40-75% of observations) [[Kennedy1993](#2)]
+                - "scales do not distinguish among simulators that have no problems, but rather intended to discriminate 
+                  problem simulators from those with no indicated difficulties."[[Kennedy1993](#2)]
+                - complex structure and development process that involves a sample of highly trained professionals and 
+                  simulator experiments, which do not comply with the modern day HMD based VR and entertainment oriented 
+                  users, reasons for not using SSQ [[Sevinc2020](#22)]
+            2. ##### CSQ and VRSQ #####
+            3. ##### FMS #####
+        2. #### Objective measurements ####
+            - physiological measurements [[Kim2005]]
+            - head dispersion [[Lim2020]]
     4. ### Different Methods of Mitigation ###
-        1. #### subchapters for mitigation ####
+        - best practices
+        - peripheral movement [[Buhler2020]], similar to FoV limitation
+        1. #### FoV limitation ####
+        2. #### Stable reference frames ####
 
 
 # Sources
@@ -162,3 +212,8 @@ https://doi.org/10.1016/j.displa.2018.07.001
 ###### 21.
 Kim, Kane, Banks: *The rate of change of vergence–accommodation conflict affects visual discomfort*. 2014  
 https://www.sciencedirect.com/science/article/pii/S0042698914002545?via%3Dihub
+
+###### 22.
+Sevinc, Berkman: *Psychometric evaluation of Simulator Sickness Questionnaire and its variants as a measure of 
+cybersickness in consumer virtual environments*. 2020  
+https://doi.org/10.1016/j.apergo.2019.102958
