@@ -52,6 +52,7 @@
                       sensory conflict
                 - more general explanation in instances where postural control may not be as much of a factor (e.g. 
                   when seated) [[Rebenitsch2016](#16)]
+
             2. ##### Vergence Accommodation conflict theory #####
                 - Vergence refers to simultaneous lateral eye movement to adjust to objects moving towards or away from 
                   the individual [?[Cassin2006]? [Kim2014](#21)]
@@ -70,6 +71,7 @@
             - VRSQ by [[Kim2018](#4)]
             - FMS
         - objective measurements
+
         1. #### Questionnaires ####
             1. ##### Simulator Sickness Questionnaire #####
                 - one of the most commonly used Measurements in cybersickness [[Saredakis2020](#1)]
@@ -105,8 +107,26 @@
                 - complex structure and development process that involves a sample of highly trained professionals and 
                   simulator experiments, which do not comply with the modern day HMD based VR and entertainment oriented 
                   users, reasons for not using SSQ [[Sevinc2020](#22)]
-            2. ##### CSQ and VRSQ #####
-            3. ##### FMS #####
+                  
+            2. ##### VRSQ [[Ames2005]] #####
+                - developed specifically for cybersickness [[Ames2005]]
+                - rearrange the SSQ symptoms for VR assessment [[Sevinc2020]]
+                - [[Ames2005]] felt the SSQ does not address ocular symptoms for VR
+                - separation into 2 clusters: general body symptoms and eye-related symptoms [[Ames2005]]
+                - [[Ames2005]] collected 23 symptoms into 2 clusters: 12 non-ocular & 11 ocular
+                - 7-option response scale (0-6): "none" (0), "slight" (1,2), "moderate" (3,4), and "severe" (5,6) [
+                  [Ames2005]]
+                - all participants completed the VRSQ immediately after the exposure, and then repeatedly at 2-min 
+                  intervals for a total of 6 post-exposure VRSQ administrations [[Ames2005]]
+                - [[Ames2005]] found 13 symptoms with high item-total correlations to remain part of the measurement
+                - "nausea" did not meet the criteria, but was kept for researchers using more "dynamic imagery"
+                - however, [[Ames2005]] used a video on a HMD without any user interaction or input method -> used 
+                  visual motion stimulus like other studies instead of VR [[Stone2017]]
+                - validity for cybersickness is questionable according to [[Sone2017]] because the stimulus was not 
+                  VR, and [[Davis2014]] also argue this is the reason for the lack of published studies using the VRSQ
+                
+            3. ##### CSQ [[Stone]] MSAQ [[Gianaros]] #####
+            4. ##### Single-Item (FMS) #####
         2. #### Objective measurements ####
             - physiological measurements [[Kim2005]]
             - head dispersion [[Lim2020]]
