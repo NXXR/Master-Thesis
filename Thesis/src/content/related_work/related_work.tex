@@ -226,8 +226,8 @@ cybersickness~\cite{Rebenitsch2016,Saredakis2020}.
 The most widely used questionnaire is the Simulator Sickness Questionnaire (SSQ), developed by Kennedy, Lane, Berbaum,
 and Lilienthal~\cite{Kennedy1993}.
 Recently, several studies have tried refining the SSQ to adapt it for the assessment of virtual reality and
-head-mounted displays, resulting in the Virtual Reality Sickness Questionnaire (VRSQ) by Kim, Park, Choi, and
-Choe~\cite{Kim2018}.
+head-mounted displays, resulting in the Virtual Reality Symptom Questionnaire (VRSQ) by Ames, Wolffsohn, and
+McBrien~\cite{Ames2005}, and the CyberSickness Questionnaire (CSQ) by Stone III~\cite{Stone2017}.
 In addition to the extensive post-session questionnaires, single item questionnaires like the Fast Motion Sickness
 Scale (FMS) by Keshavarz and Hecht~\cite{Keshavarz2011} that are polled in regular intervals during the virtual
 environment exposure have gained popularity in cybersickness studies.
@@ -396,3 +396,62 @@ small sample size used in the development study.
 Davis, Nesbitt, and Nalivaiko~\cite{Davis2014} also note the lack of published studies using the VRSQ as a method to
 evaluate cybersickness symptoms in their review on cybersickness literature, while Rebenitsch et al
 .~\cite{Rebenitsch2016} do not mention the VRSQ at all.
+
+\subsubsection{CyberSickness Questionnaire}
+
+In his study criticising the VRSQ and SSQ, Stone III~\cite{Stone2017} also proposes an alternative solution to
+measure cybersickness symptoms, the CyberSickness Questionnaire (CSQ).
+Similar to the method Kennedy et al.~\cite{Kennedy1993} used to refine the SSQ from the MSQ, they reinterpreted the
+results of the SSQ in a cybersickness context.
+For this, Stone III~\cite{Stone2017} selected the symptoms clearly indicating cybersickness:
+\begin{itemize}
+    \item headache
+    \item eyestrain
+    \item nausea
+    \item blurred vision
+    \item dizzy (eyes open)
+    \item dizzy (eyes closed)
+    \item vertigo
+    \item difficulty focusing
+    \item fullness of head
+\end{itemize}
+Additionally, they decided to amalgamate "Severe" and "Moderate" responses from the SSQ~\cite{Stone2017}.
+Stone III~\cite{Stone2017} found a two factor solution by separating the Symptoms into two clusters: "Dizziness" and
+"Difficulty focusing".
+Stone III~\cite{Stone2017} also notes that the SSQ can still be used to record post-exposure symptoms, while the
+scoring can be done using the developed CSQ approach by following these steps:
+\begin{enumerate}
+    \item Administer the SSQ after the exposure to virtual environments.
+    \item Remove the unneccesary symptom items from the collected data.
+    \item Combine "Moderate" and "Severe" options for each symptom item, resulting in responses "None" (0), "Slight"
+    (1), and "Moderate" (2).
+    \item Compute the CSQ factors, similar to the SSQ, by multiplying each symptom item with the weight shown in
+    table~\ref{tab:csq-scoring} and adding up the items to form the final scores.
+\end{enumerate}
+\begin{center}
+    \begin{tabular}{ l l l}
+        \toprule
+        \textbf{} & \textbf{Dizziness} & \textbf{Difficulty focusing} \\
+        \midrule
+        Headache                & $.50$ & $.$   \\
+        Eyestrain               & $.$   & $.58$ \\
+        Difficulty focusing     & $.$   & $.89$ \\
+        Nausea                  & $.84$ & $.$   \\
+        Fullness of head        & $.$   & $.55$ \\
+        Blurred vision          & $.$   & $.81$ \\
+        Dizziness (eyes open)   & $.89$ & $.$   \\
+        Dizziness (eyes closed) & $.99$ & $.$   \\
+        Vertigo                 & $.54$ & $.$   \\
+        \bottomrule
+    \end{tabular}
+    \captionof{table}{CSQ nine-item, two-factor model for scoring, according to Stone III~\cite{Stone2017}}
+    \label{tab:csq-scoring}
+\end{center}
+Stone III~\cite{Stone2017} notes that preliminary evidence, and the comparison of CSQ scores with other established
+visually-induced motion sickness scoring methods support the validity of the resulting CyberSickness Questionnaire.
+However, they note based on the CSQ scores of their study, 57\% of the 202 participants reported no dizziness and 40\%
+reported no difficulty focusing, which implies cybersickness was very low, and the study was not focused
+explicitly on inducing cybersickness symptoms~\cite{Stone2017}.
+The review of questionnaires by Sevinc et al.~\cite{Sevinc2020} has tested and approved the validity of the CSQ and
+concludes that it is a more accurate method of measuring cybersickness symptoms than the SSQ, as it was developed
+with a lager sample size and specifically based on the use of virtual reality applications to induce sickness symptoms.

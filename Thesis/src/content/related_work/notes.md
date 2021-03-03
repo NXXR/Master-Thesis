@@ -68,8 +68,10 @@
         - symptoms can also occur after exposure, making measuring symptoms harder [[McCauley1992](#3)]
         - Questionnaires most popular -> easy and cheap, but yield subjective info
             - SSQ by [[Kennedy1993](#2)]
-            - VRSQ by [[Kim2018](#4)]
-            - FMS
+            - VRSQ by [[Ames2005]]
+            - CSQ by [[Stone2017]]
+            - MSAQ by [[Gianaros2001]]
+            - FMS by [[Keshavarz2011]]
         - objective measurements
 
         1. #### Questionnaires ####
@@ -125,8 +127,23 @@
                 - validity for cybersickness is questionable according to [[Sone2017]] because the stimulus was not 
                   VR, and [[Davis2014]] also argue this is the reason for the lack of published studies using the VRSQ
                 
-            3. ##### CSQ [[Stone]] MSAQ [[Gianaros]] #####
-            4. ##### Single-Item (FMS) #####
+            3. ##### CSQ [[Stone2017]] #####
+                - CyberSickness Questionnaire (CSQ)
+                - alternative to SSQ to focus on cybersickness symptoms
+                - reinterpreting SSQ results in cybersickness context
+                - similar refinement approach to the SSQ from MSQ
+                - identify symptoms clearly indicating sickness: headache, eyestrain, nausea, blurred vision, 
+                  dizzy (eyes open), dizzy (eyes closed), vertigo, difficulty focusing, and fullness of head
+                - combine "severe" and "moderate" responses
+                - separation into two clusters: "Dizziness" and "Difficulty focusing"
+                - CSQ allows using the SSQ with CSQ scoring:
+                    - administer post-exposure SSQ
+                    - remove not needed items
+                    - combine "severe" and "moderate" responses
+                    - compute both CSQ factors -> sum after multiplying item score by the factor loading in table 11
+
+            4. ##### MSAQ [[Gianaros2001]] #####
+            5. ##### Single-Item (FMS) [[Keshavarz2011]] #####
         2. #### Objective measurements ####
             - physiological measurements [[Kim2005]]
             - head dispersion [[Lim2020]]
