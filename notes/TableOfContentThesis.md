@@ -9,9 +9,9 @@
        1. subchapters for mitigation
 3. Current Problems in CosmoScout / Ausgangssituation
     0. CosmoScout Concepts/Architecture / SPICE etc.
-    1. No Stable reference frame in interplanetary movement
+    1. Problems in free movement (No Stable reference frame)
     2. Convoluted/complex automatic movement
-4. Proposed Solutions
+4. Implemented Solutions
     1. Floor Grid
     2. FoV Vignette
     3. Automatic Movement Overhaul
