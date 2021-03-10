@@ -143,7 +143,46 @@
                     - compute both CSQ factors -> sum after multiplying item score by the factor loading in table 11
 
             4. ##### MSAQ [[Gianaros2001]] #####
+                - motion sickness assessment questionnaire (MSAQ)
+                - suggest assessment of motion sickness across broad range of contexts (similar to Penascola 
+                  Diagnostic Index) [[Gianaros2001]]
+                - also recognizes multi-dimensionality of mition sickness symptoms [[Gianaros2001]]
+                - "current" questionnaires don't accurately assess sopite syndrome
+                    - sopite-related symptoms include drowsiness, yawning, and disengagement from the environment
+                      [[Graybiel1976]]
+                - [[Gianaros2001]] identify four-factor solution: gastrointestinal, central, peripheral, and 
+                  sopite-related dimensions of motion sickness
+                    - gastrointernal: sickness, queasy, nausea
+                    - central: dizziness, disorientation, lightheadedness, blurred vision
+                    - peripheral: being sweaty, clammy/cold sweat, hot
+                    - sopite: being annoyed, tired, fatigue, uneasy
+                - may be used for measuring both overall (total scores) and distinct dimensions (subscale scores) of 
+                  motion sickness [[Gianaros2001]]
+                - generated symptoms may stem from relatively narrow range of contexts => questionnaire may need to 
+                  be modified to accurately reflect multiple dimensions of MS across different motion environments
+                  [[Gianaros2001]]
+                - development process based on visually-induced motion sickness (non-vr), but successfully employed 
+                  in simulator and VR studies [[Sevinc2020]]
+                - symptom items generated independently by non-experts => valid descriptors of motion sickness in a 
+                  general population [[Gianaros2001]]
+                 
             5. ##### Single-Item (FMS) [[Keshavarz2011]] #####
+                - Fast Motion Sickness Scale (FMS)
+                - most popular of many single-item questionnaires
+                - traditional questionnaires cannot be administered during stimulus presentation [[Keshavarz2011]]
+                - continuous and simple polling of MS data during presentation [[Keshavarz2011]]
+                - measures 2 cardinal symptoms of MS: nausea & general discomfort [[Keshavarz2011]]
+                - verbal ratings on 20-point scale 0 (no sickness) to 20 (frank sickness) , 1 rating per minute
+                  [[Keshavarz2011]]
+                - 20-point scale to be able to differentiate among lower degrees of MS & capture differnt states of 
+                  well-being as well as states of sickness [[Keshavarz2011]]
+                    - participants able to express feelings more precisely [[Keshavarz2011]]
+                - indifferent to physiological correlates or causes of MS [[Keshavarz2011]]
+                    - participants unable to differentiate between nausea and other precursors [[Keshavarz2011]]
+                - only designed to quantify subjective aspects of nausea and general discomfort im MS [[Keshavarz2011]]
+                - shows high correlations to SSQ total score & Nausea Subscale [[Keshavarz2011]]
+                - [[Rebenitsch2016]] concludes one-point rating scales are acceptable to monitor symptoms, but not 
+                  as thorough or sensitive
         2. #### Objective measurements ####
             - physiological measurements [[Kim2005]]
             - head dispersion [[Lim2020]]
