@@ -174,7 +174,7 @@
                 - measures 2 cardinal symptoms of MS: nausea & general discomfort [[Keshavarz2011]]
                 - verbal ratings on 20-point scale 0 (no sickness) to 20 (frank sickness) , 1 rating per minute
                   [[Keshavarz2011]]
-                - 20-point scale to be able to differentiate among lower degrees of MS & capture differnt states of 
+                - 20-point scale to be able to differentiate among lower degrees of MS & capture different states of 
                   well-being as well as states of sickness [[Keshavarz2011]]
                     - participants able to express feelings more precisely [[Keshavarz2011]]
                 - indifferent to physiological correlates or causes of MS [[Keshavarz2011]]
@@ -183,6 +183,7 @@
                 - shows high correlations to SSQ total score & Nausea Subscale [[Keshavarz2011]]
                 - [[Rebenitsch2016]] concludes one-point rating scales are acceptable to monitor symptoms, but not 
                   as thorough or sensitive
+
         2. #### Objective measurements ####
             - physiological measurements [[Kim2005]]
             - head dispersion [[Lim2020]]
