@@ -185,8 +185,37 @@
                   as thorough or sensitive
 
         2. #### Objective measurements ####
-            - physiological measurements [[Kim2005]]
-            - head dispersion [[Lim2020]]
+            - ##### physiological measurements [[Kim2005]] #####
+                - potential to monitor symptoms without interrupting the vr exposure [[Rebenitsch2016]]
+                - combination of subjective and objective measures may offer better evaluation of motion sickness
+                - objective measures more precise
+                - tested different electrophysiological signals before, during, and after exposure
+                - collected signals that showed significant corellation in previous studies
+                    - heart period
+                    - respiratory sinus arrhythmia
+                    - respiration rate
+                    - eyeblink rate
+                    - fingertip pulse volume
+                    - fingertip temperature
+                    - skin conductance
+                    - gastric tachyarrhythmia
+                    - electroencephalogram (EEG) power spectrum
+                - 45 of 57 subjects reported cybersickness during exposure
+                - cybersickness (SSQ) scores significant positive correlation with gastric tachyarrhythmia, eyeblink 
+                  rate, respiration rate, respiration sinus arrhythmia, and heart period
+                - the greater subject's change from baseline, the more they reported cybersickness symptoms
+                - gastric tachyarrhythmia, skin conductance, respiratory sinus arrhythmia, and relative delta power 
+                  fo F3 and T3 were significantly greater than baseline
+                - Heart period, fingertip skin temperature, photoplethysmogram maximum amplitude, and relative beta 
+                  power of F3 and T3 were significantly decreased compared to the baseline
+                - due to the correlation of tachyarrhythmia and cybersickness, [[Kim2005]] suggest the autonomic 
+                  nervous system may play a part in ocurrence of cybersickness
+                - [[Roberts2005]] also found tachyarrhythmia (EGG) to be a strong indicator of exposure to VR
+                - electrocardiogramm (ECG) and blood pressure showed best results for [[Kiryu2007], [Watanabe2008]], as 
+                  the heart beat becomes stronger and/or the blood flow shows lower turbulence during exposure to 
+                  virtual environments
+                
+            - ##### head dispersion [[Lim2020]] #####
     4. ### Different Methods of Mitigation ###
         - best practices
         - peripheral movement [[Buhler2020]], similar to FoV limitation
