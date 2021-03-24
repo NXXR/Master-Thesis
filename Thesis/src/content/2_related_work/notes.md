@@ -216,8 +216,39 @@
                   virtual environments
                 
             - ##### head dispersion [[Lim2020]] #####
+                - physiological measures require costly hardware and are harder to analyze [[Davis2015]]
+                - differences in postural sway as objective indicators of cybersickness symptoms
+                - postural stability measurements offer an objective and fairly low cost method of measurement, and 
+                  theoretically continuous symptom levels that do not require disturbance of the participant through 
+                  frequent polling [[Rebenitsch2016]]
+                    - [[Rebenitsch2016]] note postural sway measurements in practice are neither continuous, nor 
+                      without disturbance, as the measurements require a specific standardized stance 
+                - several studies measure amplitude, magnitude, and frequency of postural sway to predict 
+                  cybersickness [[Riccio], [Stoffregen]]
+                - older studies used to measure time till failure and stance breaks (explain) [[Rebenitsch2016]]
+                - [[Villard2008]] and [[Dong2010], [Dong2011]] noticed subject that did not experience significant 
+                  sickness symptoms had an increased standard deviation of motion during vr exposure, while subjects 
+                  that experienced sickness symptoms showed greater variability with smaller average motion
+                    - some studies mention subjects may self-adapt to virtual reality by consciously avoiding head 
+                      movements when experiencing sickness symptoms [[Rebenitsch2016]]
+                - [[Chardonnet2015]] proposed to measure VR sickness based on changes in CoG and found consistent 
+                  results and high correlation with sickness scores
+                - [[Lim2020]] proposed using the Inertial Measurement Unit (IMU) of a VR device to measure head 
+                  dispersion and positively tested its correlation to CoG sway area
+                    - no additional device or synchronization processing needed
+      
     4. ### Different Methods of Mitigation ###
-        - best practices
+        - best practices [[McCauley1992]]:
+            - "Exposure time should be limited until adaptation to the VE has occurred"
+            - "Tasks that require high rates of linear or rotational acceleration should be avoided, or kept brief, 
+              until the individual has fully adapted to the altered environment"
+            - "Users of VEs should be considered on an individual basis when determining an adaptation program"
+            - "self-movement through a Ve should be at high altitudes above the terrain and/or at lower speeds"
+            - "unusual and extraordinary maneuvers (as these) should be avoided in VEs"
+            - users of VE systems should be informed of the possible adverse effects including motion sickness, 
+              perceptual aftereffects, decreased postural stability, and, in rare cases, delayed onset of symptoms"
+            - "users should be advised to allow for recovery time after cybertravel before actively engaging in 
+              potentially dangerous activities in the real world, such as driving an automobile"
         - peripheral movement [[Buhler2020]], similar to FoV limitation
         1. #### FoV limitation ####
         2. #### Stable reference frames ####

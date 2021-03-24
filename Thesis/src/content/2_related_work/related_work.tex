@@ -594,8 +594,48 @@ They also found, heart period, fingertip skin temperature, fingertip pulse volum
 beta power at F3 and T3 electrode locations were significantly decreased compared to the recorded baseline.
 Kim et al.\ suggest that due to the correlation between gastric tachyarrhythmia and cybersickness, the autonomic
 nervous system may play a bigger part in the occurrence of cybersickness than previously assumed.
-Similar to this study, Roberts and Gallimore~\cite{Roberts2005} found electrogastrogram (EEG) measurements, to detect
+Similar to this study, Roberts and Gallimore~\cite{Roberts2005} found electrogastrogram (EGG) measurements, to detect
 gastric tachyarrhythmia, to be a strong indicator of virtual reality exposure and cybersickness symptoms.
 Other studies have also used electrocardiogram (ECG) and blood pressure measurements to indicate cybersickness, as 
 they found the heart beat becomes stronger, and the blood flow shows lower turbulence during exposure to virtual
 environments~\cite{Kiryu2007, Watanabe2008}.
+
+Davis et al.~\cite{Davis2014} note that one detractor to widespread use of physiological measurements may be the
+costly hardware and difficulty to analyse the results.
+A middle ground has been presented in several studies using measurements of postural stability as an objective, low
+cost, and continuous indicator of cybersickness symptoms~\cite{Rebenitsch2016}.
+However, Rebenitsch et al.~\cite{Rebenitsch2016} also note that postural sway measurements in many studies are not as
+continuous or without the disturbance of the subject as they are often presented, since most measurements require the
+subject to enter a specific stance for the measurement.
+Most studies use the amplitude, magnitude, and frequency of postural sway to distinguish and predict motion sickness
+symptoms, while older studies also examine the time till failure (time until a stance cannot be maintained) or the
+stance breaks (number how often the subject fails to maintain a stance) during a specific
+timeframe~\cite{Rebenitsch2016}.
+Villard, Flanagan, Albanese, and Stoffregen~\cite{Villard2008} and Dong, Stoffregen, and
+Yoshida~\cite{Dong2011, Dong2010} both noticed in their studies that subjects who did not experience significant
+sickness symptoms had an increased standard deviation of motion during their exposure period, while subjects that
+experienced sickness symptoms showed greater variability with smaller average motion compared to the baseline.
+Some other studies mentioned similar findings and suggest that subjects may self-adapt to virtual reality exposure by
+consciously avoiding head movements when experiencing sickness symptoms~\cite{Rebenitsch2016}.
+Another method of low cost, objective measurement of cybersickness is presented by Chardonnet et
+al.~\cite{Chardonnet2015}, who found consistent results measuring a subject's centre of gravity (CoG) with a high
+correlation to measured SSQ scores.
+Lim, Lee, Won, Kala, and Lee~\cite{Lim2020} further extended this measurement, as they proposed to use the VR devices
+inertial measurement unit (IMU) to record head dispersion during the exposure period.
+They introduced Head Dispersion as a measurement of stability from the following Eq.~\ref{eq:head-dispersion}
+\begin{equation}
+    \label{eq:head-dispersion}
+    Head\ Dispersion = \sqrt{\frac{\sum(roll - \overline{roll})^2 + \sum{(pitch - \overline{pitch})^2}} {n}}
+\end{equation}
+With the $roll$ and $pitch$ values in degree, and $\overline{roll}$ and $\overline{pitch}$ as the mean values along
+the session.
+To validate their approach Lim et al.\ compared their IMU sensor data to the centre of gravity sway area measured by an
+external sensor as proposed by Chardonnet et al.\ and found high correlation between their measured Head Dispersion
+and CoG sway area.
+The major advantages of this method are the lack of additional measuring devices needed, and the synchronization
+processing, while delivering a continuous indicator of potential sickness symptoms.
+However, due to the study's recency, it has not yet seen further adoption or larger sample size studies.
+
+
+\section{Methods of Mitigation}\label{sec:methods-of-mitigation}
+
