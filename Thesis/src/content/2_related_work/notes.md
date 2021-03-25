@@ -249,8 +249,17 @@
               perceptual aftereffects, decreased postural stability, and, in rare cases, delayed onset of symptoms"
             - "users should be advised to allow for recovery time after cybertravel before actively engaging in 
               potentially dangerous activities in the real world, such as driving an automobile"
-        - peripheral movement [[Buhler2020]], similar to FoV limitation
+
         1. #### FoV limitation ####
+            - [[Duh2001]] found that vection is strongly tied to FoV, as subjects receive information about vection 
+              from their peripheral visual field
+            - wide FoVs cause greater self-motion perception and postural disturbance [[Duh2001]]
+            - strategically / automatically manipulating FoV can reduce degree of VR sickness experienced and help 
+              adapt to VR [[Fernandes2016]]
+            - participants in [[Lim2020]]'s study reported less noticable black regions until 60° FoV
+            - [[Lim2020]] also showed that FoV limitation should be individual specific, as users react differently 
+              to varying degrees of FoV limitation, or differences between dynamic FoV processing and fixed FoV
+            - [[Lim2020]] conclude dynamic FoV processing can show a decrease of up to 37.05% in VR sickness symptoms
         2. #### Stable reference frames ####
 
 
