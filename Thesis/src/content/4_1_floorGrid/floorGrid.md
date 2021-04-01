@@ -16,10 +16,10 @@
         - packaged in vr-accessibility plugin
         - rendering a quad static to the observer's position and gui elements
             - grid static to the room and gui allowing for free head movement and walking within the roomscale of the VR
-        - quad is sized by a defined value and textured with a semi-transparent grid texture (center square or cross)
-        - Shader code frag?
         - quad is connected via transform node to the Display node in the scenegraph (same as GUI)
             - transform node contains the vertical offset (adjustable from the observer to the real floor)
+        - quad is sized by a defined value and textured with a semi-transparent grid texture (center square or cross)
+        - Shader code frag?
         - the grid fades after a few meters based on the blend function & texture transparency, without aliasing or 
           "grey horizon" 
         - Options to individually adjust the grid as needed:
