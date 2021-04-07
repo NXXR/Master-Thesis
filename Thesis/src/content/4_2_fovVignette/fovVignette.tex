@@ -1,29 +1,116 @@
-\section{FoV Vignette}\label{sec:fov-vignette}
+\section{Field of View Vignette}\label{sec:field-of-view-vignette}
 
-One of the most common methods to reduce cybersickness risks and symptoms is decreasing the Field of View \cite{Duh2001}
-\cite{Lin2002}.
-To alleviate cybersickness during movement with high detail, and movement in the peripheral areas of vision, a
+One of the most common methods to reduce cybersickness risks and symptoms is decreasing the Field of
+View as examined in section~\ref{subsec:field-of-view-limitation}.
+To alleviate cybersickness during movements with high detail, and movements in the peripheral areas of vision, a
 vignette is implemented to limit the Field of View, focusing the users attention and preventing the influence of
 activity in the peripheral vision from adding to cybersickness symptoms.
-The Vignette is mainly planned for movement close to an object's surface, where peripheral detail is significantly
-higher compared to movement in interplanetary space.
-The vignette is implemented as a post-processing shader, drawing a 2D effect over the rendered scene based on an
+The Vignette is primarily planned for movements close to an object's surface, where peripheral visual flow is
+significantly higher compared to movements in interplanetary space.
+Additionally, reducing the FoV may help users during the adaption phase, by directing their view to the center of the
+HMD's lenses where the image is focused.
+While a point of interest is within a users field of view, they tend to shift their gaze without moving their head.
+This can lead to users trying to focus on objects that are not at the center of their view, and thereby not in the
+center of the HMD lenses.
+In this case the user is trying to focus on part of the virtual environment, that cannot be focused on based on
+hardware limitations.
+A FoV vignette can help the adaptation process by limiting the FoV and nudging the user towards using head movements
+instead of eye movements to look at different points of interest and keep their gaze centered at the middle of the
+HMD's lenses.
+However, these adaptation aids require a narrow FoV and may be perceived as limiting or annoying to other users.
+According to the best practices by McCauley and Sharkey~\cite{McCauley1992}, and similar to the Floor Grid, the
+vignette is designed to be modular and adaptable to each individual user.
+Additionally, several options of vignetting are implemented, as suggested by Lim et al.~\cite{Lim2020}, to allow the
+user options for both dynamic and fixed limitation of FoV\@.
+
+
+\subsection{FoV Vignette Implementation}\label{subsec:fov-vignette-implementation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/4_2_fovVignette/img/Vignette_Screenshot}
+    \caption{Screenshot of CosmoScout VR with (right) and without (left) the FoV Vignette.}
+    \label{fig:fov-vignette-screenshot}
+\end{figure}
+The FoV Vignette is also implemented in the VR Accessibility Plugin for CosmoScout VR, together with the Floor Grid.
+The vignette is realized as a post-processing shader, drawing a 2D effect over the rendered scene based on an
 inner and outer radius, which are both adjustable in the settings.
 The inner radius determines the maximum distance from the center of the viewport, where a clear field of view is
 guaranteed.
-While the outer radius determines the minimum distance from the center, after which the screen is fully opaque and
-set to a custom color.
-The area between the inner and outer radius consists of a gradient, blending between fully transparent, showing the
-rendered scene, and the custom color the gradient meets at the outer radius.
-Since the vignette is supposed to block peripheral details distracting the user during movement, the vignette is only
-drawn during movement, and disabled when standing still or during sporadic movement.
+The outer radius determines the minimum distance from the center, above which the screen is fully opaque with a custom
+color that is also adjustable in the settings.
+The area between the inner and outer radius is bridged by a gradient, blending between fully transparent, showing the
+rendered scene, and the fully opaque custom color at the outer radius.
+Since the vignette is designed to block peripheral visual flow inducing vection and distracting the user during
+movement, the vignette is only drawn during movement, and disabled when standing still or during sporadic, short
+movements.
 This allows reducing the risk of cybersickness symptoms during critical phases, while still maintaining the feeling
-of presence as much as possible, as reducing the field of view negatively influences the feeling of presence \cite{Lin2002}.
-An adjustable threshold for the velocity is used, since slow movements tend to only produce low risks of cybersickness
-symptoms.
+of presence as much as possible.
+As mentioned above, two different methods of vignetting are implemented to offer more customization to the user.
+One method is drawing the vignette dynamically based on the observer's velocity in relation to the Observer's
+position and distance to other bodies, as interplanetary movements allow for, and use significantly higher
+velocities than movements close to a bodies surface.
+For more customisation, an adjustable upper and lower velocity threshold for this normalized velocity is given to
+allow more sensitive users an earlier and more noticeable vignetting, and more robust users the freedom to reduce its
+effects.
+The lower velocity threshold is the velocity at which the vignette will start limiting the FoV by decreasing its
+radius, and the upper velocity threshold is the velocity where the vignette is at a determined minimum radius.
+An adjustable threshold for the minimum velocity is used, since slow movements tend to only produce low risks of
+cybersickness symptoms and limiting the FoV is usually not necessary.
+Providing an upper velocity threshold serves solves two problems, it allows sensitive users to benefit of a
+drastically reduced FoV as early as they feel comfortable, and additionally preventing the vignette from jittering
+at maximum velocity where the velocity tends to fluctuate slightly, propagating to the radii of the dynamic vignette.
+The FoV vignette is drawn in the same way for both options as shown in the fragment shader for the dynamic radius:
+\begin{minted}{c}
+    void main()
+    {
+        if (uNormVelocity <= 0 && !uDebug ) { discard; }
+
+        vec2 texSize = textureSize(uTexture, 0);
+        float ratio = texSize.y / texSize.x;
+
+        float dist = sqrt(vPosition.x * vPosition.x + ratio * ratio * vPosition.y * vPosition.y);
+
+        if (dist < uInnerRadius ) { discard; }
+        float r = ((dist - uInnerRadius) / (uOuterRadius - uInnerRadius));
+        oColor = mix(texture(uTexture, vTexCoords), uCustomColor, r);
+        if (dist > uOuterRadius) {
+          oColor.rgb = uCustomColor.rgb;
+        }
+    }
+\end{minted}
+The debug flag (\textit{uDebug}) exists to allow for easy adjustments of the vignette's variables, and if enabled
+draws the vignette with its minimum radius.
+First the distance (\textit{dist}) of the current fragment to the center of the viewport is calculated and adjusted
+for the viewport's aspect ratio (\textit{ratio}).
+Based on this distance and the inner and outer radius (\textit{uInnerRadius} and \textit{uOuterRadius}) the blending
+factor (\textit{r}) is calculated, and the rendered scene (\textit{uTexture}) is blended with the custom color to
+create the gradient between the inner and outer radius.
+If the fragment is inside the inner radius, the post processing is discarded,a nd if the fragment is outside the
+outer radius it is set to the color of the vignette (\textit{uCustomColor}).
+The dynamic vignette's radius is controlled through the inner and outer radius that is passed to the fragment shader,
+and is updated during the update frames of the simulation.
+In the update the velocity is normalized to the upper and lower velocity threshold, and a new radius is calculated
+partly based on the previous radius to dampen the propagation of harsh changes in velocity and smoothen the changes
+in radii.
+Currently, new radii propagate with a 1\% influence over each frame:
+\begin{equation}
+    \label{eq:radii-influence}
+    r_{new} = (0.99 \times r_{last}) + (0.01 \times r_{target})
+\end{equation}
+
+As suggested by Lim et al.~\cite{Lim2020}, an option for a fixed vignette is also implemented.
+The fixed vignette also uses the lower velocity threshold to determine when it should be drawn.
 Additionally, an adjustable deadzone is implemented, allowing for a grace period where the vignette is not displayed
 when passing the threshold to avoid flickering on short, quick movements, or velocities close to the threshold, that
 pass the threshold when fluctuating slightly.
-After passing the velocity threshold for at least the deadzone time or longer, the vignette is eased in or out by a
-fade animation with an adjustable duration, to make the transition to the limited field of view more comfortable and
+After passing the velocity threshold for at least the deadzone time or longer, a fade animation is used to ease the
+vignette in or out over an adjustable duration, to make the transition to the limited field of view more comfortable and
 less noticeable.
+Through the use of an animation to gradually increase the opacity of the Vignette, a closing movement similar to the
+dynamic vignette along the gradient is suggested.
+However, the vignette is independent of the velocity, and is drawn with its specified minimal radius as soon as the
+lower velocity threshold is passed.
+As with the Floor Grid, almost all of the settings specifying the FoV vignette are adjustable either in the settigns
+file, or in the options menu at runtime, to allow users to customise the vignette according to their hardware setup
+and preferences.
