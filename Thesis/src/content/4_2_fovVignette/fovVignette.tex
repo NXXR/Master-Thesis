@@ -96,7 +96,7 @@ in radii.
 Currently, new radii propagate with a 1\% influence over each frame:
 \begin{equation}
     \label{eq:radii-influence}
-    r_{new} = (0.99 \times r_{last}) + (0.01 \times r_{target})
+    r_{new} = ( 0.99 \times r_{last} ) + ( 0.01 \times r_{target} )
 \end{equation}
 
 As suggested by Lim et al.~\cite{Lim2020}, an option for a fixed vignette is also implemented.
@@ -109,8 +109,39 @@ vignette in or out over an adjustable duration, to make the transition to the li
 less noticeable.
 Through the use of an animation to gradually increase the opacity of the Vignette, a closing movement similar to the
 dynamic vignette along the gradient is suggested.
-However, the vignette is independent of the velocity, and is drawn with its specified minimal radius as soon as the
+However, the vignette is independent of the velocity, and is drawn with its specified minimum radius as soon as the
 lower velocity threshold is passed.
-As with the Floor Grid, almost all of the settings specifying the FoV vignette are adjustable either in the settigns
+As with the Floor Grid, almost all settings specifying the FoV vignette are adjustable either in the settings
 file, or in the options menu at runtime, to allow users to customise the vignette according to their hardware setup
 and preferences.
+
+Finally, an experimental option is implemented, to only limit the FoV vertically and asymmetrically.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/4_2_fovVignette/img/Asymmetrical_Vignette[Lim2020]}
+    \caption{Asymmetrical FoV Limitation as proposed by Lim et al.~\cite{Lim2020}.}
+    \label{fig:fov-assymetrical-vignette}
+\end{figure}
+Lim et al.~\cite{Lim2020} proposed in their study that the FoV vignetting should be applied asymmetrically, as human
+visual characteristics produce an asymmetrical field of view with visual limits of 50\textdegree upwards and
+70\textdegree downwards~\cite{Hatada1980}.
+Since the horizontal field of view is significantly wider than the vertical field, we added an option to asymmetrically
+limit the vertical field of view and forego any limitation of the horizontal visual field.
+The fragment shader for the vertical vignette functions the same as their respective versions for the round
+vignettes.
+However, the calculation of the distance from the fragment to the center ignores the x-component as depicted below:
+\begin{minted}{c}
+    float dist = 0;
+    if (vPosition.y > 0) { dist = vPosition.y; }
+    else { dist = vPosition.y * -(0.7); }
+\end{minted}
+instead of calculating the euclidean distance, the distance above the center is the vertical position of the fragment
+from the center.
+The distance below the center is multiplied by $0.7$ to result in a smaller distance, and thus a smaller vignette on
+the bottom, as depicted in figure~\ref{fig:fov-assymetrical-vignette}.
+This feature is implemented experimentally, mainly because Lim et al.\ implemented an asymmetrical FoV Limitation in
+their study, but no symmetrical limitation.
+We understand that Lim et al.\ as well as their reference Hatada, Sakata, and Kusaka~\cite{Hatada1980} argue for an
+asymmetrical FoV vignette as it is based on human visual characteristics, and is therefore less noticeable.
+However, an asymmetrical vignette could lead to users not focusing on the center of the HMD's lenses but slightly
+below, leading to unfocused images that may increase cybersickness symptoms.
