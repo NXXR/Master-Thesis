@@ -29,7 +29,7 @@ changeable in the options menu at runtime.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/4_1_floorGrid/img/FloorGrid_Screenshot}
-    \caption{Screenshot of CosmoScout VR with (right) and without (left) the Floor Grid.}
+    \caption{Screenshot of CosmoScout VR without (left) and with (right) the Floor Grid.}
     \label{fig:floor-grid-screenshot}
 \end{figure}
 The Floor Grid is implemented in the VR Accessibility Plugin for CosmoScout VR\@.
@@ -41,11 +41,11 @@ the real world floor.
 To properly adjust the grid to the real world floor the node drawing the quad is attached to the node drawing the GUI
 via a transform node in the scenegraph that adds a vertical offset (in meters) to the grid that is adjustable in the
 settings file before startup, and the options menu at runtime.
-The quad size is defined in the settings file as a multiplier (\textit{uFalloff} / \textit{gridFalloff}) that scales
+The quad size is defined in the settings file as a multiplier (\textit{uFalloff}) that scales
 the initial quad, spanning in x and y direction from -1 to 1, up by the value set in the settings file.
 The scaled quad is textured with a semi transparent texture containing the grid with the center of the grid either as a
 square or a cross.
-Additionally, the texture can be scaled by a separate factor (\textit{uSize} / \textit{gridSize}) resulting in a
+Additionally, the texture can be scaled by a separate factor (\textit{uSize}) resulting in a
 coarser or finer mesh.
 The calculations for the vertex positions and texture coordinates are shown in the code block below from the Floor
 Grid's vertex shader:
@@ -63,7 +63,7 @@ The variables \textit{uMatModelView} and \textit{uMatProjection} are the Model, 
 to transform the coordinates in the graphics pipeline.
 The Floor Grid's fragment shader applies the selected texture, but is discarded if the fragment is not part of a grid
 line (i.e.\ is fully transparent).
-Additionally, the texture's opacity (\textit{uAlpha} / \textit{gridAlpha}) is adjustable through the settings file and
+Additionally, the texture's opacity (\textit{uAlpha}) is adjustable through the settings file and
 in the options menu at runtime.
 To prevent aliasing or the grid turning into a grey plane towards the horizon, the floor grid is drawn with the
 OpenGL Blend Function "\mintinline{c}{glBlendFunc(GL_SCR_ALPHA, GL_ONE_MINUS_SRC_ALPHA)}".
