@@ -1,1 +1,27 @@
 \section{Automatic Movement Overhaul}\label{sec:automatic-movement-overhaul}
+
+As pointed out in section~\ref{subsec:problems-with-automatic-movement}, the current automatic movement method was
+built as temporary means to navigate between saved bookmarks.
+The method applies a linear interpolation to transition smoothly between the origin and target position leading to
+movement in a straight line between the two points.
+Additionally, a linear interpolation between the origin and target orientation is used to rotate the observer into the
+target orientation.
+\\
+While this is the easiest, and most straightforward way to smoothly move the observer through the simulation without
+breaking continuity by teleporting the user, the simultaneous translation and rotation have been found to induce
+disorientation followed up by motion sickness symptoms by the user.
+\\
+\\
+In this section a new automatic navigation for CosmoScout is presented, which aims to make the automatic navigation
+more accessible and less sickness inducing.
+As parts of the navigation have not been fully implemented, we first present the concepts how the automatic
+navigation system should move the observer.
+After the concept, key features of the implemented solutions are presented and explained.
+
+
+\subsection{Automatic Movement Concept}\label{subsec:automatic-movement-concept}
+
+
+
+
+\subsection{Automatic Movement Implementation}\label{subsec:automatic-movement-implementation}
