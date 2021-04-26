@@ -52,34 +52,36 @@ Through the classification of locations a set of general movements and transitio
 those locations in a manner that is predictable for the user, while still general enough to minimize special cases
 that could lead to unwanted behaviour.
 \\
-The classification leads to 3 types of movement and the transitions between them, as shown in table~\ref{tab:auto-move-types}:
-\begin{center}
-    \begin{tabular}{c | c c c}
-        \toprule
-        \textbf{Origin \textbackslash Target} & \textbf{Surface} & \textbf{Orbit} & \textbf{Interplanetary}\\
-        \midrule
-        \textbf{Surface}         & Surface movement & Surface to Orbit transition & - \\
-                                 &                  & (Ascending)                 &   \\
-        \textbf{Orbit}           & Orbit to Surface transition & Orbital movement & Orbital transition \\
-                                 & (Descending)                &                  &                    \\
-        \textbf{Interplanetary}  & - & - & Interplanetary movement \\
-        \bottomrule
-    \end{tabular}
-    \captionof{table}{Possible movement and transition types for the automatic navigation.}
-    \label{tab:auto-move-types}
-\end{center}
+The classification leads to 3 types of movement and the transitions between them, resulting in the state machine
+shown in figure~\ref{fig:nav-states}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/4_3_autoNavigation/img/NavigationStateDiagram}
+    \caption{State diagram for the different types of movement and the transitions between them.}
+    \label{fig:nav-states}
+\end{figure}
 the different movements are structured in layers, therefore a transition from surface to interplanetary space and
 vice versa is done via transition from surface to orbit, and from orbit to interplanetary space.
 Additionally, there is no transition from interplanetary movement to orbital movement since the interplanetary
-movements end in a position where no further transition is needed.
+movements end in a position where either the destination is reached, or the observer is in a poition in the target
+orbit and is able to resume orbital movement immediately.
+\\
 \\
 An example for this layered travel is a movement from a location on the origin body's surface to a location on the
 target body's surface:
-First, the observer transitions from the surface location to an orbit location via an ascending transition.
-In orbit, the observer transitions to a position to facilitate interplanetary movement, and moves to the target
-body into an orbit position.
+the movement starts in the "Surface movement" state, since the origin location is on a body's surface.
+First, the observer transitions from the surface location to an orbit location via the ascension transition, because
+the observer is still in the origin's SPICE frame.
+Then, since the observer is still in the wrong frame, the observer transitions to a position for interplanetary
+movement, and moves to towards the target via interplanetary movement, ending in an orbital location in the target
+frame.
 Then, an orbital movement is performed to move above the final location on the surface.
-Finally, the observer transitions to the final location on the surface via a descending transition.
+Finally, the observer enters a decension transitions to the final location on the surface.
+\\
+\\
+While a SPICE frame is merely a nested oriented frame of reference, and therefore not limited in distance from its
+center, in the context of the navigation concept, the frame is used as a general reference to a body's sphere of
+influence, where the observer is eiter on the surface or in an arbitrarily, but reasonably high orbit around the body.
 
 \subsubsection{Surface Movement}\label{subsubsec:surface-movements}
 
