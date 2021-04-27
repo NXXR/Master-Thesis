@@ -18,6 +18,7 @@ user.
     \caption{HTC Vive Remote Controller Button reference~\cite{BAA2017}.}
     \label{fig:controller-reference}
 \end{figure}
+
 The main control scheme of CosmoScout VR for HMDs employs a one-handed flying scheme similar to the control scheme of
 Google Earth VR or the One-Hand Flying described by Drogemuller et al.~\cite{Drogemuller2020}.
 The controls use the buttons highlighted in figure~\ref{fig:controller-reference}, as well as an indicator that is
@@ -72,13 +73,14 @@ While traditional 4-DOF-navigation provides an inherently more stable frame of r
 movement usually providing an up-direction strongly tied to the movement scheme, a 6-DOF-navigational system lacks this
 reference frame as it allows the user to freely rotate around all axes.
 A reference to the different degrees of freedom is shown in figure~\ref{fig:6-dof-reference}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{content/3_current_state/img/6-DOF-reference[Fragaszy2018]}
     \caption{Six potential degrees of freedom for rotation and translation of an object~\cite{Fragaszy2018}.}
     \label{fig:6-dof-reference}
 \end{figure}
-\\
+
 Keshavarz, and Hecht~\cite{Keshavarz2011b} examined the influence of rotations around multiple axes and found that
 increasingly complex rotations lead to an increase in cybersickness symptoms.
 Additionally, Rebenitsch et al.~\cite{Rebenitsch2016} found multiple studies examining the effects of different
@@ -107,13 +109,14 @@ impact of complex rotations.
 The current automatic navigation to selected bodies or bookmarked locations was only designed as a rudimentary method
 to facilitate the means of quick and precise movements to points of interest without the need for manual travel to
 said point of interest.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/3_current_state/img/OldAutomaticNavigation}
     \caption{Current automatic movement between two points of interest.}
     \label{fig:old-auto-nav}
 \end{figure}
-\\
+
 The navigation uses linear interpolation between the current position and rotation, and the target position and
 rotation to change both variables over a predetermined duration.
 Additionally, the animation speed is variable to start the movement slow, speeding up in the intermediate travel,
@@ -128,13 +131,14 @@ Obviously, a complex rotation paired with linear movement can easily provoke vis
 users experiencing these movements, as these motions resemble provocative simulations used in several studies to
 actively induce cybersickness in their subjects.
 \\
-\\
+
 \begin{wrapfigure}{o}{0.25\textwidth}
     \centering
     \includegraphics[width=0.1\textwidth]{content/3_current_state/img/OldAutomaticNavigation_Landing}
     \caption{Current automatic movement descending onto a body's surface.}
     \label{fig:old-auto-nav-descend}
 \end{wrapfigure}
+
 The movements to ascend or descend between a body's orbit and its surface have been mentioned by some users to be a
 significant problem of the automatic movement in CosmoScout VR and source of discomfort.
 The source of increased cybersickness symptoms is thought to be the more prominent reference frame provided by the
@@ -158,12 +162,14 @@ plane parallel to the real world surface to it being perpendicular to perceived 
 \\
 Finally, the current navigation does not have any collision detection or handling, which can contribute to discomfort
 of users when the linear path of the navigation intersects a body, as shown in figure~\ref{fig:old-auto-nav-collision}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.25\textwidth]{content/3_current_state/img/OldAutomaticNavigation_SurfaceCollision}
     \caption{Current automatic movement between two points of interest on different sides of a body.}
     \label{fig:old-auto-nav-collision}
 \end{figure}
+
 While, collision detection and handling is not part of this study, we aimed to mitigate collision related problems in
 our solutions and provide navigation methods that allows collision detection and handling to be added afterwards
 without major changes to the basic structure.
