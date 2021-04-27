@@ -72,6 +72,11 @@
             - linear motion from origin to target
             - replaced interpolation between origin and target by using the t parameter along a linear spline 
               between origin and target
+            - split the rotation into 2 parts:
+                - initial rotation from origin orientation onto _mLookAtPoint_ (i.e. movement direction for spline 
+                  before movement)
+                    - _mLookAtPoint_ added as a point the observer is focusing on during translative phase of movement
+                - final rotation from movement direction onto final orientation after movement
             - separated the rotation from the translation by modifying the start & end time parameters of the 
               _animatedValue_ object
                 - add code to modify the duration of rotation relative to the difference between the origin and 
@@ -79,11 +84,7 @@
                     - split overall duration into 3 (t_start + t_move + t_final = t_dur)
                     - t_start & t_final, weighted depending on the angular difference (0 < t_start, t_final < 1/3 t_dur)
                     - t_move, takes up rest of duration (1/3 t_dur < t_move < t_dur)
-            - split the rotation into 2 parts:
-                - initial rotation from origin orientation onto _mLookAtPoint_ (i.e. movement direction for spline 
-                  before movement)
-                    - _mLookAtPoint_ added as a point the observer is focusing on during translative phase of movement
-                - final rotation from movement direction onto final orientation after movement
+            
         - modification of _updateMovementAnimation_ necessary to adjust for split rotation and spline
         - stop simulation time during movement -> easier to handle movement, prevents rotating target frame moving 
           observer's origin position (at beginning of movement, observer position is transformed into target frame)
