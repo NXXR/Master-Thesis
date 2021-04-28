@@ -170,7 +170,7 @@ First, the observer finds the closest suitable location where the following cond
     between the target's center, and the origin's center.
     \begin{equation}
         \label{eq:orbital-magnitudes}
-        |\vec{v}| > |\vec{w}|
+        \left\| \vec{v} \right\| > \left\| \vec{w} \right\|
     \end{equation}
 \end{itemize}
 The requirements are visualised in figure~\ref{fig:orbital-transition-angles}.
@@ -264,11 +264,11 @@ The other \textit{AnimatedValue} is used for the rotation, interpolating between
 target orientation over the duration of the movement.
 \\
 After the \textit{moveTo}-method has processed the available information into the two \textit{AnimatedValue} objects,
-the \textit{mAnimationInProgress}-flag is set.
+the \textit{mAnimationInProgress} flag is set.
 While the flag is true, the \textit{updateMovementAnimation}-method uses the current time at each frame to poll the
-current position and orientation from the \textit{AnimatedValue}-objects, until the time is past the end time of both
+current position and orientation from the \textit{AnimatedValue} objects, until the time is past the end time of both
 end times.
-Afterwards, the \textit{updateMovementAnimation} resets the \textit{mAnimationInProgress}-flag to false.
+Afterwards, the \textit{updateMovementAnimation} resets the \textit{mAnimationInProgress} flag to false.
 \\
 \\
 Since the automatic movement can potentially be called from anywhere in CosmoScout, including plugins, we plan to
@@ -280,8 +280,8 @@ Since the interplanetary movement shows similar characteristics, the \textit{mov
 method signature is also used for interplanetary travel, and generally linear movements.
 \\
 \\
-The first change to the method is replacing the \textit{AnimatedValue}-object for the interpolation of the observers 
-position with a linear spline between the origin and target position, and using the \textit{AnimatedValue}-object to
+The first change to the method is replacing the \textit{AnimatedValue} object for the interpolation of the observers
+position with a linear spline between the origin and target position, and using the \textit{AnimatedValue} object to
 interpolate the $t$ parameter over the length of the spline relative to the duration of the movement.
 \\
 Second, split the rotation into an initial rotation, from the origin orientation to a \textit{mLookAtPoint} in
@@ -291,8 +291,9 @@ Additionally, the rotations are separated from the translation by adjusting the 
 \\
 The overall duration ($t_{all}$) is split into three stages, the initial rotation ($t_{start}$), the translative phase
 ($t_{move}$), and the final rotation ($t_{end}$).
-For the duration of each rotation a function is used that calculates a weight factor ($w$) between 0 and 1 based on the
-angular difference ($\theta$) of the start and the end orientation.
+For the duration of each rotation a function (equation~\ref{eq:duration-weight}) is used that calculates a weight
+factor ($w$) between 0 and 1 based on the angular difference ($\theta$) of the start and the end direction of view
+(negative $z$-axis).
 This way, the durations for each rotation can vary in length based on the angular difference of the rotation, and the
 translative phase takes up the rest of the duration as described in the following equations:
 \begin{equation}
@@ -302,7 +303,7 @@ translative phase takes up the rest of the duration as described in the followin
 \end{equation}
 with:
 \begin{equation}
-    \label{eq:duration-rules}
+    \label{eq:duration-weight}
     w = f(\theta) = - \frac{\cos{\theta} - 1}{2}
 \end{equation}
 This results in the following limitations for the durations:
@@ -314,3 +315,296 @@ This results in the following limitations for the durations:
     \label{eq:duration-result-mov}
     \tfrac{1}{3} t_{all} \leq t_{move} \leq t_{all}
 \end{equation}
+\\
+The modifications to the \textit{moveTo}-method also require changes to the \textit{updateMovementAnimation}-method,
+as the position and rotation needs to be polled from different sources.
+Additionally, the simulation is changed to stop the simulation time during movement.
+The automatic movement is programmed to transform all positions into the target's SPICE frame, and the delay of the
+initial rotation before translation results in inadvertent movement, as the target frame rotates, moving the observer
+significantly due to the distance to the target's center.
+
+\subsubsection{Changes to \textit{updateMovementAnimation}}\label{subsubsec:changes-to-updatemovementanimation}
+
+\begin{minted}{c}
+    void CelestialObserver::updateMovementAnimation(double tTime) {
+        if (mAnimationInProgress) {
+            // get position from spline
+            mPosition = mMoveSpline->getPosition(mAnimatedT.get(tTime));
+
+            if (tTime < mAnimatedRotationStart.mEndTime) {
+                // rotation to look-at point not done yet
+                mRotation = mAnimatedRotationStart.get(tTime);
+            } else if (tTime > mAnimatedRotationFinal.mStartTime) {
+                // rotation to final direction started
+                mRotation = mAnimatedRotationFinal.get(tTime);
+            } else {
+                // observer is moving along spline -> adjust rotation towards look-at point
+                auto direction = glm::normalize(mLookAtPoint - mPosition);
+                mRotation      = glm::quatLookAt(direction, mUpDirection);
+            }
+
+            if (mAnimatedRotationFinal.mEndTime < tTime) {
+                mAnimationInProgress = false;
+                if (!mMovementQueue.empty()) {
+                    moveTo(mMovementQueue.front());
+                    mMovementQueue.pop();
+                }
+            }
+        }
+    }
+\end{minted}
+The polling of the current position only has minimal changes (l.\@4), as the \textit{AnimatedValue}
+is polled to receive the $t$ parameter for the position on the spline based on the current time, instead of receiving
+the interpolated position directly from the \textit{AnimatedValue}.
+\\
+Polling the orientation is dependent on the current time in the movement process (ll.\@6--16).
+If the current time is before the end time of the initial rotation, the current orientation is provided by the
+\textit{AnimatedValue} of the initial rotation, interpolating between the original orientation, and the orientation
+towards the \textit{mLookAtPoint}.
+If the current time is after the start time of the final rotation, the orientation is provided by the
+\textit{AnimatedValue} of the final rotation, interpolating between the orientation aimed at the
+\textit{mLookAtPoint}, and the final orientation.
+Otherwise, the movement animation is in the translative phase, and the current orientation is calculated using the 
+\textit{mLookAtPoint}, and the \textit{mUpDirection} to generate a new orientation focused on the \textit{mLookAtPoint}.
+The \textit{mUpDirection} is saved from the orientation of the observer at the beginning of the movement animation,
+to prevent the camera from any rolling rotations during the movement animation, since rolling during movements
+appears to increase disorientation and therefore discomfort in users.
+Lines 18--24 of the code block contain another important change that is explained in the next section.
+
+\subsubsection{Movement description packages and Movement Queue}\label{subsubsec:movement-description-packages-and-movement-queue}
+
+Based on the new changes to the \textit{updateMovementAnimation}-method, there are the following requirements any
+movement must fill with data in order for the movement animation to display correctly:
+\begin{itemize}
+    \item The \textit{mMoveSpline}, providing the path for the movement, and the \textit{AnimatedValue} for the
+    interpolation of the $t$ parameter for the spline.
+    \item The \textit{AnimatedValue} for the initial rotation from the origin direction towards the
+    \textit{mLookAtPoint}.
+    \item The \textit{mLookAtPoint} to focus on during the translation, and the \textit{mUpDirection} to calculate
+    the orientation and prevent rolling.
+    \item The \textit{AnimatedValue} for the final rotation from the direction towards the \textit{mLookAtPoint} to
+    the final direction.
+\end{itemize}
+Any new movement must provide these information and therefore, a movement always consist of the initial rotation,
+then the translation with a given point focused in the center of the viewport during the movement, and a final
+rotation into the final orientation.
+\\
+To provide functionality for the transitions, as well as future, potentially complex movements and routes, a queue is
+added to the automatic movement system.
+The parameters needed by the \textit{moveTo}-methods to process into the above mentioned requirements are packaged into
+structs, and the \textit{mMovementQueue} provides a FIFO queue to hold an ordered list of these movement instructions.
+At the end of the \textit{updateMovementAnimation}-method (ll.\@18--24), the
+\textit{mMovementQueue} is checked whether it contains any items, and if so, the topmost item is removed, and the
+\textit{moveTo}-method is called with the struct as parameter.
+For this additional \textit{moveTo}-methods can be added to provide different types of movement.
+Additionally, a \textit{moveTo}-method is added that accepts a queue of movement instructions as a parameter, as
+shown below:
+\begin{minted}{c}
+    void CelestialObserver::moveTo(std::queue<MovementDescription> const& moveDescriptionsQueue) {
+        // make sure queue contains at least one element
+        if (!moveDescriptionsQueue.empty()) {
+            // swap new movements into queue
+            mMovementQueue = moveDescriptionsQueue;
+            // execute first movement instruction
+            moveTo(mMovementQueue.front());
+            mMovementQueue.pop();
+        }
+    }
+\end{minted}
+Providing a new, non-empty queue to the method during an ongoing movement discards remaining items, emplaces the
+new queue into the \textit{mMovementQueue}, and calls the \textit{moveTo}-method with the topmost item of the queue.
+Discarding the old queue when receiving a new queue is done, to prevent buffering of multiple, potentially unwanted
+movements.
+Currently, the \textit{mMovementQueue} can be filled with a variant of one of the two basic movement description
+packages.
+Either the linear movement that resulted from the original \textit{moveTo}-method, and is used in the interplanetary
+movement, or the circular movement that is used in the orbital movement.
+
+\subsubsection{Different \textit{moveTo}-methods and control point computation}\label{subsubsec:different-moveto-methods-and-control-point-computation}
+
+To provide different types of movement, the \textit{moveTo}-method has multiple implementation with different
+signatures:
+\begin{minted}{c}
+    void moveTo(std::string const& sCenterName, std::string const& sFrameName,
+        glm::dvec3 const& position, glm::dquat const& rotation, double dSimulationTime,
+        double dRealStartTime, double dRealEndTime);
+
+    [...]
+
+    void moveTo(defaultPoint2Point const& moveDescriptionP2P);
+
+    [...]
+
+    void moveTo(defaultOrbit const& moveDescriptionOrbit);
+
+    [...]
+
+    void moveTo(MovementDescription const& moveDescription);
+
+    [...]
+
+    void moveTo(std::queue<MovementDescription>const & moveDescriptionsQueue);
+\end{minted}
+The original signature of the method (l.\@1) is kept to allow backwards compatibility.
+The second signature (l.\@7) accepts movement description packages for linear, point-to-point (interplanetary)
+movements.
+The function simply unpacks and relays the parameters for the linear movement to the first \textit{moveTo}-method.
+The third signature (l.\@11) accepts movement description packages for circular (orbital) movements.
+The fourth signature (l.\@15) is added because the movement queue uses a variant type for its elements.
+Therefore, when a new element for the queue is used, this method accepts it.
+The method checks the real movement description type using a switch-case-statement, and typecasts the variant-type
+elements, and relays them to their respective methods.
+The last signature (l.\@19) accepts whole movement queues to be passed and is described above.
+Currently, only linear and circular movement packages are implemented, however, the addition of further movement
+description packages is straightforward in this system.
+\\
+\\
+The movement path is constructed using a uniform cubic basis splines.
+Uniform cubic b-splines offer some advantages over other curves, as they are similar to bezier curves, which means
+they are relatively easy to construct, and have a continuous velocity over the curve.
+Additionally, uniform cubic b-splines offer a continuous curvature, easing the movement of the observer along the
+spline.
+Lastly, their control points only have local influence on the curve, which means that additional control points can
+be inserted to handle collisions, without major changes to the overall curve.
+Their only disadvantage, the interpolated curve not necessarily passing through the specified control points, can be
+mitigated by inserting triplets of control points with the middle point being the control point teh curve should pass
+close to, and the other two points representing a tangent to the curve that is passing through the three control points.
+\\
+Uniform cubic b-splines that are non-looping also require an additional point on either end of the curve where the
+curve is not interpolated.
+Therefore, the curve for the movement always starts in the second and ends in the penultimate control point.
+\\
+\\
+The spline for the interplanetary movement is constructed between the origin and target using two triplets of control 
+points.
+First, the vector between the origin and target ($OT$-vector) is constructed and normalized.
+Then, each triplet forms the tangent through the start and end point, where the start or end point is the middle
+control point, with one control point in front, and one control point behind the middle point in direction of the
+$OT$-vector.
+This way, bot the tangent in the start and end point are along the $OT$-vector, leading to a straight spline between
+the start and end point.
+The resulting spline is saved in the \textit{mMoveSpline}, and the \textit{AnimatedValue}-object for the
+interpolation of the $t$ parameter is set to interpolate between $0$ and $t_{max}$ ($1$ in most cases) over the
+duration of the translation phase.
+\\
+The \textit{mLookAtPoint} is set to the last control point, as it is slightly in front of the end point of the
+interpolated spline.
+This way the observer is always oriented towards the end point of the movement path, without the movement ending in a
+location where the position and \textit{mLookAtPoint} coincide, which could lead to an undefined orientation for the
+observer.
+Additionally, the \textit{mUpDirection} is saved from the up-direction of the observer in the origin location to
+prevent the observer from rolling during the movement phase.
+\\
+Finally, the \textit{AnimatedValue}-objects for the initial, and the final rotation are set.
+The initial rotation interpolates between the origin orientation, and the orientation towards the
+\textit{mLookAtPoint} over the duration for the initial rotation.
+The final rotation interpolates between the orientation towards the \textit{mLookAtPoint} and the final orientation
+over the duration for the final rotation.
+\\
+The durations and points in time for the rotations and the translation are calculated as mentioned above
+(equations~\ref{eq:duration-weight}~and~\ref{eq:duration-timings}).
+\\
+\\
+The orbital movement uses a different \textit{moveTo}-method to realize the circular movement path.
+To approximate the circular arc between the start and end point, both points are projected into 2D space by finding
+the normal to the plane defined by the center-start, and center-end vectors ($\overrightarrow{cs}$ and
+$\overrightarrow{ce}$).
+This also results in the shortest possible path in orbit from the start to the end point.
+Next, the angle ($\theta$) between the two vectors is calculated, and both vectors are normalized to compute the
+additional control points on the unit circle.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/CircularCurveParameters}
+    \caption{Control points ($P2$, $P3$), the start point ($P1$), end point ($P4$) and angle ($\theta$) in 2D
+    space~\cite{Poxmax2021}.}
+    \label{fig:orbital-control-points}
+\end{figure}
+
+Figure~\ref{fig:orbital-control-points} shows an example of the transformation into 2D space, and the required
+control points ($P1$, $P2$, $P3$, and $P4$).
+Poxmax~\cite{Poxmax2021} derived a formula to calculate the missing control points $P2$ and $P3$ on the unit circle:
+\begin{equation}
+    \label{eq:control-points}
+    \begin{aligned}
+        P_{start} &= P1 = (1, 0) \\
+        P_{c1} &= P2 = (1, k) \\
+        P_{c2} &= P3 = (\cos(\theta) + k \cdot \sin(\theta), \sin(\theta) - k \cdot \cos(\theta)) \\
+        P_{end} &= P4 = (\cos(\theta), \sin(\theta))
+    \end{aligned}
+\end{equation}
+With:
+\begin{equation}
+    \label{eq:control-points-factor}
+    \begin{aligned}
+        k &= f(\theta) = \frac{4}{3} \cdot \tan\left( \frac{\theta}{4} \right)
+    \end{aligned}
+\end{equation}
+To transform the control points back into 3D space, the oriented angle around the center from $P1$ to $P2$
+($\phi_{start}$), and from $P4$ to $P3$ ($\phi_{end}$) is calculated.
+To get the control points, the start position and end position are rotated around the normal of the 2D plane, and
+scaled by the magnitude of their 2D counterpart.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/ControlPointsReflected}
+    \caption{Example control points for circular spline where $\theta = 90\deg$~\cite{Poxmax2021}.}
+    \label{fig:orbital-reflected-points}
+\end{figure}
+
+Since, the spline needs two additional control points where the spline is not interpolated, the calculated control
+points are also reflected to the other side of the start and end position as shown in
+figure~\ref{fig:orbital-reflected-points}.
+\\
+The control points in 3D space ($C_{P2}$, $C_{P3}$), and their reflections ($C_{rP2}$, $C_{rP3}$) can be calculated
+using Rodrigues' rotation formula with the start and end points ($C_{start}$, $C_{end}$), the normal for the 2D plane
+($\vec{N}$), the angles between the control point, and the start, or end point ($\phi_{start}$, $\phi_{end}$), and the
+control points in 2D space ($\overrightarrow{P2}$, $\overrightarrow{P3}$):
+\begin{equation}
+    \label{eq:control-point-transformation}
+    \begin{aligned}
+        C_{P2} &= \left(
+            \vec{C}_{start} \cos(\phi_{start}) +
+            ( \vec{N} \times \vec{C}_{start} )\sin(\phi_{start}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{start} )( 1 - \cos(\phi_{start}) )
+        \right) \cdot \left\| \overrightarrow{P2} \right\|
+        \\
+        C_{rP2} &= \left(
+            \vec{C}_{start} \cos(-\phi_{start}) +
+            ( \vec{N} \times \vec{C}_{start} )\sin(-\phi_{start}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{start} )( 1 - \cos(-\phi_{start}) )
+        \right) \cdot \left\| \overrightarrow{P2} \right\|
+        \\
+        C_{P3} &= \left(
+            \vec{C}_{end} \cos(\phi_{end}) +
+            ( \vec{N} \times \vec{C}_{end} )\sin(\phi_{end}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{end} )( 1 - \cos(\phi_{end}) )
+        \right) \cdot \left\| \overrightarrow{P3} \right\|
+        \\
+        C_{rP3} &= \left(
+            \vec{C}_{end} \cos(-\phi_{end}) +
+            ( \vec{N} \times \vec{C}_{end} )\sin(-\phi_{end}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{end} )( 1 - \cos(-\phi_{end}) )
+        \right) \cdot \left\| \overrightarrow{P3} \right\|
+    \end{aligned}
+\end{equation}
+Since the start and end position are used to derive the adjacent control points, different orbit heights in start and
+end position are carried over to their adjacent control points, keeping the triplet of control points on the tangent
+to the movement curve in the start or end position.
+Differences in orbit height between the start triplet and end triplet lead to the movement spline becoming more
+elliptical, resulting in a zoom effect from the start to the end orbit height during the rotation around the center.
+\\
+With the control points calculated, the \textit{mMoveSpline} can be constructed, and the
+\textit{AnimatedValue}-object for the $t$ parameter can be set to interpolate the position along the spline over the
+duration of the movement phase.
+The \textit{mLookAtPoint} for the orientation during the translation phase is set to the center of the body, and the
+\textit{mUpDirection} is saved from the origin orientation to prevent rolling during the movement.
+The \textit{AnimatedValue}-object for the initial rotation is set to interpolate from the origin orientation to the
+orientation facing the center of the body over the duration of the initial rotation.
+The \textit{AnimatedValue}-object for the final rotation is set to interpolate from the orientation facing the center
+of the body to the final orientation over the duration of the final rotation.
+The durations for the two rotation are calculated in the same way as the durations for the linear movement, based on
+the angular difference between the start and end direction.
+However, to properly calculate the angular difference, roll rotation has to be taken into account as well, therefore
+the difference between the start and end quaternion is used to calculate the weight instead of the
+equation~\ref{eq:duration-weight}.

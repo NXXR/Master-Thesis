@@ -98,7 +98,7 @@
                   interpolation
                 - if in between -> use provided _mLookAtPoint_ to calculate orientation to focus on point
 
-        - #### Movement packages ####
+        - #### Movement packages and queue ####
             - based on changes to update function all movement methods must consist of, and provide following 
               information:
                 - movement spline & animated value to interpolate t parameter along spline
@@ -109,6 +109,20 @@
             - any _moveTo_ method must provide these parameters -> movements always consist of initial rotation, 
               then translation with some point focused in the center of the viewport, and a final rotation into the 
               final orientation
+              
+            - add Queue for the transitions, and future, potentially complex movements and routes
+            - package parameters for _moveTo_-functions into structs
+            - add a queue fillable with these structs (FIFO because context sensitive -> order important)
+            - at the end of a movement animation _updateMovementAnimation_ checks if the queue is empty
+                - if not empty, next struct is popped and _moveTo_ is called with the struct/parameters inside
+            - [moveTo(queue) code segment]
+            - add moveTo function to receive fully prepared queue -> other/future components of CS can calculate and 
+              compile queue of movements and hand it to the CelestialObserver class to execute each movement in the 
+              queue
+                - calling _moveTo_ during a movement, discards the elements of the current queue and puts the new 
+                  queue in place
+                - no adding to the queue to preserver current navigation, preventing buffering of multiple, 
+                  potentially unwanted movements
 
         - #### different _moveTo_ methods and control point computation ####
             - Uniform Cubic Basis Splines chosen:
@@ -157,18 +171,3 @@
                 - initial rotation set to interpolate between origin orientation and orientation towards the center 
                   (LookAtPoint)
                 - final rotation set to interpolate between orientation towards the center and the target orientation
-    
-        - #### Movement Queue ####
-            - add Queue for the transitions, and future, potentially complex movements and routes
-            - package parameters for _moveTo_-functions into structs
-            - add a queue fillable with these structs (FIFO because context sensitive -> order important)
-            - at the end of a movement animation _updateMovementAnimation_ checks if the queue is empty
-                - if not empty, next struct is popped and _moveTo_ is called with the struct/parameters inside
-            - [moveTo(queue) code segment]
-            - add moveTo function to receive fully prepared queue -> other/future components of CS can calculate and 
-              compile queue of movements and hand it to the CelestialObserver class to execute each movement in the 
-              queue
-                - calling _moveTo_ during a movement, discards the elements of the current queue and puts the new 
-                  queue in place
-                - no adding to the queue to preserver current navigation, preventing buffering of multiple, 
-                  potentially unwanted movements
