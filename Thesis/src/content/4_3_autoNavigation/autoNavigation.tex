@@ -475,12 +475,21 @@ curve is not interpolated.
 Therefore, the curve for the movement always starts in the second and ends in the penultimate control point.
 \\
 \\
-The spline for the interplanetary movement is constructed between the origin and target using two triplets of control 
+The spline for the interplanetary movement is constructed between the origin and target using two triplets of control
 points.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/LinearSplinePoints}
+    \caption{Control points of a linear spline with the start and end point ($P_{start}$, $P_{end}$), and the control
+    points ($P_{S-OT}$, $P_{S+OT}$, $P_{E-OT}$, $P_{E+OT}$) making up each triplet.}
+    \label{fig:linear-control-points}
+\end{figure}
+
 First, the vector between the origin and target ($OT$-vector) is constructed and normalized.
 Then, each triplet forms the tangent through the start and end point, where the start or end point is the middle
 control point, with one control point in front, and one control point behind the middle point in direction of the
-$OT$-vector.
+$OT$-vector, as described in figure~\ref{fig:linear-control-points}.
 This way, bot the tangent in the start and end point are along the $OT$-vector, leading to a straight spline between
 the start and end point.
 The resulting spline is saved in the \textit{mMoveSpline}, and the \textit{AnimatedValue}-object for the
