@@ -19,22 +19,24 @@ user.
     \label{fig:controller-reference}
 \end{figure}
 
-The main control scheme of CosmoScout VR for HMDs employs a one-handed flying scheme similar to the control scheme of
-Google Earth VR or the One-Hand Flying described by Drogemuller et al.~\cite{Drogemuller2020}.
+The main control scheme of CosmoScout VR for HMDs employs one-handed flying controls similar to the control
+scheme of Google Earth VR or the One-Hand Flying described by Drogemuller et al.~\cite{Drogemuller2020}.
 The controls use the buttons highlighted in figure~\ref{fig:controller-reference}, as well as an indicator that is
 drawn as an extension of the remote controller's forward pointing axis.
 \\
 Pressing the touchpad allows the user to rotate the simulation around the body the user is pointing at with the
-remote's indicator, i.e.\ the observer is moved around the body in a circular orbit.
+remote's indicator, i.e.\ the observer is moved around the body in circular orbits on a sphere with the radius of the
+initial distance to the body.
 The angle of the rotation corresponds directly to the magnitude of the vector between the initial and current position
 of the indicator's intersection with the body.
 \\
 Pressing the grip button allows the user to "grab" the body, the remote indicator is pointing at, and move the body
-on a circular orbit around the observers position.
+around the observers position in circular orbits on a sphere with a radius of the initial distance between the
+observer and the body.
 The observer is always rotated so that the "grabbed" point on the body remains at the position of the remote indicator.
+\\
 Pulling the hair trigger allows the user to move the observer freely with 6 degrees of freedom (see
 figure~\ref{fig:6-dof-reference}).
-\\
 While the trigger is pulled, the observer's translational movement is determined by the vector from the initial
 position when the trigger was pulled to the current position.
 The vector's magnitude directly corresponds to the velocity of the observer in the direction of the vector.
