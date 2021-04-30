@@ -3,7 +3,7 @@
 In this chapter, special concepts and features of the CosmoScout VR application are presented, which shape and
 influence the methods and solutions to mitigate cybersickness symptoms presented in
 chapter~\ref{ch:implemented-solutions}.
-\\
+
 Additionally, situations and aspects of CosmoScout VR that have shown to provoke cybersickness in the simulation are
 examined in the second section of this chapter to highlight the areas that the implemented solution are targeted at,
 in order to alleviate the problems and provide a more comfortable user experience without unnecessarily limiting the
@@ -23,18 +23,18 @@ The main control scheme of CosmoScout VR for HMDs employs one-handed flying cont
 scheme of Google Earth VR or the One-Hand Flying described by Drogemuller et al.~\cite{Drogemuller2020}.
 The controls use the buttons highlighted in figure~\ref{fig:controller-reference}, as well as an indicator that is
 drawn as an extension of the remote controller's forward pointing axis.
-\\
+
 Pressing the touchpad allows the user to rotate the simulation around the body the user is pointing at with the
 remote's indicator, i.e.\ the observer is moved around the body in circular orbits on a sphere with the radius of the
 initial distance to the body.
 The angle of the rotation corresponds directly to the magnitude of the vector between the initial and current position
 of the indicator's intersection with the body.
-\\
+
 Pressing the grip button allows the user to "grab" the body, the remote indicator is pointing at, and move the body
 around the observers position in circular orbits on a sphere with a radius of the initial distance between the
 observer and the body.
 The observer is always rotated so that the "grabbed" point on the body remains at the position of the remote indicator.
-\\
+
 Pulling the hair trigger allows the user to move the observer freely with 6 degrees of freedom (see
 figure~\ref{fig:6-dof-reference}).
 While the trigger is pulled, the observer's translational movement is determined by the vector from the initial
@@ -54,14 +54,13 @@ twist the remote in uncomfortable positions, but can gradually navigate the simu
 
 In order to improve usability and reduce cybersickness symptoms, we aimed to identify and improve aspects and
 scenarios in CosmoScout VR that led to cybersickness symptoms or general feeling of discomfort.
-\\
 To identify these problems, we conducted small tests, gathering empirical data, and used small interviews and
 discussions with other developers and users of CosmoScout.
 A formal study with unbiased test subjects was not done for several reasons, mainly since the goal is only vaguely
 defined and may require a decently sized sample size, as well as time to process its results.
 Additionally, the health and safety regulations and lockdowns around the COVID-19 outbreak complicated the feasibility
 of any preliminary study.
-\\
+
 The empirical data and interviews identified two major problem areas that need independent solutions to mitigate
 discomfort and sickness symptoms.
 The 6-Degrees-of-Freedom (6-DOF) in interplanetary space can easily lead to visually induced motion sickness, and the
@@ -89,14 +88,12 @@ Additionally, Rebenitsch et al.~\cite{Rebenitsch2016} found multiple studies exa
 degrees of freedom in navigation.
 They mention 6-DOF navigation usually induce more cybersickness symptoms than navigation with limited degrees of
 freedom and conclude that the reason might be a limitation of rotation axes.
-\\
 The control scheme of CosmoScout VR as described in section~\ref{subsec:control-scheme} does not allow for easy and
 independent control of rotation around each axis, which can quickly lead to complex rotations around multiple axes at
 once.
 These complex rotations paired with a lack of reference frame can easily disorient the user and lead to visually
 induced motion sickness symptoms.
-\\
-\\
+
 While it seems both problems originate from the control scheme, a change of the control scheme does not necessarily
 help mitigate the problems as different control schemes like those proposed by Drogemuller et al.~\cite{Drogemuller2020}
 either suffer from the same problems, or significantly change the interaction context.
@@ -128,11 +125,11 @@ navigation.
 The color gradient represents the velocity of the observer in the simulation during their linear movement.
 The camera icons represent the rotation of the observers field of view, and the frequency of the icons roughly
 represent the angular velocity of the rotation.
-\\
+
 Obviously, a complex rotation paired with linear movement can easily provoke visually induced motion sickness in
 users experiencing these movements, as these motions resemble provocative simulations used in several studies to
 actively induce cybersickness in their subjects.
-\\
+
 
 \begin{wrapfigure}{o}{0.25\textwidth}
     \centering
@@ -145,11 +142,10 @@ The movements to ascend or descend between a body's orbit and its surface have b
 significant problem of the automatic movement in CosmoScout VR and source of discomfort.
 The source of increased cybersickness symptoms is thought to be the more prominent reference frame provided by the
 body's surface.
-\\
 As presented in figure~\ref{fig:old-auto-nav-descend}, the movements use the same interpolation as mentioned above.
 However, during the intermediate period, where both linear velocity of translation and angular velocity of rotation
 are highest, the perceived reference frame changes.
-\\
+
 While the observer is positioned in a body's orbit, the user's frame of reference is oriented such that the body is
 "in front" of them, i.e.\ the surface's normal being perpendicular to the perceived up-direction.
 During the descending movement the body's surface normal shifts to be parallel to the up-direction without the user
@@ -157,11 +153,9 @@ vestibular system feeling angular acceleration or a shift in gravity.
 Paired with the disorientation during the automatic movement this strong reference frame and change of orientation may
 exasperate the resulting motion sickness symptoms, as the rotations in interplanetary space only have other bodies,
 and the surrounding stars as weak points of reference to indicate the rotation.
-\\
 The ascending movement suffers from the same problem, but in reverse, changing the body's surface from a reference
 plane parallel to the real world surface to it being perpendicular to perceived gravity.
-\\
-\\
+
 Finally, the current navigation does not have any collision detection or handling, which can contribute to discomfort
 of users when the linear path of the navigation intersects a body, as shown in figure~\ref{fig:old-auto-nav-collision}.
 
