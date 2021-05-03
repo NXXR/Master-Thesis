@@ -153,8 +153,12 @@ However, the calculation of the distance from the fragment to the center ignores
 below:
 \begin{minted}{c}
     float dist = 0;
-    if (vPosition.y > 0) { dist = vPosition.y; }
-    else { dist = vPosition.y * -(0.7); }
+    if (vPosition.y > 0) {
+        dist = vPosition.y;
+    }
+    else {
+        dist = vPosition.y * -(0.7);
+    }
 \end{minted}
 instead of calculating the euclidean distance, the distance above the center is the vertical position of the fragment
 from the center.
