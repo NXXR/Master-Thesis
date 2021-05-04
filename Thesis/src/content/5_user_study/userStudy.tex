@@ -1,1 +1,66 @@
 \chapter{User Study}\label{ch:user-study}
+
+Determining the effectiveness of the developed features to reduce cybersickness in the CosmoScout VR application is
+difficult since cybersickness is polysymptomatic and polygenic, and can therefore manifest in different ways for each
+individual.
+This reduces the ability to objectively argue about the effectiveness of the developed features.
+All developed features are rooted in positive results for cybersickness reduction in other studies.
+However, the interaction context and environment differs from the studies and arguments for the mitigation techniques
+in other studies may not be as relevant for the CosmoScout VR environment.
+To measure the effectiveness of the developed features, a user study is planned to test the mitigation features on a
+sample size of potential users of CosmoScout.
+
+The primary goal of this user study is not to study the effects or causes of cybersickness itself, as this work is
+only indirectly aimed at finding the root causes of cybersickness in general or in the CosmoScout VR application
+specifically.
+Instead, the goal of the study is to implement measures to mitigate the occurrence and impact of cybersickness
+symptoms on the user, especially for the navigation in the application.
+Therefore, the user study is not conducted to find an amount of cybersickness symptoms that can occur for any
+individual, or the specific causes of cybersickness, but to compare the user experience and usability before and
+after the implementation of the mitigation features, with a focus on cybersickness symptom incidence.
+Additionally, all features were developed targeting a specific aspect of the navigation in the virtual environment
+and are not in direct competition with each other.
+Therefore, the feature's effectiveness is tested in scenarios tailored to each developed feature, in order to
+compare their effectiveness to the original environment without the specific mitigation feature.
+
+While objective measures provide a more direct insight into the occurrence and severity of cybersickness symptoms
+during the time subjects spend inside the virtual environment, they often  require special equipment and are
+significantly harder to evaluate, and draw conclusions from, correctly.
+Physiological measurements as suggested by Kim et al.~\cite{Kim2005} cannot be used for this study, since those
+require special medical equipment to measure, and trained personnel to correctly read and interpret.
+However, an easier accessible objective measurement is recording the subject's centre of gravity (CoG) either using an
+external device like a balance board as proposed by chardonnet et al.~\cite{Chardonnet2015}, or using the VR HMD's
+IMU (inertial measuring unit) as employed be Lim et al.~\cite{Lim2020}.
+This objective method requires less specialized or no additional equipment, and is easier to read and interpret.
+However, as mentioned by Rebenitsch et al.~\cite{Rebenitsch2016}, measuring a subject's CoG requires a specific
+stance without movement.
+Restricting the subject in this way during the exposure to the virtual environment results either in additional
+discomfort for the user, or discontinuous data, diminishing the effectiveness and advantages of objective measurements.
+Finally, adding objective measurements to the user study is still beneficial to provide a reference or anchor for the
+subjective measures of the user study.
+
+Subjective measures are easier to administer and evaluate, and the user study focuses mainly on these measures and
+feedback from the subject's to determine the success of the developed features.
+The feedback is also gathered, to guide further improvement of current features, and development of additional
+features.
+While the Simulator Sickness Questionnaire (SSQ) by Kennedy et al.~\cite{Kennedy1993} is arguably the most popular
+subjective measurement to record cybersickness, we agree with recent studies criticising the use of the SSQ in
+HMD-based cybersickness research like Sevinc et al.~\cite{Sevinc2020} and Rebenitsch et al.~\cite{Rebenitsch2016}.
+These studies dissuade from using the SSQ because of its complex structure and development process that is unsuitable
+for modern day HMD-based virtual environments, and diverse users and application types.
+Kennedy et al.\ themselves note in their original study, that the SSQ should be used to identify and discriminate
+problem simulators, and that the SSQ scores should be used in comparison with the provided calibration sample of
+military flight simulators, used by trained military personnel.
+Because of these arguments, and its length, we decide not to use the SSQ in our user study to determine the severity
+of cybersickness.
+For similar reasons, we also discard the questionnaires mentioned in section~\ref{subsec:subjective-measurements}
+that are derived from, or based on the SSQ\@.
+Finally, we chose to use the Fast Motion Sickness Scale (FMS) developed by Keshavarz et al.~\cite{Keshavarz2011} to
+efficiently measure incidence and severity of cybersickness symptoms during the exposure to the virtual environment,
+paired with an additional questionnaire in between exposure periods to record user feedback to the mitigation features.
+Using the FMS also allows us to sample cybersickness discreetly over the duration of the exposure, and identify
+scenarios that are more likely to induce cybersickness, and scenarios where the mitigation features are most effective.
+
+
+\section{User study concept}\label{sec:user-study-concept}
+
