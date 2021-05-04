@@ -49,20 +49,20 @@ Through the classification of locations a set of general movements and transitio
 those locations in a manner that is predictable for the user, while still general enough to minimize special cases
 that could lead to unwanted behaviour.
 
-The classification leads to 3 types of movement and the transitions between them, resulting in the state machine
+The classification of locations leads to 3 types of movement and the transitions between them, resulting in the states
 shown in figure~\ref{fig:nav-states}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{content/4_3_autoNavigation/img/NavigationStateDiagram}
-    \caption{State diagram for the different types of movement and the transitions between them.}
+    \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/NavigationLocationStates}
+    \caption{State diagram for the different types of locations, and the movements and transitions between them.}
     \label{fig:nav-states}
 \end{figure}
 
 The different movements are structured in layers, therefore a transition from surface to interplanetary space and
 vice versa is done via transition from surface to orbit, and from orbit to interplanetary space.
-Additionally, there is no transition from interplanetary movement to orbital movement since the interplanetary
-movements end in a position where either the destination is reached, or the observer is in a poition in the target
+Additionally, there is no explicit transition from interplanetary movement to orbital movement since the interplanetary
+movements end in a position where either the destination is reached, or the observer is in a position in the target
 orbit and is able to resume orbital movement immediately.
 
 An example for this layered travel is a movement from a location on the origin body's surface to a location on the
@@ -400,10 +400,20 @@ new queue into the \mintinline{c}{mMovementQueue}, and calls the \mintinline{c}{
 of the queue.
 Discarding the old queue when receiving a new queue is done, to prevent buffering of multiple, potentially unwanted
 movements.
-Currently, the \mintinline{c}{mMovementQueue} can be filled with a variant of one of the two basic movement description
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/4_3_autoNavigation/img/QueueConstructionFlowchart}
+    \caption{Flowchart for the construction of a movement queue.}
+    \label{fig:movement-queue}
+\end{figure}
+
+Currently, the \mintinline{c}{mMovementQueue} can be filled with a variant of the two basic movement description
 packages.
 Either the linear movement that resulted from the original \mintinline{c}{moveTo}-method, and is used in the
 interplanetary movement, or the circular movement that is used in the orbital movement.
+The construction of a movement queue based on information about origin and target location is shown in the
+flowchart in figure~\ref{fig:movement-queue}.
 
 \subsubsection{Different \mintinline{c}{moveTo}-methods and control point computation}\label{subsubsec:different-moveto-methods-and-control-point-computation}
 
