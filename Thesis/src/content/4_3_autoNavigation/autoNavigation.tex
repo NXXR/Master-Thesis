@@ -564,29 +564,23 @@ control points in 2D space ($\overrightarrow{P2}$, $\overrightarrow{P3}$):
 \begin{equation}
     \label{eq:control-point-transformation}
     \begin{aligned}
-        C_{P2} &= \left(
+        \vec{C}_{P2} &= \left(
             \vec{C}_{start} \cos(\phi_{start}) +
             ( \vec{N} \times \vec{C}_{start} )\sin(\phi_{start}) +
             \vec{N} ( \vec{N} \cdot \vec{C}_{start} )( 1 - \cos(\phi_{start}) )
         \right) \cdot \left\| \overrightarrow{P2} \right\|
         \\
-        C_{rP2} &= \left(
-            \vec{C}_{start} \cos(-\phi_{start}) +
-            ( \vec{N} \times \vec{C}_{start} )\sin(-\phi_{start}) +
-            \vec{N} ( \vec{N} \cdot \vec{C}_{start} )( 1 - \cos(-\phi_{start}) )
-        \right) \cdot \left\| \overrightarrow{P2} \right\|
+        \vec{C}_{rP2} &= \vec{C}_{start} - \left( \overrightarrow{C_{start}C_{P2}} \right) =
+        2\vec{C}_{start} - \vec{C}_{P2}
         \\
-        C_{P3} &= \left(
+        \vec{C}_{P3} &= \left(
             \vec{C}_{end} \cos(\phi_{end}) +
             ( \vec{N} \times \vec{C}_{end} )\sin(\phi_{end}) +
             \vec{N} ( \vec{N} \cdot \vec{C}_{end} )( 1 - \cos(\phi_{end}) )
         \right) \cdot \left\| \overrightarrow{P3} \right\|
         \\
-        C_{rP3} &= \left(
-            \vec{C}_{end} \cos(-\phi_{end}) +
-            ( \vec{N} \times \vec{C}_{end} )\sin(-\phi_{end}) +
-            \vec{N} ( \vec{N} \cdot \vec{C}_{end} )( 1 - \cos(-\phi_{end}) )
-        \right) \cdot \left\| \overrightarrow{P3} \right\|
+        \vec{C}_{rP3} &= \vec{C}_{end} - \left( \overrightarrow{C_{end}C_{P3}} \right) =
+        2\vec{C}_{end} - \vec{C}_{P3}
     \end{aligned}
 \end{equation}
 Since the start and end position are used to derive the adjacent control points, different orbit heights in start and
