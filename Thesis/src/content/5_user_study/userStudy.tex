@@ -29,7 +29,7 @@ significantly harder to evaluate, and draw conclusions from, correctly.
 Physiological measurements as suggested by Kim et al.~\cite{Kim2005} cannot be used for this study, since those
 require special medical equipment to measure, and trained personnel to correctly read and interpret.
 However, an easier accessible objective measurement is recording the subject's centre of gravity (CoG) either using an
-external device like a balance board as proposed by chardonnet et al.~\cite{Chardonnet2015}, or using the VR HMD's
+external device like a balance board as proposed by Chardonnet et al.~\cite{Chardonnet2015}, or using the VR HMD's
 IMU (inertial measuring unit) as employed be Lim et al.~\cite{Lim2020}.
 This objective method requires less specialized or no additional equipment, and is easier to read and interpret.
 However, as mentioned by Rebenitsch et al.~\cite{Rebenitsch2016}, measuring a subject's CoG requires a specific
@@ -61,6 +61,201 @@ paired with an additional questionnaire in between exposure periods to record us
 Using the FMS also allows us to sample cybersickness discreetly over the duration of the exposure, and identify
 scenarios that are more likely to induce cybersickness, and scenarios where the mitigation features are most effective.
 
+To create a study that, confidently and reliably produces to data to determine the effectiveness of the developed
+features, a pre-study with a small sample size is recommended, in order to fine-tune the process and the
+questionnaire items.
+Additionally, a pre-study could determine the effectiveness and necessity of CoG or head dispersion measurements, and
+whether the correlation between these objective measurements and the FMS scores outweigh the additional time and
+inconvenience needed to collect these measurements.
+
 
 \section{User study concept}\label{sec:user-study-concept}
 
+The study is designed as a summative within subjects study, which means every subject is tested on all available
+scenarios in order to test all developed features with every user, reducing the necessary sample size and the
+confounding variable of individual subject preferences.
+For within subjects studies, the order of tests can introduce a confounding variable.
+However, by counter balancing the test scenarios these effects can be lessened.
+The result is a compound study testing each developed feature on its own against the initial scenario without the
+feature.
+Therefore, the independent variables in each study are the design decisions for the developed features, mainly the
+features themselves being turned on or off.
+The resulting dependent variables that are examined in this study are slightly different for each feature:
+\begin{itemize}
+    \item User satisfaction, or user preference for or against each feature
+    \item cybersickness incidence and severity for each feature
+    \item intuitiveness of controls with the floor grid
+    \item obstruction or limitation of usability with the vignette, or the floor grid
+    \item predictability of movements for the automatic navigation
+    \item task completion time
+\end{itemize}
+While the task completion time itself is not as important, a significant difference between the scenarios with a
+feature turned on or off may indicate problems relating to the other dependent variables.
+
+In order to rely on the results of the study, the study is examined according to four quality criteria as suggested 
+by Preim, and Dachselt~\cite{Preim2015}:
+
+The study's credibility or authenticity is dependent on a clearly defined target group, and the main focus of the study.
+The main focus is already stated above, to determine the effectiveness of the developed features in reducing
+cybersickness symptoms or their severity during a user's exposure to the virtual environment of the CosmoScout VR
+simulation.
+The target group should be selected accordingly, to be close to the target user base, while still selecting subjects
+that are not directly affiliated with the CosmoScout project, in order to remain unbiased during the study.
+Ideally, the selected target group should be as unfamiliar with the project as possible, to reduce possible bias.
+
+The internal validity of the study is given by minimising confounding factors, and a standardised study process.
+The process is standardised by providing an execution plan in the next section, including timings for each scenario
+and the layout for the questionnaires.
+A pre-study should be done with subjects that are not part of the final sample group to fine-tune the timings and
+questions.
+To minimise individual experience with virtual environments or a familiarity with the CosmoScout VR simulation, the
+execution plan also affords each subject an initial introduction and training time to become familiar with the
+simulation's controls and general feel, as the handling of the controls is not an immediate variable in this study.
+Additionally, breaks in between the scenarios are planned to allow the subjects to return towards their baseline to
+reduce the confounding factor of time spent inside the simulation, since cybersickness is strongly linked to time
+spend inside a virtual environment according to other studies on cybersickenss.
+
+External validity is important to guarantee or indicate the transferability of the results.
+Since the developed features are specially targeted at selected problems of the CosmoScout VR application, the
+transferability of this study's results is limited.
+Some aspects and results of this study may be transferable to similar applications that involve 6-DoF-Navigation and
+display similar problems with cybersickness.
+To retain external validity, the testing environment, and scenarios are created to resemble the real field of
+application.
+
+The reliability of the study is determined by the selection and size of the sample group and its representation of
+the real users.
+The selection criteria for the subject in the sample group are mentioned above, aiming to find subjects that closely
+resemble the general user base in age and experience with virtual environments.
+Since the study is not planned to use concurrent or group testing of subject, the study's sample size is based on
+response of subjects, and time spent on the data acquisition part of the study.
+A longer data acquisition phase allows for a larger sample size.
+
+The primary quality criteria for this study will be the credibility and validity stemming from the study itself, as
+the reliability through the sample size has less priority due to the polysymptomatic and polygenic nature of
+cybersickness.
+While a larger sample size increases the reliability of the results, the nature and individual response of subjects
+to cybersickness implies that developed solutions have to be configurable in order to be efficient.
+However, while the developed features are highly configurable to individual needs, allowing the subjects to customise
+the features to better fit their needs would introduce a major confounding factor to the study.
+
+
+\subsection{Execution Plan}\label{subsec:execution-plan}
+
+Initially, basic information about each subject is recorded:
+\begin{itemize}
+    \item Subject's age and sex
+    \item Subject's experience with Virtual Reality Environments and Devices
+\end{itemize}
+These information are not explicitly used to draw conclusions about the feature effectiveness or cybersickness, but
+the study's validity and reliability, indicating the relation of the sample group to the target user group.
+
+After this information is provided, the subject should have around two to five minutes to set up and get used to the
+VR HMD and the CosmoScout Virtual Environment, and especially the control scheme.
+This training phase should test the subject's familiarity with the control scheme or respectively its intuitiveness.
+The training scenario also provides a couple of control points to familiarize the subject with them, so the subject
+can recognize them during the later scenarios and identify the task or movement required from them.
+
+Next, the subject is tasked with 2 pairs of 2 counterbalanced scenarios, two for the floor grid, and two for the
+vignette.
+Each pair of scenarios consist of one scenario with, and one without the tested mitigation feature active.
+In both scenarios, the subject has to use the free navigation controls to navigate through the simulation to adjust
+the observers position and orientation to match each checkpoint.
+Once a checkpoint is completed, the next one is displayed, and only one checkpoint is displayed in the simulation at
+any time during the scenario.
+If the checkpoint is outside the observer's view, a prominent indicator is displayed, showing the direction of the
+next checkpoint on the screen.
+The checkpoints are placed in a pattern requiring the subject to perform a mix of easy and complex movements in the
+simulation that are similar to real, and plausible situations.
+The checkpoints for the floor grid are placed mainly in interplanetary space, with some closer to a body's surface,
+while the vignette checkpoints are placed on or close to the surface of a body with sufficiently detailed surface
+images.
+The floor grid checkpoints should help show whether the added fixed reference frame of the floor grid helps the
+subject to maintain a stable frame of reference and posture.
+The vignette checkpoints are placed close to a body's surface to generate sufficient peripheral visual flow.
+In this way the checkpoints are placed to test the effectiveness of the developed features based on the reasons and
+arguments laid out in the previous chapters of this study (chapters~\ref{subsec:problems-with-free-movement},
+~\ref{sec:floor-grid}, and~\ref{sec:field-of-view-vignette}).
+Each scenario should contain 10 checkpoints, and each scenario pair, should contain the same order of checkpoints in
+order to reliably correlate the FMS scores of both scenarios.
+the checkpoints are placed, so that each checkpoint should be accessible within one minute, resulting in the scenario
+taking about 10 minutes to complete.
+
+At the beginning of each scenario, and after each checkpoint the subject is asked to rate their cybersickness symptoms
+on a 20-point scale according to the FMS via a built-in interface plugin with a slider from 0 to 20.
+After the initial value, the interface retains the last value to allow the subject to choose their score relative to
+the score of the last checkpoint.
+In between each scenario, the subject is given a break of four to five minutes outside the virtual environment in
+order to return to their baseline.
+Additionally, during the break after each scenario pair, the subject is asked to fill out a questionnaire to rate
+their experience.
+The Questions are structured as a statement that is rated on the Likert scale, and should be fine-tuned in a pre-study.
+The initial example questionnaire is in the appendix (figure~\ref{fig:study-checkpoint-questionnaire-1}).
+In addition to the questions, a freeform box is provided to allow the subject's to add feedback or other comments
+about the test, the feature, or suggestions to their answers (figure~\ref{fig:study-checkpoint-questionnaire-2}).
+Overall, the four scenarios with 10 minutes each, the breaks in between the scenarios, and the initial 5 min for
+training make up roughly one hour of the study.
+
+In the last section of the user study, the automatic navigation is tested in a pair of scenarios.
+Each consists of automatic movement between select points of interest covering a variety of navigation scenarios for
+the overhauled movement, and some points should be selected to result in potentially provocative movements in the old
+automatic navigation in order to highlight the differences between the old and new navigation.
+
+Both scenario should consist of the same three to five movements between points of interest, resulting in two to five
+minutes for each scenario.
+After each destination, the user is asked to rate their cybersickness on the FMS, and after each scenario the subject is
+given a short break of four to five minutes similar to the other scenarios.
+During both breaks the subject is asked to fill out another questionnaire to assess the subject's satisfaction with
+the automatic movement, as well as the movement's predictability, with answers on the Likert scale.
+An additional question is aimed at finding, whether users prefer short, potentially provocative movements over longer,
+less provocative movements.
+As with the other questionnaire, a box for feedback, comments, and suggestions is added, and the questions should be
+fine-tuned during a pre-study.
+The initial example questionnaire is in the appendix (figure~\ref{fig:study-autonav-questionnaire-1}
+and~\ref{fig:study-autonav-questionnaire-2}).
+
+
+\section{Hypothesis}\label{sec:hypothesis}
+
+The study is designed to evaluate the effectiveness of the developed features based on cybersickness incidence and
+severity through FMS measurements, and subject acceptance, or preference through questionnaires.
+Therefore, we formulate the following hypotheses, where the first two involve the statistical difference between
+the cybersickness measurements, as well as the subject acceptance or satisfaction.
+\begin{hypothesis}
+    \label{hyp:cybersickness}
+    The study shows significant ($p = .05$) results, that each new feature produces less cybersickness incidence and
+    severity, with an at least small effect size ($d > 0.2$) between the feature-on and feature-off results.
+\end{hypothesis}
+\begin{hypothesis}
+    \label{hyp:satisfaction}
+    The study shows significant ($p = .05$) results, that subject's acceptance or satisfaction is higher for each new
+    feature than the featureless version, with an at least small effect size ($d > 0.2$) between the feature-on and
+    feature-off results.
+\end{hypothesis}
+
+Additionally, we formulate hypotheses about the effectiveness of each feature compared to each other:
+\begin{hypothesis}
+    \label{hyp:navigation}
+    The overhauled automatic navigation will show the most improvement compared to the previous navigation.
+\end{hypothesis}
+\begin{hypothesis}
+    \label{hyp:floor-grid}
+    The floor grid will show the least improvement.
+\end{hypothesis}
+\begin{hypothesis}
+    \label{hyp:vignette}
+    The vignette will show less improvement than the navigation.
+\end{hypothesis}
+The reason for Hypothesis~\ref{hyp:floor-grid} is, that we estimate general lower cybersickness in interplanetary
+space, and the unchanged control scheme might reduce the effectiveness of the floor grid.
+We assume the FoV-Vignette (Hypothesis~\ref{hyp:vignette}) will show less effectiveness, because the vignette is not
+individually customised to fit each subject, either reducing the effectiveness by being less noticeable, or causing
+discomfort or dissatisfaction by being too prominent.
+
+Additionally, we expect the absolute values of the FMS data to be less indicating for the effectiveness of the
+features.
+However, the rate of change between each checkpoint may indicate movements during the scenario that significantly
+improved through the introduction of a feature, or usually generate more cybersickness.
+The overall increase of the FMS score over the whole scenario will also provide an indicator for the provocativeness
+of the scenario, and the effectiveness of each feature to mitigate the effects of cybersickness over prolonged exposure
+to virtual environments.
