@@ -194,21 +194,26 @@ breaklines
     \pagenumbering{arabic}
 
     % Include your chapters here.
-    \include{content/1_introduction/introduction}
-    \include{content/2_related_work/related_work}
-    \include{content/3_current_state/current_state}
+    \chapter{Introduction}\label{ch:introduction}
+        \include{content/1_introduction/introduction}
+    \chapter{Background and Related Work}\label{ch:background-and-related-work}
+        \include{content/2_1_virtual_reality/virtual_reality}
+        \include{content/2_2_cybersickness/cybersickness}
+        \include{content/2_3_cosmoscout/cosmoscout}
+    \chapter{Current State and Problems of CosmoScout VR}\label{ch:current-state-and-problems-of-cosmoscout}
+        \include{content/3_current_state/current_state}
     \chapter{Implemented Solutions}\label{ch:implemented-solutions}
-    \include{content/4_1_floorGrid/floorGrid}
-    \include{content/4_2_fovVignette/fovVignette}
-    \include{content/4_3_autoNavigation/autoNavigation}
-    \include{content/5_user_study/userStudy}
-    \include{content/6_further_work/furtherWork}
-    %\include{content/chapter01/chapter01}
-    %\include{content/chapter02/chapter02}
+        \include{content/4_1_floorGrid/floorGrid}
+        \include{content/4_2_fovVignette/fovVignette}
+        \include{content/4_3_autoNavigation/autoNavigation}
+    \chapter{User Study}\label{ch:user-study}
+        \include{content/5_user_study/userStudy}
+    \chapter{Further Work}\label{ch:further-work}
+        \include{content/6_further_work/furtherWork}
 
     \appendix
-
-    \include{content/appendix/appendix}
+    \chapter{Appendix}\label{ch:appendix}
+        \include{content/appendix/appendix}
 
     \addcontentsline{toc}{chapter}{Bibliography}
     \renewcommand{\btxfnamespaceshort}{\,}
