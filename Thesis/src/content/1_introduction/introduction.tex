@@ -1,2 +1,110 @@
+Recent advances and public interest in motion tracking technology (Wii\textcopyright, Kinect\textcopyright), as well
+as stereoscopic 3D media and technology have renewed the development in virtual and mixed reality technology.
+However, after advancing hardware limitations, cybersickness is seen as one of the main detractors to widespread
+adoption of virtual reality technology.
+Cybersickness is a form of motion sickness, with symptoms similar to simulator or sea sickness, that is encountered
+when experiencing a virtual environment.
+Similar to other forms of motion sickness, cybersickness is polysymptomatic and polygenic.
+Polysymptomatic means cybersickness can manifest and be experienced in a wide range of different symptoms and
+severity, including nauseagenic symptoms like dryness of mouth, or nausea, oculomotor symptoms like eye strain, or
+headache,  and disorientation symptoms like vertigo, or dizziness.
+Polygenic means symptoms of cybersickness manifest differently for individuals, increasing the difficulty of
+comparing cybersickness incidence and severity across groups of users.
 
+While the root causes of cybersickness have not been definitively uncovered, several theories have gained traction
+attempting to explain cybersickness occurrence in virtual environments.
+Sensory conflict theory attempts to explain cybersickness resulting from conflicting information from the visual and
+somatosensory system.
+The discrepancy between what the user sees, and the sensory information especially from the vestibular system is
+believed to cause the symptoms similar to other forms of motion sickness.
+Postural instability theory is another popular attempt to explain cybersickness symptoms.
+With parallels to the sensory conflict theory, postural instability is believed to be a result of prolonged exposure
+to virtual environments and conflicting reference frames.
+While the theory does not sufficiently explain the causes of cybersickness through postural instability, they found
+instability precedes occurrences of cybersickness.
 
+Measuring cybersickness symptoms can be difficult due to the subjectiveness of many symptoms.
+Historically, subjective measurements like questionnaires have been the most popular tool to measure cybersickness
+symptoms, their incidence and severity.
+Popular questionnaires to assess cybersickness are the Simulator Sickness Questionnaire (SSQ), as well as a few
+similar questionnaires that have been derived from the SSQ with the goal to specialise on virtual environments, as
+the SSQ is based on the older motion sickness questionnaire (MSQ) and was created to assess military flight
+simulators used by the United States Armed Forces.
+The SSQ, and its derived questionnaires are a popular measurement of cybersickness symptoms, and offer different
+scales to separate symptoms into categories with sub-scores, allowing to discriminate problem simulators.
+However, the SSQ scores are only meant as a comparative measure to the original scores gathered from the military
+flight simulators, and as a problem locator unsuitable for general assessment of cybersickness.
+Another popular method of subjective cybersickness indication are single-item questionnaires like the Fast Motion
+Sickness scale (FMS) which provides means to measure symptom severity and incidence, however, without separation into
+symptom clusters.
+Due to the single value measurement, the FMS allows acquisition of measurements at discrete intervals over the whole
+exposure period instead of single data points before and after the exposure.
+On the other hand, these measurements provide no insights into the makeup of symptoms that result in the
+cybersickness score.
+
+Several objective measurements have been tested to validate subjective measurements by linking a physiological
+response to the subjective data gathered from questionnaires.
+Studies have found electrogastrogram (EGG), electrocardiogram (ECG), and respiration measurements to be reliable
+indicators for cybersickness symptoms.
+While these measurements provide a continuous stream of data over the exposure period, they often require specialised
+equipment and are difficult to interpret correctly.
+A more accessible objective measurement are changes in the centre of gravity, indicating postural instability.
+Devices to measure postural sway are easier to interpret and more accessible, as even the inertial measuring unit
+(IMU) of VR devices can be used to acquire this data.
+However, postural sway cannot be measured continuously over the exposure period, since the movements are difficult to
+separate from noise and other confounding factors reliably, and therefore require a specific stance or period of no
+movement to acquire reliable data.
+
+To mitigate the incidence and effects of cybersickness symptoms, several solutions have gained popularity.
+First and foremost, there are several best practices that help reduce the severity of cybersickness symptoms, like an
+adaptation time for new users, and the avoidance of movements that are either unrealistic in the given context, or
+lead to disorienting the user due to the unpredictability, or complexity of movements.
+Additionally, limiting the field of view is a popular method to reduce cybersickness by decreasing the peripheral
+visual flow.
+This leads to less vection, the feeling of self-motion, and less presence, resulting in decreased severity of sensory
+conflict.
+Another solution for some cases of cybersickness is to provide the user with a stable reference frame that provides a
+strong indication for the direction of gravity, aiding with postural stability where the virtual environment has
+either none or conflicting reference frames for the perceived direction of gravity.
+
+The goal of this study is the development of features that prevent and reduce cybersickness for users of the
+CosmoScout VR application.
+CosmoScout VR is a modular, scientific visualisation of the solar system that allows immersive, exploratory research
+on large, multiscale datasets.
+In the application, the free and automatic navigation have caused users to experience symptoms of cybersickness and
+are therefore the targets of the developed features.
+Due to the different aspects of cybersickness and the different presumed origins of symptoms in the simulation,
+several independent features are developed to combat selected aspects of the virtual environment.
+The main separation is the free movement and the automatic navigation.
+The free navigation has shown less severe symptoms and require more general solutions.
+To combat cybersickness onset during the six-degrees-of-freedom navigation in interplanetary space, a grid is
+displayed coinciding with the real world floor to provide a frame of reference for the direction of gravity in an
+environment that often lacks a strong indicator of any direction.
+Close to the surface of a body a vignette is provided during movements to reduce peripheral visual flow, and to help
+the user focus at the center of the VR device's lenses, reducing vection and preventing potential eye strain.
+To reduce cybersickness during the automatic navigation in the virtual environment, the navigation system was
+overhauled to reduce complexity and increase predictability of the movements.
+The major change is the separation of rotation and translation into distinct phases of the movement, and to split the
+movement into stages depending on the origin and target location of the movement.
+This way, movements can be classified into several general, but flexible navigation scenarios that avoid potentially
+provocative movements for the user.
+
+Lastly, to validate the developed features, a user study is designed to evaluate and validate the effectiveness of
+the features in a future study.
+The goal of this user study is to compare each developed feature independently to the initial simulation.
+During the test scenarios involving free and automatic movement, the subject's cybersickness symptoms and satisfaction
+is measured with subjective and objective measurements.
+To assess cybersickness symptoms, FMS measurements are planned to gather discreet symptom data over the exposure period.
+Additionally, postural stability measurements are planned to correlate to the subjective data.
+User satisfaction is measured with a questionnaire after each scenario.
+The estimated result of the user study is, that automatic navigation will show the most improvement, since the
+initial case created noticeable discomfort, and the overhaul of the automatic navigation presents the most
+straightforward solution to the cybersickness problems.
+The gird and the vignette will likely show less distinct results, since they are more general solutions to a vague
+problem.
+The grid may show less effectiveness, as movements in interplanetary space generally produce less sever symptoms, and
+the effectiveness may benefit from changes to the control scheme that currently limit the feature's potential.
+The field-of-view vignette is a highly individual feature, and disallowing individual customisation in the user study
+might prevent testing the feature's full potential in order to reduce confounding factors between subjects.
+All in all, it is anticipated that all developed features prove effective means of reducing cybersickness in the
+CosmoScout VR application.
