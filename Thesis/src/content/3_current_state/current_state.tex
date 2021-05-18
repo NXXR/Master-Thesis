@@ -44,8 +44,55 @@ The angles correspond to the angular velocity of the observer's rotation.
 Through the translation of vector magnitude and angles of orientation into velocities, the user does not need to
 twist the remote in uncomfortable positions, but can gradually navigate the simulation with small, precise movements.
 
+
 \subsection{SPICE Coordinate Systems}\label{subsec:spice-coordinate-systems}
-% TODO: SPICE
+
+The SPICE system is provided and developed by the Navigation and Ancillary Information Facility (NAIF) of the United
+States National Aeronautics and Space Administration (NASA).
+The system is used to manage data sets called "kernels" and provide a precise observation geometry information 
+system, originally developed to assist in planning and interpreting scientific observations from space-based 
+instruments aboard robotic spacecrafts~\cite{NAIFbook, NAIFhomepage}.
+
+SPICE is used in the CosmoScout application for precise, and time-dependent positioning of celestial objects inside
+the simulation through a set of inertial and non-inertial nested reference frames.
+An inertial frame is a non-rotating, and non-accelerating reference frame with respect to the surrounding stars, and
+provides a static reference frame for the whole simulation.
+The used inertial frame is called "J2000" and is based on the earth's equatorial plane, and the equinox, the 
+intersection between the equatorial and the ecliptic plane, as described in figure~\ref{fig:J2000}.
+The J2000 reference frame, is also almost coincident (rotational difference of less than $0.1$ arc seconds) with the
+International Celestial Reference Frame (ICRF), which is defined by measured positions of extragalactic sources, like
+quasars.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/3_current_state/img/J2000[NAIFoverview]}
+    \caption{The construction of the J2000 reference frame~\cite{NAIFoverview}.}
+    \label{fig:J2000}
+\end{figure}
+
+Nested in the inertial frame are several non-inertial frames, which are accelerating frames, including rotations.
+CosmoScout uses the body-fixed frames for the celestial objects in the simulation.
+The center of the frame is also the center of the natural body of the frame (sun, planet, satellite, asteroid, etc.),
+and the frame is tied to that body, rotating with it.
+The most common named bodies have body-fixed frames hardcoded into SPICE ("IAU\_\textit{bodyname}", i.e.\ "IAU\_MARS"),
+and their rotation state at any time is determined by a dataset published by the international astronomical union (IAU).
+
+CosmoScout also uses the nested reference frames for the scene graph, to handle the large scale of the simulation, by
+using frame-local scene graphs attached to the SPICE reference frame.
+These, usually flat frame-local scene graphs are internally attached to the root node of the real ViSTA scene graph to
+allow standard graph traversal.
+This way, the observer node can be easily moved and reattached to other SPICE frames and enables easy frame
+transitions during the navigation.
+Additionally, the chosen reference frame for the observer is chosen automatically through a weight based on the
+distance of the observer to a body, and the body's size.
+The closer the observer is to a body's center, the higher the weight for the respective body-fixed reference frame.
+The weight also influences the max velocity of the free navigation, and the frame in which position, and rotation, if
+the weight is high enough, are tracked~\cite{SimonPaper}.
+
+This concept is also used in section~\ref{sec:automatic-movement-overhaul}, where the term frame is used to describe
+the sphere of influence, where a body's weight is dominant, resulting in the observer's position being tracked
+relative to the body's reference frame.
+Locations where the observer is tracked in the J2000 frame are considered interplanetary space.
 
 
 \section{Identified Problems}\label{sec:identified-problems}
