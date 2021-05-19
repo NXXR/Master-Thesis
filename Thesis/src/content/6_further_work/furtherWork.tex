@@ -1,1 +1,59 @@
+In this study, cybersickness, and the most common theories about its origin, as well as popular methods to prevent,
+and mitigate resulting symptoms were reviewed.
+Based on this information, the CosmoScout VR application has been examined to identify and remedy potential
+scenarios and aspects of the application that can cause cybersickness symptoms, with the main focus on navigation in
+the virtual environment, especially when CosmoScout VR is used with a VR HMD\@.
 
+The six-degrees-of-freedom navigation is separated into two cases: movement in interplanetary space, and movement
+close to, or on a body's surface.
+Additionally, the automated navigation was examined and overhauled.
+
+For movement in interplanetary space, it is assumed that the cybersickness symptoms stem from a missing reference
+frame, and the control scheme not offering a way to control rotation axes, or translation and rotation, independently.
+These factors can lead to disorientation and postural instability, evoking cybersickness symptoms in the user.
+To mitigate this, a floor grid has been developed, and implemented to provide the user with a stable reference frame
+suggesting an
+up-direction along the real world gravity gradient, to help the user maintain postural stability.
+In future projects we suggest adapting the control scheme to the floor grid, for example by inverting the movement
+controls, to change the interaction context of the simulation from the user being an observer moving through the
+solar system simulation, to an exocentric, pseudo-AR  simulation, where the user manipulates the surrounding
+simulation using gestures while the observer seemingly remains stationary.
+This may further help with cybersickness symptoms according to the sensory conflict theory, as the user is seemingly
+not moving through the simulation anymore, invoking less, or no vection.
+
+For free movement close to the surface of a body, it is assumed that the increased peripheral flow during fast
+movements causes discomfort.
+To remedy this, a field-of-view reducing vignette has been developed, and implemented to reduce peripheral visual flow,
+and vection induced in the user.
+Several versions of the vignette have been implemented, including a dynamic, and a static vignette, to allow for user
+customisation as other studies have shown conflicting results with regard to the optimal FoV limitation.
+In future projects, the results of the user study and possible further studies should provide information about the
+optimal settings of the vignette, or useful settings to cater to user preferences.
+Additionally, potential further work regarding the vignette include adding an option for the vignette to blur the
+peripheral areas instead of modifying the opacity, as well as an option to render the vignette as a sphere around the
+observer facing the direction of movement, instead of rendering it as a post-processing effect.
+
+The automatic navigation has been identified to cause noticeable cybersickness symptoms during movement.
+This is mainly due to the fact, that the automatic movement is based on a linear interpolation between the origin and
+target location, and orientation at the same time over the duration of the movement, leading to a mix of translation,
+and complex rotation around multiple axes.
+To remedy this, a new navigation concept has been developed and major functionality has been implemented.
+The new navigation separates the rotation from the translation temporally, providing a more readable and predictable
+movement to the user.
+Additionally, a structured movement is developed, to facilitate automatic navigation between arbitrary locations
+using a flexible set of basic movements to enhance predictability.
+In further works, the remaining functions of the new automatic navigation (mainly the transitions between surface and
+orbit) should be implemented, including collision detection to modify the navigation path around other bodies that may
+be in the way of the automatic navigation.
+Finally, the system can also be used to realize more complex movements and different navigation tasks, like guided or
+pre-programmed tours between multiple points of interest in the simulation.
+
+While this concludes the possible further works and adjustments to the developed features, the immediate next step is
+the realisation of the planned user study to produce insights into the effectiveness of the implemented features.
+The user study has been planned in this study, however, the current situation around the COVID-19 pandemic, makes the
+execution of a user study more difficult, if not unreasonable.
+The execution of the user study also includes the development of the test scenarios, the development of an interface
+plugin to allow the subject to submit FMS ratings, and a pre-study to fine-tune the questions used to record subject
+satisfaction with the developed features.
+The results of the user study are also meant to be used to determine the priority of further development regarding
+the implemented features, as well as to offer insights into possible further improvements.
