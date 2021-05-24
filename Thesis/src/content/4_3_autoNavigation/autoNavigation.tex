@@ -38,10 +38,10 @@ locations into groups.
 We propose the classification of locations based on their location relative to other bodies, and the SPICE reference
 frame the location is in:
 \begin{itemize}
-    \item Surface locations, that are close to, or on the surface of a body, where the location's position and
-    orientation are in the respective body's SPICE frame relative to the body's center;
-    \item Orbit locations, where the location is not on or close to the surface, but the position and orientation
-    are still relative to the body's SPICE frame and center;
+    \item Surface locations, that are extremely low orbit, or on the surface of a body, where the location's position
+    and orientation are in the respective body's SPICE frame relative to the body's center;
+    \item Orbit locations, where the location is further from the surface, but the position and orientation
+    are still relative to the body's SPICE center;
     \item Interplanetary locations, where the location's position and orientation is not relative to another body's
     SPICE frame and center, but the solar system's barycenter, i.e.\ the "J2000" SPICE frame.
 \end{itemize}
@@ -280,8 +280,9 @@ This way, the durations for each rotation can vary in length based on the angula
 translative phase takes up the rest of the duration as described in the following equations:
 \begin{equation}
     \label{eq:duration-timings}
-    \frac{w_{start}}{3} t_{start} + (1 - \frac{w_{start}}{3} - \frac{w_{end}}{3}) t_{move} +
-    \frac{w_{end}}{3} t_{end} = t_{all}
+    \frac{w_{\mathrm{start}}}{3} t_{\mathrm{start}} + (1 - \frac{w_{\mathrm{start}}}{3} - \frac{w_{\mathrm{end}}}{3})
+    t_{\mathrm{move}} +
+    \frac{w_{\mathrm{end}}}{3} t_{\mathrm{end}} = t_{\mathrm{all}}
 \end{equation}
 with:
 \begin{equation}
@@ -291,11 +292,11 @@ with:
 This results in the following limitations for the durations:
 \begin{equation}
     \label{eq:duration-result-rot}
-    0 \leq t_{start}, t_{end} \leq \tfrac{1}{3} t_{all}
+    0 \leq t_{\mathrm{start}}, t_{\mathrm{end}} \leq \tfrac{1}{3} t_{\mathrm{all}}
 \end{equation}
 \begin{equation}
     \label{eq:duration-result-mov}
-    \tfrac{1}{3} t_{all} \leq t_{move} \leq t_{all}
+    \tfrac{1}{3} t_{\mathrm{all}} \leq t_{\mathrm{move}} \leq t_{\mathrm{all}}
 \end{equation}
 
 The modifications to the \mintinline{c}{moveTo}-method also require changes to the
@@ -424,32 +425,24 @@ signatures:
         glm::dvec3 const& position, glm::dquat const& rotation, double simulationTime,
         double realStartTime, double realEndTime);
 
-    [...]
-
     void moveTo(DefaultPoint2Point const& moveDescriptionP2P);
-
-    [...]
 
     void moveTo(DefaultOrbit const& moveDescriptionOrbit);
 
-    [...]
-
     void moveTo(MovementDescription const& moveDescription);
-
-    [...]
 
     void moveTo(std::queue<MovementDescription> const& moveDescriptionsQueue);
 \end{minted}
 The original signature of the method (l.\@1) is kept to allow backwards compatibility.
-The second signature (l.\@7) accepts movement description packages for linear, point-to-point (interplanetary)
+The second signature (l.\@5) accepts movement description packages for linear, point-to-point (interplanetary)
 movements.
 The function simply unpacks and relays the parameters for the linear movement to the first \mintinline{c}{moveTo}-method.
-The third signature (l.\@11) accepts movement description packages for circular (orbital) movements.
-The fourth signature (l.\@15) is added because the movement queue uses a variant type for its elements.
+The third signature (l.\@7) accepts movement description packages for circular (orbital) movements.
+The fourth signature (l.\@9) is added because the movement queue uses a variant type for its elements.
 Therefore, when a new element for the queue is used, this method accepts it.
 The method checks the real movement description type using a switch-case-statement, and typecasts the variant-type
 elements, and relays them to their respective methods.
-The last signature (l.\@19) accepts whole movement queues to be passed and is described above.
+The last signature (l.\@11) accepts whole movement queues to be passed and is described above.
 Currently, only linear and circular movement packages are implemented, however, the addition of further movement
 description packages is straightforward in this system.
 
@@ -474,8 +467,9 @@ points.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/LinearSplinePoints}
-    \caption{Control points of a linear spline with the start and end point ($P_{start}$, $P_{end}$), and the control
-    points ($P_{S-OT}$, $P_{S+OT}$, $P_{E-OT}$, $P_{E+OT}$) making up each triplet.}
+    \caption{Control points of a linear spline with the start and end point ($P_{\mathrm{start}}$,
+        $P_{\mathrm{end}}$), and the control points ($P_{S-OT}$, $P_{S+OT}$, $P_{E-OT}$, $P_{E+OT}$) making up each
+        triplet.}
     \label{fig:linear-control-points}
 \end{figure}
 
@@ -486,7 +480,7 @@ $OT$-vector, as described in figure~\ref{fig:linear-control-points}.
 This way, bot the tangent in the start and end point are along the $OT$-vector, leading to a straight spline between
 the start and end point.
 The resulting spline is saved in the \mintinline{c}{mMoveSpline}, and the \mintinline{c}{AnimatedValue}-object for the
-interpolation of the $t$ parameter is set to interpolate between $0$ and $t_{max}$ ($1$ in most cases) over the
+interpolation of the $t$ parameter is set to interpolate between $0$ and $t_{\mathrm{max}}$ ($1$ in most cases) over the
 duration of the translation phase.
 
 The \mintinline{c}{mLookAtPoint} is set to the last control point, as it is slightly in front of the end point of the
@@ -503,7 +497,7 @@ The initial rotation interpolates between the origin orientation, and the orient
 The final rotation interpolates between the orientation towards the \mintinline{c}{mLookAtPoint} and the final
 orientation over the duration for the final rotation.
 
-The durations and points in time for the rotations and the translation are calculated as mentioned above
+The durations and points in time for the rotations, and the translation are calculated as mentioned above
 (equations~\ref{eq:duration-weight}~and~\ref{eq:duration-timings}).
 
 The orbital movement uses a different \mintinline{c}{moveTo}-method to realize the circular movement path.
@@ -518,20 +512,20 @@ additional control points on the unit circle.
     \centering
     \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/CircularCurveParameters}
     \caption{Control points ($P2$, $P3$), the start point ($P1$), end point ($P4$) and angle ($\theta$) in 2D
-    space~\cite{Poxmax2021}.}
+    space~\cite{Pomax2021}.}
     \label{fig:orbital-control-points}
 \end{figure}
 
 Figure~\ref{fig:orbital-control-points} shows an example of the transformation into 2D space, and the required
 control points ($P1$, $P2$, $P3$, and $P4$).
-Poxmax~\cite{Poxmax2021} derived a formula to calculate the missing control points $P2$ and $P3$ on the unit circle:
+Pomax~\cite{Pomax2021} derived a formula to calculate the missing control points $P2$ and $P3$ on the unit circle:
 \begin{equation}
     \label{eq:control-points}
     \begin{aligned}
-        P_{start} &= P1 = (1, 0) \\
+        P_{\mathrm{start}} &= P1 = (1, 0) \\
         P_{c1} &= P2 = (1, k) \\
         P_{c2} &= P3 = (\cos(\theta) + k \cdot \sin(\theta), \sin(\theta) - k \cdot \cos(\theta)) \\
-        P_{end} &= P4 = (\cos(\theta), \sin(\theta))
+        P_{\mathrm{end}} &= P4 = (\cos(\theta), \sin(\theta))
     \end{aligned}
 \end{equation}
 With:
@@ -542,14 +536,14 @@ With:
     \end{aligned}
 \end{equation}
 To transform the control points back into 3D space, the oriented angle around the center from $P1$ to $P2$
-($\phi_{start}$), and from $P4$ to $P3$ ($\phi_{end}$) is calculated.
+($\phi_{\mathrm{start}}$), and from $P4$ to $P3$ ($\phi_{\mathrm{end}}$) is calculated.
 To get the control points, the start position and end position are rotated around the normal of the 2D plane, and
 scaled by the magnitude of their 2D counterpart.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/ControlPointsReflected}
-    \caption{Example control points for circular spline where $\theta = 90\deg$~\cite{Poxmax2021}.}
+    \caption{Example control points for circular spline where $\theta = 90\deg$~\cite{Pomax2021}.}
     \label{fig:orbital-reflected-points}
 \end{figure}
 
@@ -558,29 +552,30 @@ points are also reflected to the other side of the start and end position as sho
 figure~\ref{fig:orbital-reflected-points}.
 
 The control points in 3D space ($C_{P2}$, $C_{P3}$), and their reflections ($C_{rP2}$, $C_{rP3}$) can be calculated
-using Rodrigues' rotation formula with the start and end points ($C_{start}$, $C_{end}$), the normal for the 2D plane
-($\vec{N}$), the angles between the control point, and the start, or end point ($\phi_{start}$, $\phi_{end}$), and the
-control points in 2D space ($\overrightarrow{P2}$, $\overrightarrow{P3}$):
+using Rodrigues' rotation formula with the start and end points ($C_{\mathrm{start}}$, $C_{\mathrm{end}}$), the
+normal for the 2D plane ($\vec{N}$), the angles between the control point, and the start, or end point
+($\phi_{\mathrm{start}}$, $\phi_{\mathrm{end}}$), and the control points in 2D space ($\overrightarrow{P2}$,
+$\overrightarrow{P3}$):
 \begin{equation}
     \label{eq:control-point-transformation}
     \begin{aligned}
         \vec{C}_{P2} &= \left(
-            \vec{C}_{start} \cos(\phi_{start}) +
-            ( \vec{N} \times \vec{C}_{start} )\sin(\phi_{start}) +
-            \vec{N} ( \vec{N} \cdot \vec{C}_{start} )( 1 - \cos(\phi_{start}) )
+            \vec{C}_{\mathrm{start}} \cos(\phi_{\mathrm{start}}) +
+            ( \vec{N} \times \vec{C}_{\mathrm{start}} )\sin(\phi_{\mathrm{start}}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{\mathrm{start}} )( 1 - \cos(\phi_{\mathrm{start}}) )
         \right) \cdot \left\| \overrightarrow{P2} \right\|
         \\
-        \vec{C}_{rP2} &= \vec{C}_{start} - \left( \overrightarrow{C_{start}C_{P2}} \right) =
-        2\vec{C}_{start} - \vec{C}_{P2}
+        \vec{C}_{rP2} &= \vec{C}_{\mathrm{start}} - \left( \overrightarrow{C_{\mathrm{start}}C_{P2}} \right) =
+        2\vec{C}_{\mathrm{start}} - \vec{C}_{P2}
         \\
         \vec{C}_{P3} &= \left(
-            \vec{C}_{end} \cos(\phi_{end}) +
-            ( \vec{N} \times \vec{C}_{end} )\sin(\phi_{end}) +
-            \vec{N} ( \vec{N} \cdot \vec{C}_{end} )( 1 - \cos(\phi_{end}) )
+            \vec{C}_{\mathrm{end}} \cos(\phi_{\mathrm{end}}) +
+            ( \vec{N} \times \vec{C}_{\mathrm{end}} )\sin(\phi_{\mathrm{end}}) +
+            \vec{N} ( \vec{N} \cdot \vec{C}_{\mathrm{end}} )( 1 - \cos(\phi_{\mathrm{end}}) )
         \right) \cdot \left\| \overrightarrow{P3} \right\|
         \\
-        \vec{C}_{rP3} &= \vec{C}_{end} - \left( \overrightarrow{C_{end}C_{P3}} \right) =
-        2\vec{C}_{end} - \vec{C}_{P3}
+        \vec{C}_{rP3} &= \vec{C}_{\mathrm{end}} - \left( \overrightarrow{C_{\mathrm{end}}C_{P3}} \right) =
+        2\vec{C}_{\mathrm{end}} - \vec{C}_{P3}
     \end{aligned}
 \end{equation}
 Since the start and end position are used to derive the adjacent control points, different orbit heights in start and

@@ -76,23 +76,20 @@ at maximum velocity where the velocity tends to fluctuate slightly, propagating 
 The FoV vignette is drawn in the same way for both options as shown in the fragment shader for the dynamic radius:
 \begin{minted}{c}
     void main() {
-        if (uNormVelocity <= 0 && !uDebug ) { discard; }
-
         vec2 texSize = textureSize(uTexture, 0);
-        float ratio = texSize.y / texSize.x;
+        float ratio  = texSize.y / texSize.x;
 
-        float dist = sqrt(vPosition.x * vPosition.x + ratio * ratio * vPosition.y * vPosition.y);
+        float dist   = sqrt(vPosition.x * vPosition.x + ratio * ratio * vPosition.y * vPosition.y);
 
         if (dist < uInnerRadius ) { discard; }
-        float r = ((dist - uInnerRadius) / (uOuterRadius - uInnerRadius));
-        oColor = mix(texture(uTexture, vTexCoords), uCustomColor, r);
+
+        float r      = (dist - uInnerRadius) / (uOuterRadius - uInnerRadius);
+        oColor       = mix(texture(uTexture, vTexCoords), uCustomColor, r);
         if (dist > uOuterRadius) {
           oColor.rgb = uCustomColor.rgb;
         }
     }
 \end{minted}
-The debug flag (\mintinline{c}{uDebug}) exists to allow for easy adjustments of the vignette's variables, and if enabled
-draws the vignette with its minimum radius.
 
 First the distance (\mintinline{c}{dist}) of the current fragment to the center of the viewport is calculated and
 adjusted for the viewport's aspect ratio (\mintinline{c}{ratio}).
@@ -110,7 +107,7 @@ in radii.
 Currently, new radii propagate with a 1\% influence over each frame:
 \begin{equation}
     \label{eq:radii-influence}
-    r_{new} = ( 0.99 \times r_{last} ) + ( 0.01 \times r_{target} )
+    r_{\mathrm{new}} = ( 0.99 \times r_{\mathrm{last}} ) + ( 0.01 \times r_{\mathrm{target}} )
 \end{equation}
 
 As suggested by Lim et al.~\cite{Lim2020}, a second option with a static vignette is also implemented.
@@ -155,9 +152,8 @@ below:
     float dist = 0;
     if (vPosition.y > 0) {
         dist = vPosition.y;
-    }
-    else {
-        dist = vPosition.y * -(0.7);
+    } else {
+        dist = vPosition.y * -0.7;
     }
 \end{minted}
 Instead of calculating the euclidean distance, the distance above the center is the vertical position of the fragment

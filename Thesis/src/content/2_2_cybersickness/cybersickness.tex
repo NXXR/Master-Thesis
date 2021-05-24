@@ -687,10 +687,11 @@ inertial measurement unit (IMU) to record head dispersion during the exposure pe
 They introduced Head Dispersion as a measurement of stability from the following Eq.~\ref{eq:head-dispersion}
 \begin{equation}
     \label{eq:head-dispersion}
-    Head\ Dispersion = \sqrt{\frac{\sum(roll - \overline{roll})^2 + \sum{(pitch - \overline{pitch})^2}} {n}}
+    \mathrm{Head\ Dispersion} = \sqrt{\frac{\sum(\mathrm{roll} - \overline{\mathrm{roll}})^2 + \sum{(\mathrm{pitch} -
+    \overline{\mathrm{pitch}})^2}}{n}}
 \end{equation}
-With the $roll$ and $pitch$ values in degree, and $\overline{roll}$ and $\overline{pitch}$ as the mean values along
-the session.
+With the roll and pitch values in degree, and $\overline{\mathrm{roll}}$ and $\overline{\mathrm{pitch}}$ as the mean
+values along the session.
 
 To validate their approach Lim et al.\ compared their IMU sensor data to the centre of gravity sway area measured by an
 external sensor as proposed by Chardonnet et al.\ and found high correlation between their measured Head Dispersion
