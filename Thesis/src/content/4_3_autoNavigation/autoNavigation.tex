@@ -305,6 +305,10 @@ Additionally, the simulation is changed to stop the simulation time during movem
 The automatic movement is programmed to transform all positions into the target's SPICE frame, and the delay of the
 initial rotation before translation results in inadvertent movement, as the target frame rotates, moving the observer
 significantly due to the distance to the target's center.
+Videos to compare the old and new movement can be found in the enclosed digital appendix\footnotemark.
+\footnotetext{The videos are also available at
+\textit{\href{https://youtu.be/8hXcuZNVw2E}{youtu.be/8hXcuZNVw2E}} (old navigation)
+and \textit{\href{https://youtu.be/MfVulsq_P4I}{youtu.be/MfVulsq_P4I}} (new navigation).}
 
 \subsubsection{Changes to \mintinline{c}{updateMovementAnimation}}\label{subsubsec:changes-to-updatemovementanimation}
 
@@ -454,7 +458,7 @@ spline.
 Lastly, their control points only have local influence on the curve, which means that additional control points can
 be inserted to handle collisions, without major changes to the overall curve.
 Their only disadvantage, the interpolated curve not necessarily passing through the specified control points, can be
-mitigated by inserting triplets of control points with the middle point being the control point teh curve should pass
+mitigated by inserting triplets of control points with the middle point being the control point the curve should pass
 close to, and the other two points representing a tangent to the curve that is passing through the three control points.
 
 Uniform cubic b-splines that are non-looping also require an additional point on either end of the curve where the
@@ -598,3 +602,19 @@ the angular difference between the start and end direction.
 However, to properly calculate the angular difference, roll rotation has to be taken into account as well, therefore
 the difference between the start and end quaternion is used to calculate the weight instead of the
 equation~\ref{eq:duration-weight}.
+
+With both, the linear spline construction for the interplanetary movement, and the circular arc spline construction
+for the orbital movement, implemented, the basic movements necessary for the automatic navigation have been
+provided to allow the automatic navigation to cover most use cases of the navigation.
+The only steps that have not yet been fully implemented, are the transitions between the different movements,
+specifically, the movement for the descending and ascending transition, that are currently covered by the orbital
+movement method, resulting in a linear zoom down the surface, followed by a rotation into the final orientation,
+instead of the curve described in the concepts, and the transition from orbital movement to interplanetary movement,
+requiring the calculation of the point in orbit described in the concept, and the enqueueing of the orbital movement to
+the calculated position, that is currently only covered by the basic interplanetary movement, without the orbital
+movement, resulting in potential collisions with the origin body.
+However, the above described and implemented features, provide the basic functionality that existed before the
+overhaul, while still improving the navigation as discussed above by separating the translation and rotation.
+Further improvements, including collision detection and handling are planned for later work, and the results of a
+user study will be used to steer the improvement process and prioritize development of features that prove most
+effective at reducing and preventing cybersickness symptoms.
