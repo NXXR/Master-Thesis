@@ -82,7 +82,8 @@ The FoV vignette is drawn in the same way for both options as shown in the fragm
         vec2 texSize = textureSize(uTexture, 0);
         float ratio  = texSize.y / texSize.x;
 
-        float dist   = sqrt(vPosition.x * vPosition.x + ratio * ratio * vPosition.y * vPosition.y);
+        float dist   = sqrt(vPosition.x * vPosition.x +
+                            ratio * ratio * vPosition.y * vPosition.y);
 
         if (dist < uInnerRadius ) { discard; }
 
