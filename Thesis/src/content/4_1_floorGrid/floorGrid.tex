@@ -2,9 +2,9 @@
 
 As suggested in the studies examined in section~\ref{subsubsec:stable-reference-frame}, we decided to add a stable
 reference frame to help with postural stability.
-Especially, we focus on the 6-Degrees-of-Freedom navigation in the interplanetary areas of the Simulation, that
-generally lack any sort of fixed reference frame, since movement on a planet surface has the surface and its normal
-direction as a strong visual indicator for a reference frame.
+Especially, we focus on the 6-DoF navigation in the interplanetary areas of the simulation, that generally lack any
+sort of fixed reference frame, since movement on a planet surface has the surface and its normal direction as a
+strong visual indicator for a reference frame.
 
 
 \subsection{Floor Grid Concept}\label{subsec:floor-grid-concept}
@@ -34,12 +34,12 @@ changeable in the options menu at runtime.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/4_1_floorGrid/img/FloorGrid_Screenshot}
-    \caption{Screenshot of CosmoScout VR without (left) and with (right) the Floor Grid.}
+    \caption{Screenshot of CosmoScout VR without (left) and with (right) the floor grid.}
     \label{fig:floor-grid-screenshot}
 \end{figure}
 
-The Floor Grid is implemented in the VR Accessibility Plugin for CosmoScout VR, so it can be optionally loaded with
-CosmoScout when it is needed and can be excluded in hardware setup where they are not.
+The floor grid is implemented in the VR accessibility plugin for CosmoScout VR (\textit{csp-vr-accessibility}), so it
+can be optionally loaded with CosmoScout when it is needed, and can be excluded in hardware setup where they are not.
 
 It renders a quad that is fixed to the observer's position and GUI elements.
 This way still allows free movements with the VR HMD while staying a static frame of reference that is tied to
@@ -55,8 +55,8 @@ square or a cross.
 Additionally, the texture can be scaled by a separate factor (\mintinline{c}{uSize}) resulting in a
 coarser or finer mesh.
 
-The calculations for the vertex positions and texture coordinates are shown in the code block below from the Floor
-Grid's vertex shader:
+The calculations for the vertex positions and texture coordinates are shown in the code block below from the floor
+grid's vertex shader:
 \begin{minted}{c}
     void main() {
         vTexCoords  = vec2((iQuadPos.x + 1)/2 * uFalloff * uSize,
@@ -67,16 +67,16 @@ Grid's vertex shader:
         gl_Position = uMatProjection * vec4(vPosition, 1);
     }
 \end{minted}
-The variables \mintinline{c}{uMatModelView} and \mintinline{c}{uMatProjection} are the Model, View, and Projection
-Matrices needed to transform the coordinates in the graphics pipeline.
+The variables \mintinline{c}{uMatModelView} and \mintinline{c}{uMatProjection} are the model, view, and projection
+matrices needed to transform the coordinates in the graphics pipeline.
 
-The Floor Grid's fragment shader applies the selected texture, but is discarded if the fragment is not part of a grid
+The floor grid's fragment shader applies the selected texture, but is discarded if the fragment is not part of a grid
 line (i.e.\ is fully transparent).
 Additionally, the texture's opacity (\mintinline{c}{uAlpha}) is adjustable through the settings file and
 in the options menu at runtime.
 
 To prevent aliasing or the grid turning into a grey plane towards the horizon, the floor grid is drawn with the
-OpenGL Blend Function "\mintinline{c}{glBlendFunc(GL_SCR_ALPHA, GL_ONE_MINUS_SRC_ALPHA)}".
+OpenGL blend function "\mintinline{c}{glBlendFunc(GL_SCR_ALPHA, GL_ONE_MINUS_SRC_ALPHA)}".
 This blend function leads to the grid fading after a few meters because the texture is mostly transparent.
 Finally, the color of the grid is adjustable in the settings file or in the options at runtime to allow more
 customisation for individual users.

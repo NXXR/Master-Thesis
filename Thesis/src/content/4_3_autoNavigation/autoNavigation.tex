@@ -37,6 +37,7 @@ the simulation (both bookmarked and calculated intermediate locations), the firs
 locations into groups.
 We propose the classification of locations based on their location relative to other bodies, and the SPICE reference
 frame the location is in:
+\newpage
 \begin{itemize}
     \item Surface locations, that are extremely low orbit, or on the surface of a body, where the location's position
     and orientation are in the respective body's SPICE frame relative to the body's center;
@@ -54,7 +55,7 @@ shown in figure~\ref{fig:nav-states}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{content/4_3_autoNavigation/img/NavigationLocationStates}
+    \includegraphics[width=0.6\textwidth]{content/4_3_autoNavigation/img/NavigationLocationStates}
     \caption{State diagram for the different types of locations, and the movements and transitions between them.}
     \label{fig:nav-states}
 \end{figure}
@@ -85,7 +86,7 @@ influence, where the observer is eiter on the surface or in an arbitrarily, but 
 \begin{wrapfigure}{o}{0.25\textwidth}
     \centering
     \includegraphics[width=0.1\textwidth]{content/4_3_autoNavigation/img/PlannedLanding}
-    \caption{Planned automatic movement descending onto a body's surface.}
+    \caption{Planned automatic transition to a body's surface.}
     \label{fig:new-auto-nav-descend}
 \end{wrapfigure}
 
@@ -120,8 +121,8 @@ coincide with the body's center.
 
 \subsubsection{Orbital Movement}\label{subsubsec:orbital-movements}
 
-The default orbital distance for each body is relative to the body size, so that the orbited body always occupies the
-same space of the viewport, independent of the body's size.
+The default orbital distance for each body is relative to the body size, so the orbited body always occupies the
+same viewport area, independent of the body's size.
 In order to prevent movements through the body as shown in figure~\ref{fig:old-auto-nav-collision} in
 section~\ref{subsec:problems-with-automatic-movement}, we plan to use the flexibility of splines to move the observer
 in circular curves around the body, while focusing the center of the viewport on the center of the body.
@@ -131,8 +132,7 @@ observer moving around the body, but a rotation of the whole simulation around t
 on.
 In case either the starting point, or the final location are not equidistant to the boday's center, the curve becomes
 less circular, but the nature of the spline should compensate for different distances to the center automatically,
-leading to the user perceiving the change in distance as the observer zooming out, away from the body during the
-rotation.
+leading to the user perceiving the change in distance as the observer zooming in or out during the rotation.
 
 For the transition from orbital to interplanetary movement, a few steps are added to reduce surprising rotations and
 make the movement easier to predict by the user.
@@ -237,7 +237,7 @@ well as the parameter information about the target location, and the duration of
 
 An \mintinline{c}{AnimatedValue} object is consists of a start and end value, as well as a start and end time.
 The object then provides a method to poll the value using time as the parameter, returning either the start or
-end value, if the time is outside the timespan provided by the start and end time of the
+end value, if the time is outside the time span provided by the start and end time of the
 \mintinline{c}{AnimatedValue}, or the method returns an interpolated value between the start and end values relative
 to the point in time between the start and end time.
 
@@ -388,6 +388,7 @@ At the end of the \mintinline{c}{updateMovementAnimation}-method (ll.\@18--24), 
 For this additional \mintinline{c}{moveTo}-methods can be added to provide different types of movement.
 Additionally, a \mintinline{c}{moveTo}-method is added that accepts a queue of movement instructions as a parameter, as
 shown below:
+\newpage
 \begin{minted}{c}
     void CelestialObserver::moveTo(std::queue<MovementDescription> const& moveDescriptionsQueue) {
         // make sure queue contains at least one element
@@ -446,12 +447,12 @@ The fourth signature (l.\@9) is added because the movement queue uses a variant 
 Therefore, when a new element for the queue is used, this method accepts it.
 The method checks the real movement description type using a switch-case-statement, and typecasts the variant-type
 elements, and relays them to their respective methods.
-The last signature (l.\@11) accepts whole movement queues to be passed and is described above.
+The last signature (l.\@11) accepts whole movement queues to be passed, and is described above.
 Currently, only linear and circular movement packages are implemented, however, the addition of further movement
 description packages is straightforward in this system.
 
-The movement path is constructed using a uniform cubic basis splines.
-Uniform cubic b-splines offer some advantages over other curves, as they are similar to bezier curves, which means
+The movement path is constructed using a uniform cubic b-spline.
+These splines offer some advantages over other curves, as they are similar to bezier curves, which means
 they are relatively easy to construct, and have a continuous velocity over the curve.
 Additionally, uniform cubic b-splines offer a continuous curvature, easing the movement of the observer along the
 spline.

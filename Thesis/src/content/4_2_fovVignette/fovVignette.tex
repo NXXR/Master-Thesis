@@ -1,15 +1,15 @@
 \section{Field of View Vignette}\label{sec:field-of-view-vignette}
 
-One of the most common methods to reduce cybersickness risks and symptoms is decreasing the Field of
-View as examined in section~\ref{subsubsec:field-of-view-limitation}.
+One of the most common methods to reduce cybersickness risks and symptoms is decreasing the field of
+view as examined in section~\ref{subsubsec:field-of-view-limitation}.
 To alleviate cybersickness during movements with high detail, and movements in the peripheral areas of vision, a
-vignette is implemented to limit the Field of View, focusing the users attention and preventing the influence of
+vignette is implemented to limit the field of view, focusing the users attention and preventing the influence of
 activity in the peripheral vision from adding to cybersickness symptoms.
 
 
 \subsection{FoV Vignette Concept}\label{subsec:fov-vignette-concept}
 
-The Vignette is primarily planned for movements close to an object's surface, where peripheral visual flow is
+The vignette is primarily planned for movements close to an object's surface, where peripheral visual flow is
 significantly higher compared to movements in interplanetary space.
 
 Additionally, reducing the FoV may help users during the adaption phase, by directing their view to the center of the
@@ -27,7 +27,7 @@ Drogemuller et al.~\cite{Drogemuller2020} also recommend dynamically changing th
 control scheme to reduce a users feeling of presence during complex movements in order to reduce discomfort.
 However, these adaptation aids require a narrow FoV and may be perceived as limiting or annoying to other users.
 
-According to the best practices by McCauley and Sharkey~\cite{McCauley1992}, and similar to the Floor Grid, the
+According to the best practices by McCauley and Sharkey~\cite{McCauley1992}, and similar to the floor grid, the
 vignette is designed to be modular and adaptable to each individual user.
 Additionally, several options of vignetting are implemented, as suggested by Lim et al.~\cite{Lim2020}, to allow the
 user options for both dynamic and fixed limitation of FoV\@.
@@ -38,11 +38,11 @@ user options for both dynamic and fixed limitation of FoV\@.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/4_2_fovVignette/img/Vignette_Screenshot}
-    \caption{Screenshot of CosmoScout VR without (left) and with (right) the FoV Vignette.}
+    \caption{Screenshot of CosmoScout VR without (left) and with (right) the FoV vignette.}
     \label{fig:fov-vignette-screenshot}
 \end{figure}
 
-The FoV Vignette is also implemented in the VR Accessibility Plugin for CosmoScout VR, together with the Floor Grid.
+The FoV vignette is also implemented in the VR accessibility plugin for CosmoScout VR, together with the floor grid.
 
 The vignette is realized as a post-processing shader, drawing a 2D effect over the rendered scene based on an
 inner and outer radius, which are both adjustable in the settings.
@@ -61,7 +61,7 @@ of presence as much as possible.
 As mentioned above, two different methods of vignetting are implemented to offer more customization to the user, a
 dynamic and a static vignette.
 
-One method is drawing the vignette dynamically based on the observer's velocity in relation to the Observer's
+One method is drawing the vignette dynamically based on the observer's velocity in relation to the observer's
 position and distance to other bodies, as interplanetary movements allow for, and use significantly higher
 velocities than movements close to a bodies surface.
 
@@ -124,12 +124,12 @@ After passing the velocity threshold for at least the time specified in the dead
 to ease the vignette in or out over an adjustable duration, to make the transition to the limited field of view more
 comfortable and less noticeable.
 
-Through the use of an animation to gradually increase the opacity of the Vignette, a closing movement similar to the
+Through the use of an animation to gradually increase the opacity of the vignette, a closing movement similar to the
 dynamic vignette along the gradient is suggested.
 However, the vignette is independent of the velocity, and is drawn with its specified minimum radius as soon as the
 lower velocity threshold is passed.
 
-As with the Floor Grid, almost all settings specifying the FoV vignette are adjustable either in the settings
+As with the floor grid, almost all settings specifying the FoV vignette are adjustable either in the settings
 file, or in the options menu at runtime, to allow users to customise the vignette according to their hardware setup
 and preferences.
 
@@ -138,7 +138,7 @@ Finally, an experimental option is implemented, to only limit the FoV vertically
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{content/4_2_fovVignette/img/Asymmetrical_Vignette[Lim2020]}
-    \caption{Asymmetrical FoV Limitation as proposed by Lim et al.~\cite{Lim2020}.}
+    \caption{Asymmetrical FoV limitation as proposed by Lim et al.~\cite{Lim2020}.}
     \label{fig:fov-assymetrical-vignette}
 \end{figure}
 
@@ -165,7 +165,7 @@ from the center.
 The distance below the center is multiplied by $0.7$ to result in a smaller distance, and thus a smaller vignette on
 the bottom, as depicted in figure~\ref{fig:fov-assymetrical-vignette}.
 
-This feature is implemented experimentally, mainly because Lim et al.\ implemented an asymmetrical FoV Limitation in
+This feature is implemented experimentally, mainly because Lim et al.\ implemented an asymmetrical FoV limitation in
 their study, but no symmetrical limitation.
 
 We understand that Lim et al.\ as well as their reference Hatada, Sakata, and Kusaka~\cite{Hatada1980} argue for an

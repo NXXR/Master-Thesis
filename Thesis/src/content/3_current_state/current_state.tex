@@ -14,7 +14,7 @@ user.
 
 The SPICE system is provided and developed by the Navigation and Ancillary Information Facility (NAIF) of the United
 States National Aeronautics and Space Administration (NASA).
-The system is used to manage data sets providing a precise observation geometry information system, originally
+The system is used to manage datasets providing a precise observation geometry information system, originally
 developed to assist in planning and interpreting scientific observations from space-based
 instruments aboard robotic spacecrafts~\cite{NAIFbook, NAIFhomepage}.
 Essentially, SPICE is a set of nested reference frames to allow precise transformations across the large scale
@@ -72,8 +72,6 @@ Locations where the observer is tracked in the J2000 frame are considered interp
     \caption{HTC Vive Remote Controller Button reference\footnotemark.}
     \label{fig:controller-reference}
 \end{figure}
-\footnotetext{Figure taken from~\href{https://bahfvr.blogspot.com/2017/09/htc-vive-3-touchpad.html}
-{bahfvr.blogspot.com/2017/09/htc-vive-3-touchpad.html}}
 
 The main control scheme of CosmoScout VR for HMDs employs one-handed flying controls similar to the control
 scheme of Google Earth VR or the One-Hand Flying described by Drogemuller et al.~\cite{Drogemuller2020}.
@@ -100,6 +98,9 @@ initial and the current orientation of the remote.
 The angles correspond to the angular velocity of the observer's rotation.
 Through the translation of vector magnitude and angles of orientation into velocities, the user does not need to
 twist the remote in uncomfortable positions, but can gradually navigate the simulation with small, precise movements.
+
+\footnotetext{Figure taken from~\href{https://bahfvr.blogspot.com/2017/09/htc-vive-3-touchpad.html}
+{bahfvr.blogspot.com/2017/09/htc-vive-3-touchpad.html}}
 
 
 \section{Identified Problems}\label{sec:identified-problems}
@@ -168,12 +169,20 @@ said point of interest.
     \label{fig:old-auto-nav}
 \end{figure}
 
+\begin{wrapfigure}{o}{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.1\textwidth]{content/3_current_state/img/OldAutomaticNavigation_Landing}
+    \caption{Current automatic movement descending onto a body's surface.}
+    \label{fig:old-auto-nav-descend}
+\end{wrapfigure}
+
 The navigation uses linear interpolation between the current position and rotation, and the target position and
 rotation to change both variables over a predetermined duration.
 Additionally, the animation speed is variable to start the movement slow, speeding up in the intermediate travel,
 before slowing down again, settling into the final position and orientation.
 Figure~\ref{fig:old-auto-nav} describes the movement process between two points of interest during the automatic
 navigation.
+
 The color gradient represents the velocity of the observer in the simulation during their linear movement.
 The camera icons represent the rotation of the observers field of view, and the frequency of the icons roughly
 represent the angular velocity of the rotation.
@@ -182,14 +191,6 @@ Obviously, a complex rotation paired with linear movement can easily provoke vis
 users experiencing these movements, as these motions resemble provocative simulations used in several studies to
 actively induce cybersickness in their subjects.
 
-
-\begin{wrapfigure}{o}{0.25\textwidth}
-    \centering
-    \includegraphics[width=0.1\textwidth]{content/3_current_state/img/OldAutomaticNavigation_Landing}
-    \caption{Current automatic movement descending onto a body's surface.}
-    \label{fig:old-auto-nav-descend}
-\end{wrapfigure}
-
 The movements to ascend or descend between a body's orbit and its surface have been mentioned by some users to be a
 significant problem of the automatic movement in CosmoScout VR and source of discomfort.
 The source of increased cybersickness symptoms is thought to be the more prominent reference frame provided by the
@@ -197,6 +198,13 @@ body's surface.
 As presented in figure~\ref{fig:old-auto-nav-descend}, the movements use the same interpolation as mentioned above.
 However, during the intermediate period, where both linear velocity of translation and angular velocity of rotation
 are highest, the perceived reference frame changes.
+
+\begin{wrapfigure}{o}{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.25\textwidth]{content/3_current_state/img/OldAutomaticNavigation_SurfaceCollision}
+    \caption{Current automatic movement between two points of interest on different sides of a body.}
+    \label{fig:old-auto-nav-collision}
+\end{wrapfigure}
 
 While the observer is positioned in a body's orbit, the user's frame of reference is oriented such that the body is
 "in front" of them, i.e.\ the surface's normal being perpendicular to the perceived up-direction.
@@ -210,13 +218,6 @@ plane parallel to the real world surface to it being perpendicular to perceived 
 
 Finally, the current navigation does not have any collision detection or handling, which can contribute to discomfort
 of users when the linear path of the navigation intersects a body, as shown in figure~\ref{fig:old-auto-nav-collision}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.25\textwidth]{content/3_current_state/img/OldAutomaticNavigation_SurfaceCollision}
-    \caption{Current automatic movement between two points of interest on different sides of a body.}
-    \label{fig:old-auto-nav-collision}
-\end{figure}
 
 While, collision detection and handling is not part of this thesis, we aimed to mitigate collision related problems in
 our solutions and provide navigation methods that allows collision detection and handling to be added afterwards
